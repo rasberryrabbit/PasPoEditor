@@ -1,0 +1,40 @@
+object FormProp: TFormProp
+  Left = 355
+  Height = 273
+  Top = 217
+  Width = 408
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsDialog
+  Caption = 'PO Comment'
+  ClientHeight = 273
+  ClientWidth = 408
+  Position = poOwnerFormCenter
+  LCLVersion = '1.1'
+  object Memo1: TMemo
+    Left = 8
+    Height = 212
+    Top = 8
+    Width = 390
+    ScrollBars = ssVertical
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 112
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = '&Ok'
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 240
+    Height = 25
+    Top = 240
+    Width = 75
+    Cancel = True
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+end

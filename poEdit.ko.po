@@ -1,0 +1,371 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: pocomposer_main.rsalreadyhavetranslation
+msgid "Already have translation, Do you overwrite all?"
+msgstr "이미 번역내용이 있습니다. 모두 덮어쓰기할까요?"
+
+#: pocomposer_main.rsauto
+msgid "Auto"
+msgstr "자동"
+
+#: pocomposer_main.rscannotbeundo
+msgid "Cannot be undo, are you sure?"
+msgstr "되돌릴 수 없어집니다. 정말 하시겠습니까?"
+
+#: pocomposer_main.rsdmessagesimp
+msgid "%d messages imported."
+msgstr "%d 번역을 가져왔습니다."
+
+#: pocomposer_main.rsdpatcheddadd
+msgid "%d patched, %d added"
+msgstr "%d 패치되고 %d 추가 되었습니다"
+
+#: pocomposer_main.rsitwilllostch
+msgid "It will lost changes. continue anyway?"
+msgstr "변경한 내용을 잃습니다. 계속하시겠습니까?"
+
+#: pocomposer_main.rsnomatchesfound
+msgid "No Matches found."
+msgstr "일치하는 것이 없습니다."
+
+#: pocomposer_main.rsreplace
+msgid "Replace?"
+msgstr "바꾸시겠습니까?"
+
+#: pocomposer_main.translateerror
+msgid "Translator Error"
+msgstr "번역 오류"
+
+#: tform1.addpo.caption
+msgid "Add PO File"
+msgstr "PO File 더하기"
+
+#: tform1.addpo.hint
+msgid "Add translation and items from other PO file."
+msgstr "다른 PO 파일에서 번역 문자열과 아이템을 추가"
+
+#: tform1.buttonclr.caption
+msgid "clear"
+msgstr "지우기"
+
+#: tform1.caption
+msgid "PO Editor"
+msgstr "PO 편집기"
+
+#: tform1.editcopy1.caption
+msgid "&Copy"
+msgstr "복사(&C)"
+
+#: tform1.editcopy1.hint
+msgid "Copy"
+msgstr "복사"
+
+#: tform1.editcut1.caption
+msgid "Cu&t"
+msgstr "잘라내기(&t)"
+
+#: tform1.editcut1.hint
+msgid "Cut"
+msgstr "잘라내기"
+
+#: tform1.editdelete1.caption
+msgid "&Delete"
+msgstr "삭제(&D)"
+
+#: tform1.editdelete1.hint
+msgid "Delete"
+msgstr "삭제"
+
+#: tform1.editdown.caption
+msgid "Item Down"
+msgstr "위 아이템"
+
+#: tform1.editexportsel.caption
+msgid "Export Selections"
+msgstr "선택한 것을 내보내기"
+
+#: tform1.editexportsel.hint
+msgid "Export selected items"
+msgstr "선택된 아이템을 내보내기"
+
+#: tform1.editgotonexttran.caption
+msgid "Goto Next Translated"
+msgstr "번역된 다음 아이템으로"
+
+#: tform1.editgotonextuntran.caption
+msgid "Goto Next Untranslated"
+msgstr "번역없는 다음 아이템으로"
+
+#: tform1.editgotoprevtran.caption
+msgid "Goto Previous Translated"
+msgstr "번역된 이전 아이템으로"
+
+#: tform1.editgotoprevuntran.caption
+msgid "Goto Previous Untranslated"
+msgstr "번역없는 이전 아이템으로"
+
+#: tform1.editmemoleft.caption
+msgid "Left Editor"
+msgstr "왼쪽 편집기"
+
+#: tform1.editmemoright.caption
+msgid "Right Editor"
+msgstr "오른쪽 편집기"
+
+#: tform1.editpaste1.caption
+msgid "&Paste"
+msgstr "붙여넣기(&P)"
+
+#: tform1.editpaste1.hint
+msgid "Paste"
+msgstr "붙여넣기"
+
+#: tform1.editpofileprop.caption
+msgid "Edit PO File comment"
+msgstr "PO File 주석문 편집"
+
+#: tform1.editpofileprop.hint
+msgid "Edit PO file property"
+msgstr "PO 파일 속성을 편집"
+
+#: tform1.editselalltran.caption
+msgid "Select All Translated"
+msgstr "번역된 것 모두 선택"
+
+#: tform1.editselalluntran.caption
+msgid "Select All Untranslated"
+msgstr "번역 안된 것 모두 선택"
+
+#: tform1.editselectall1.caption
+msgid "Select &All"
+msgstr "모두 선택(&A)"
+
+#: tform1.editselectall1.hint
+msgid "Select All"
+msgstr "모두 선택"
+
+#: tform1.editshowrawitem.caption
+msgid "Show raw string"
+msgstr "내용 문자열 보기"
+
+#: tform1.editstripuntran.caption
+msgid "Remove untranslated"
+msgstr "번역되지 않은 것을 제거"
+
+#: tform1.editstripuntran.hint
+msgid "Remove untranslated items"
+msgstr "번역되지 않은 아이템 제거"
+
+#: tform1.editundo1.caption
+msgid "&Undo"
+msgstr "되돌리기(&U)"
+
+#: tform1.editundo1.hint
+msgid "Undo"
+msgstr "되돌리기"
+
+#: tform1.editup.caption
+msgid "Item Up"
+msgstr "아래 아이템"
+
+#: tform1.exportpo.caption
+msgid "Export PO File"
+msgstr "PO File 내보내기"
+
+#: tform1.exportpo.hint
+msgid "Export Translated msgstr to PO file"
+msgstr "PO 파일로 번역된 문장들을 내보내기"
+
+#: tform1.fileexit1.caption
+msgid "E&xit"
+msgstr "종료(&x)"
+
+#: tform1.fileexit1.hint
+msgid "Exit"
+msgstr "종료"
+
+#: tform1.fileopen1.caption
+msgid "&Open ..."
+msgstr "열기(&O) ..."
+
+#: tform1.fileopen1.hint
+msgid "Open"
+msgstr "열기"
+
+#: tform1.filesaveas1.caption
+msgid "Save &As ..."
+msgstr "저장 (&A) ..."
+
+#: tform1.filesaveas1.hint
+msgid "Save As"
+msgstr "저장"
+
+#: tform1.importpo.caption
+msgid "Import PO File"
+msgstr "PO File 가져오기"
+
+#: tform1.importpo.hint
+msgid "Import Translation from other PO file"
+msgstr "다른 PO 파일에서 번역을 가져오기"
+
+#: tform1.menuitem1.caption
+msgid "&File"
+msgstr "파일(&F)"
+
+#: tform1.menuitem111.caption
+msgctxt "TFORM1.MENUITEM111.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem16.caption
+msgctxt "TFORM1.MENUITEM16.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem19.caption
+msgid "&Translate"
+msgstr "번역(&T)"
+
+#: tform1.menuitem2.caption
+msgctxt "TFORM1.MENUITEM2.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem23.caption
+msgctxt "TFORM1.MENUITEM23.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem28.caption
+msgctxt "TFORM1.MENUITEM28.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem3.caption
+msgid "&Search"
+msgstr "찾기(&S)"
+
+#: tform1.menuitem39.caption
+msgctxt "TFORM1.MENUITEM39.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem40.caption
+msgid "&View"
+msgstr "보기(&V)"
+
+#: tform1.menuitemedit.caption
+msgid "&Edit"
+msgstr "편집(&E)"
+
+#: tform1.menuitemrecent.caption
+msgctxt "tform1.menuitemrecent.caption"
+msgid "Recent Files"
+msgstr "최근 파일"
+
+#: tform1.optionsortcomment.caption
+msgid "Sort by comment"
+msgstr "주석문으로 정렬"
+
+#: tform1.searchfind.caption
+msgid "Find"
+msgstr "찾기"
+
+#: tform1.searchfind.hint
+msgid "Find & replace text. Regular Expression"
+msgstr "문자열 검색/치환. 정규식"
+
+#: tform1.searchnext.caption
+msgid "Next"
+msgstr "다음찾기"
+
+#: tform1.searchnext.hint
+msgid "Find next match text"
+msgstr "다음 검색"
+
+#: tform1.sheetmsg1.caption
+msgctxt "tform1.sheetmsg1.caption"
+msgid "0"
+msgstr ""
+
+#: tform1.statusbar1.panels[0].text
+msgid "."
+msgstr ""
+
+#: tform1.toolbar1.caption
+msgid "ToolBar1"
+msgstr ""
+
+#: tform1.toolbutton1.caption
+msgid "ToolButton1"
+msgstr ""
+
+#: tform1.toolbutton3.caption
+msgid "ToolButton3"
+msgstr ""
+
+#: tform1.toolbutton5.caption
+msgid "ToolButton5"
+msgstr ""
+
+#: tform1.toolbutton7.caption
+msgid "ToolButton7"
+msgstr ""
+
+#: tform1.translatecopy.caption
+msgid "Copy Translated Text"
+msgstr "번역한 문장 붙이기"
+
+#: tform1.translatecopy.hint
+msgid "Copy Translated text from bottom window"
+msgstr "아래 창에서 번역된 문자열을 복사"
+
+#: tform1.translatemsg.caption
+msgid "Translate Msg"
+msgstr "메시지 번역"
+
+#: tform1.translatemsg.hint
+msgid "Translate directly"
+msgstr "바로 번역"
+
+#: tform1.translatetext1.caption
+msgid "Translate text"
+msgstr "문장 번역"
+
+#: tform1.translatetext1.hint
+msgid "Translate text to bottom window"
+msgstr "아래 창으로 내용을 번역"
+
+#: tform2.button1.caption
+msgctxt "tform2.button1.caption"
+msgid "&Close"
+msgstr "닫기(&C)"
+
+#: tform2.caption
+msgctxt "tform2.caption"
+msgid "Raw"
+msgstr ""
+
+#: tformprop.button1.caption
+msgid "&Ok"
+msgstr "확인(&O)"
+
+#: tformprop.button2.caption
+msgid "&Cancel"
+msgstr "취소(&C)"
+
+#: tformprop.caption
+msgid "PO Comment"
+msgstr "PO 주석문"
+
+#: tformshowraw.button1.caption
+msgctxt "TFORMSHOWRAW.BUTTON1.CAPTION"
+msgid "&Close"
+msgstr "닫기(&C)"
+
+#: tformshowraw.caption
+msgctxt "TFORMSHOWRAW.CAPTION"
+msgid "Raw"
+msgstr ""
+

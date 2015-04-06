@@ -1,0 +1,371 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: pocomposer_main.rsalreadyhavetranslation
+msgid "Already have translation, Do you overwrite all?"
+msgstr ""
+
+#: pocomposer_main.rsauto
+msgid "Auto"
+msgstr ""
+
+#: pocomposer_main.rscannotbeundo
+msgid "Cannot be undo, are you sure?"
+msgstr ""
+
+#: pocomposer_main.rsdmessagesimp
+msgid "%d messages imported."
+msgstr ""
+
+#: pocomposer_main.rsdpatcheddadd
+msgid "%d patched, %d added"
+msgstr ""
+
+#: pocomposer_main.rsitwilllostch
+msgid "It will lost changes. continue anyway?"
+msgstr ""
+
+#: pocomposer_main.rsnomatchesfound
+msgid "No Matches found."
+msgstr ""
+
+#: pocomposer_main.rsreplace
+msgid "Replace?"
+msgstr ""
+
+#: pocomposer_main.translateerror
+msgid "Translator Error"
+msgstr ""
+
+#: tform1.addpo.caption
+msgid "Add PO File"
+msgstr ""
+
+#: tform1.addpo.hint
+msgid "Add translation and items from other PO file."
+msgstr ""
+
+#: tform1.buttonclr.caption
+msgid "clear"
+msgstr ""
+
+#: tform1.caption
+msgid "PO Editor"
+msgstr ""
+
+#: tform1.editcopy1.caption
+msgid "&Copy"
+msgstr ""
+
+#: tform1.editcopy1.hint
+msgid "Copy"
+msgstr ""
+
+#: tform1.editcut1.caption
+msgid "Cu&t"
+msgstr ""
+
+#: tform1.editcut1.hint
+msgid "Cut"
+msgstr ""
+
+#: tform1.editdelete1.caption
+msgid "&Delete"
+msgstr ""
+
+#: tform1.editdelete1.hint
+msgid "Delete"
+msgstr ""
+
+#: tform1.editdown.caption
+msgid "Item Down"
+msgstr ""
+
+#: tform1.editexportsel.caption
+msgid "Export Selections"
+msgstr ""
+
+#: tform1.editexportsel.hint
+msgid "Export selected items"
+msgstr ""
+
+#: tform1.editgotonexttran.caption
+msgid "Goto Next Translated"
+msgstr ""
+
+#: tform1.editgotonextuntran.caption
+msgid "Goto Next Untranslated"
+msgstr ""
+
+#: tform1.editgotoprevtran.caption
+msgid "Goto Previous Translated"
+msgstr ""
+
+#: tform1.editgotoprevuntran.caption
+msgid "Goto Previous Untranslated"
+msgstr ""
+
+#: tform1.editmemoleft.caption
+msgid "Left Editor"
+msgstr ""
+
+#: tform1.editmemoright.caption
+msgid "Right Editor"
+msgstr ""
+
+#: tform1.editpaste1.caption
+msgid "&Paste"
+msgstr ""
+
+#: tform1.editpaste1.hint
+msgid "Paste"
+msgstr ""
+
+#: tform1.editpofileprop.caption
+msgid "Edit PO File comment"
+msgstr ""
+
+#: tform1.editpofileprop.hint
+msgid "Edit PO file property"
+msgstr ""
+
+#: tform1.editselalltran.caption
+msgid "Select All Translated"
+msgstr ""
+
+#: tform1.editselalluntran.caption
+msgid "Select All Untranslated"
+msgstr ""
+
+#: tform1.editselectall1.caption
+msgid "Select &All"
+msgstr ""
+
+#: tform1.editselectall1.hint
+msgid "Select All"
+msgstr ""
+
+#: tform1.editshowrawitem.caption
+msgid "Show raw string"
+msgstr ""
+
+#: tform1.editstripuntran.caption
+msgid "Remove untranslated"
+msgstr ""
+
+#: tform1.editstripuntran.hint
+msgid "Remove untranslated items"
+msgstr ""
+
+#: tform1.editundo1.caption
+msgid "&Undo"
+msgstr ""
+
+#: tform1.editundo1.hint
+msgid "Undo"
+msgstr ""
+
+#: tform1.editup.caption
+msgid "Item Up"
+msgstr ""
+
+#: tform1.exportpo.caption
+msgid "Export PO File"
+msgstr ""
+
+#: tform1.exportpo.hint
+msgid "Export Translated msgstr to PO file"
+msgstr ""
+
+#: tform1.fileexit1.caption
+msgid "E&xit"
+msgstr ""
+
+#: tform1.fileexit1.hint
+msgid "Exit"
+msgstr ""
+
+#: tform1.fileopen1.caption
+msgid "&Open ..."
+msgstr ""
+
+#: tform1.fileopen1.hint
+msgid "Open"
+msgstr ""
+
+#: tform1.filesaveas1.caption
+msgid "Save &As ..."
+msgstr ""
+
+#: tform1.filesaveas1.hint
+msgid "Save As"
+msgstr ""
+
+#: tform1.importpo.caption
+msgid "Import PO File"
+msgstr ""
+
+#: tform1.importpo.hint
+msgid "Import Translation from other PO file"
+msgstr ""
+
+#: tform1.menuitem1.caption
+msgid "&File"
+msgstr ""
+
+#: tform1.menuitem111.caption
+msgctxt "TFORM1.MENUITEM111.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem16.caption
+msgctxt "TFORM1.MENUITEM16.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem19.caption
+msgid "&Translate"
+msgstr ""
+
+#: tform1.menuitem2.caption
+msgctxt "TFORM1.MENUITEM2.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem23.caption
+msgctxt "TFORM1.MENUITEM23.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem28.caption
+msgctxt "TFORM1.MENUITEM28.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem3.caption
+msgid "&Search"
+msgstr ""
+
+#: tform1.menuitem39.caption
+msgctxt "TFORM1.MENUITEM39.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem40.caption
+msgid "&View"
+msgstr ""
+
+#: tform1.menuitemedit.caption
+msgid "&Edit"
+msgstr ""
+
+#: tform1.menuitemrecent.caption
+msgctxt "tform1.menuitemrecent.caption"
+msgid "Recent Files"
+msgstr ""
+
+#: tform1.optionsortcomment.caption
+msgid "Sort by comment"
+msgstr ""
+
+#: tform1.searchfind.caption
+msgid "Find"
+msgstr ""
+
+#: tform1.searchfind.hint
+msgid "Find & replace text. Regular Expression"
+msgstr ""
+
+#: tform1.searchnext.caption
+msgid "Next"
+msgstr ""
+
+#: tform1.searchnext.hint
+msgid "Find next match text"
+msgstr ""
+
+#: tform1.sheetmsg1.caption
+msgctxt "tform1.sheetmsg1.caption"
+msgid "0"
+msgstr ""
+
+#: tform1.statusbar1.panels[0].text
+msgid "."
+msgstr ""
+
+#: tform1.toolbar1.caption
+msgid "ToolBar1"
+msgstr ""
+
+#: tform1.toolbutton1.caption
+msgid "ToolButton1"
+msgstr ""
+
+#: tform1.toolbutton3.caption
+msgid "ToolButton3"
+msgstr ""
+
+#: tform1.toolbutton5.caption
+msgid "ToolButton5"
+msgstr ""
+
+#: tform1.toolbutton7.caption
+msgid "ToolButton7"
+msgstr ""
+
+#: tform1.translatecopy.caption
+msgid "Copy Translated Text"
+msgstr ""
+
+#: tform1.translatecopy.hint
+msgid "Copy Translated text from bottom window"
+msgstr ""
+
+#: tform1.translatemsg.caption
+msgid "Translate Msg"
+msgstr ""
+
+#: tform1.translatemsg.hint
+msgid "Translate directly"
+msgstr ""
+
+#: tform1.translatetext1.caption
+msgid "Translate text"
+msgstr ""
+
+#: tform1.translatetext1.hint
+msgid "Translate text to bottom window"
+msgstr ""
+
+#: tform2.button1.caption
+msgctxt "tform2.button1.caption"
+msgid "&Close"
+msgstr ""
+
+#: tform2.caption
+msgctxt "tform2.caption"
+msgid "Raw"
+msgstr ""
+
+#: tformprop.button1.caption
+msgid "&Ok"
+msgstr ""
+
+#: tformprop.button2.caption
+msgid "&Cancel"
+msgstr ""
+
+#: tformprop.caption
+msgid "PO Comment"
+msgstr ""
+
+#: tformshowraw.button1.caption
+msgctxt "TFORMSHOWRAW.BUTTON1.CAPTION"
+msgid "&Close"
+msgstr ""
+
+#: tformshowraw.caption
+msgctxt "TFORMSHOWRAW.CAPTION"
+msgid "Raw"
+msgstr ""
+

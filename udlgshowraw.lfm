@@ -1,0 +1,36 @@
+object FormShowRaw: TFormShowRaw
+  Left = 256
+  Height = 342
+  Top = 141
+  Width = 562
+  BorderIcons = [biMinimize]
+  BorderStyle = bsDialog
+  Caption = 'Raw'
+  ClientHeight = 342
+  ClientWidth = 562
+  Position = poMainFormCenter
+  LCLVersion = '1.1'
+  object Memo1: TMemo
+    Left = 8
+    Height = 294
+    Top = 8
+    Width = 550
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    OnKeyPress = Memo1KeyPress
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+    WordWrap = False
+  end
+  object Button1: TButton
+    Left = 243
+    Height = 25
+    Top = 310
+    Width = 75
+    Anchors = [akBottom]
+    Caption = '&Close'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+end
