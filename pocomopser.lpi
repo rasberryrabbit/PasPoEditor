@@ -103,6 +103,7 @@
       <Unit4>
         <Filename Value="uMSTRanAPI.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="uMSTRanAPI"/>
       </Unit4>
       <Unit5>
         <Filename Value="udlgprop.pas"/>
@@ -128,6 +129,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="synapse"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

@@ -10,6 +10,8 @@ unit uMSTRanAPI;
 
   Need fpc, lazarus
 
+  - 2015.04 New method Translator API
+
 *)
 
 interface
@@ -17,7 +19,10 @@ interface
 uses Classes;
 
 var
-  BingAppId :string = 'your key';
+  BingClientID : string = 'PoEdit_Translate';
+  BingClientSecret : string = '2S6rh3cIsGD+/ky/C+BPAMXG+o3DnQC0s953aGc/2Wc=';
+  BingAppID : string = '';
+
 
 function DetectLanguage(const AText:string ):string;
 function GetLanguagesForSpeak: TStringList;
@@ -27,54 +32,71 @@ procedure Speak(const FileName : string; const AText:string; const Lng:string);
 
 implementation
 
-uses Windows, SysUtils, WinINet, DOM, fphttpclient, XmlRead;
+uses SysUtils, httpsend, synautil, synacode, ssl_openssl, ssl_openssl_lib,
+     DOM, fphttpclient, XmlRead, fpjson;
 
 
 const
-  MicrosoftTranslatorTranslateUri = 'http://api.microsofttranslator.com/v2/Http.svc/Translate?appId=%s&text=%s&from=%s&to=%s';
-  MicrosoftTranslatorDetectUri = 'http://api.microsofttranslator.com/v2/Http.svc/Detect?appId=%s&text=%s';
-  //this AppId if for demo only please be nice and use your own , it's easy get one from here http://msdn.microsoft.com/en-us/library/ff512386.aspx
-  (*
-     AppId¢¥http://msdn.microsoft.com/en-us/library/ff512386.aspx
-     AppId.
-  *)
-  //===
-  MicrosoftTranslatorGetLngUri = 'http://api.microsofttranslator.com/v2/Http.svc/GetLanguagesForTranslate?appId=%s';
-  MicrosoftTranslatorGetSpkUri = 'http://api.microsofttranslator.com/v2/Http.svc/GetLanguagesForSpeak?appId=%s';
-  MicrosoftTranslatorSpeakUri = 'http://api.microsofttranslator.com/v2/Http.svc/Speak?appId=%s&text=%s&language=%s';
+  MicrosoftTranslatorTranslateUri = 'http://api.microsofttranslator.com/v2/Http.svc/Translate?text=%s&from=%s&to=%s&appId=';
+  MicrosoftTranslatorDetectUri = 'http://api.microsofttranslator.com/v2/Http.svc/Detect?text=%s&appId=';
+  MicrosoftTranslatorGetLngUri = 'http://api.microsofttranslator.com/v2/Http.svc/GetLanguagesForTranslate?appId=';
+  MicrosoftTranslatorGetSpkUri = 'http://api.microsofttranslator.com/v2/Http.svc/GetLanguagesForSpeak?appId=';
+  MicrosoftTranslatorSpeakUri = 'http://api.microsofttranslator.com/v2/Http.svc/Speak?text=%s&language=%s&appId=';
+  BingAuthUrl = 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13';
+  BingTokenHeader = 'Authorization: Bearer ';
+  ResultXMLArray = '<ArrayOfstring';
+  ResultXMLStr = '<string';
 
-
-procedure WinInet_HttpGet(const Url: string;Stream:TStream);overload;
-const
-BuffSize = 1024*1024;
 var
-  hInter   : HINTERNET;
-  UrlHandle: HINTERNET;
-  BytesRead: DWORD;
-  Buffer   : Pointer;
+  BingAccessToken : string = '';
+
+function HttpGetTranslate(const Url: string;Headers:array of string;Stream:TStream):Integer;
+var
+  hget : THTTPSend;
 begin
-  hInter := InternetOpen('', INTERNET_OPEN_TYPE_PRECONFIG, nil, nil, 0);
-  if Assigned(hInter) then
-    try
-      Stream.Seek(0,0);
-      GetMem(Buffer,BuffSize);
-      try
-          UrlHandle := InternetOpenUrl(hInter, PChar(Url), nil, 0, INTERNET_FLAG_RELOAD, 0);
-          if Assigned(UrlHandle) then
-          begin
-            repeat
-              InternetReadFile(UrlHandle, Buffer, BuffSize, BytesRead);
-              if BytesRead>0 then
-               Stream.WriteBuffer(Buffer^,BytesRead);
-            until BytesRead = 0;
-            InternetCloseHandle(UrlHandle);
-          end;
-      finally
-        FreeMem(Buffer);
-      end;
-    finally
-     InternetCloseHandle(hInter);
+  hget := THTTPSend.Create;
+  try
+    if Pos('https://',Url)<>0 then begin
+       hget.Sock.CreateWithSSL(TSSLOpenSSL);
+       hget.Sock.SSLDoConnect;
     end;
+    if BingAccessToken<>'' then
+      if length(Headers)>0 then
+        hget.Headers.AddStrings(Headers);
+    if hget.HTTPMethod('GET',Url) then
+       Stream.CopyFrom(hget.Document,0);
+    Result:=hget.ResultCode;
+  finally
+   hget.Free;
+  end;
+end;
+
+
+function BingGetAccessToken(var aToken:string):Integer;
+const
+  postdata = 'grant_type=client_credentials&client_id=%s&client_secret=%s&scope=http://api.microsofttranslator.com';
+var
+  hget : THTTPSend;
+  rstr : TStringStream;
+  poststr : string;
+begin
+  aToken:='';
+  Result:=500;
+  hget := THTTPSend.Create;
+  try
+    hget.Sock.CreateWithSSL(TSSLOpenSSL);
+    hget.Sock.SSLDoConnect;
+    poststr:=Format(postdata,[EncodeURLElement(BingClientID),EncodeURLElement(BingClientSecret)]);
+    WriteStrToStream(hget.Document,poststr);
+    hget.MimeType:='application/x-www-form-urlencoded';
+    if hget.HTTPMethod('POST',BingAuthUrl) then
+      aToken:=GetJSON(hget.Document).FindPath('access_token').AsString;
+    Result:=hget.ResultCode;
+    if Result>=400 then
+       aToken:='';
+  finally
+   hget.Free;
+  end;
 end;
 
 function TranslateText(const AText:string; const SourceLng,DestLng:string):string;
@@ -82,25 +104,31 @@ var
    XmlDoc : TXMLDocument;
    Node   : TDOMNode;
    strbuf : TStringStream;
+   RetCode: Integer;
 begin
   Result:='';
   //Make the http request
   strbuf:=TStringStream.Create('');
   try
-    WinInet_HttpGet(Format(MicrosoftTranslatorTranslateUri,[BingAppId,EncodeURLElement(AText),SourceLng,DestLng]),strbuf);
-    //Create  a XML object o parse the result
-    try
-      strbuf.Position:=0;
-      ReadXMLFile(XmlDoc,strbuf);
-      (*
-      if (XmlDoc.parseError.errorCode <> 0) then
-       raise Exception.CreateFmt('Error in Xml Data %s',[XmlDoc.parseError]);
-      *)
-      if XmlDoc.DocumentElement.ChildNodes.Length>0 then
-        Result:=pchar(UTF8Encode(XmlDoc.DocumentElement.TextContent));
-    finally
-      XmlDoc.Free;
+    if BingAccessToken='' then
+       BingGetAccessToken(BingAccessToken);
+    RetCode := HttpGetTranslate(Format(MicrosoftTranslatorTranslateUri,[EncodeURLElement(AText),SourceLng,DestLng]),[BingTokenHeader+BingAccessToken],strbuf);
+    if RetCode>=400 then begin
+       BingGetAccessToken(BingAccessToken);
+       RetCode := HttpGetTranslate(Format(MicrosoftTranslatorTranslateUri,[EncodeURLElement(AText),SourceLng,DestLng]),[BingTokenHeader+BingAccessToken],strbuf);
     end;
+    if RetCode<400 then begin
+      //Create  a XML object o parse the result
+      try
+        strbuf.Position:=Pos(ResultXMLStr,strbuf.DataString)-1;
+        ReadXMLFile(XmlDoc,strbuf);
+        if XmlDoc.DocumentElement.ChildNodes.Length>0 then
+          Result:=pchar(UTF8Encode(XmlDoc.DocumentElement.TextContent));
+      finally
+        XmlDoc.Free;
+      end;
+    end else
+      BingAccessToken:='';
   finally
     strbuf.Free;
   end;
@@ -111,26 +139,30 @@ var
    XmlDoc : TXMLDocument;
    Node   : TDOMNode;
    strbuf : TStringStream;
+   RetCode: Integer;
 begin
   Result:='';
   strbuf:=TStringStream.Create('');
   try
     //make the http request
-    WinInet_HttpGet(Format(MicrosoftTranslatorDetectUri,[BingAppId,EncodeURLElement(AText)]),strbuf);
-    //load the returned xml string
-    try
-      strbuf.Position:=0;
-      ReadXMLFile(XmlDoc,strbuf);
-      (*
-      if (XmlDoc.parseError.errorCode <> 0) then
-       raise Exception.CreateFmt('Error in Xml Data %s',[XmlDoc.parseError]);
-      Node:= XmlDoc.documentElement;
-      *)
-      //get the detected language from the node
-      if XmlDoc.DocumentElement.ChildNodes.Length>0 then
-        Result:=pchar(UTF8Encode(XmlDoc.DocumentElement.TextContent));
-    finally
-      XmlDoc.Free;
+    if BingAccessToken='' then
+       BingGetAccessToken(BingAccessToken);
+    RetCode:=HttpGetTranslate(Format(MicrosoftTranslatorDetectUri,[EncodeURLElement(AText)]),[BingTokenHeader+BingAccessToken],strbuf);
+    if RetCode>=400 then begin
+       BingGetAccessToken(BingAccessToken);
+       RetCode:=HttpGetTranslate(Format(MicrosoftTranslatorDetectUri,[EncodeURLElement(AText)]),[BingTokenHeader+BingAccessToken],strbuf);
+    end;
+    if RetCode<400 then begin
+      //load the returned xml string
+      try
+        strbuf.Position:=Pos(ResultXMLStr,strbuf.DataString)-1;
+        ReadXMLFile(XmlDoc,strbuf);
+        //get the detected language from the node
+        if XmlDoc.DocumentElement.ChildNodes.Length>0 then
+          Result:=pchar(UTF8Encode(XmlDoc.DocumentElement.TextContent));
+      finally
+        XmlDoc.Free;
+      end;
     end;
   finally
     strbuf.Free;
@@ -143,35 +175,41 @@ var
    Node   : TDOMElement;
    Nodes  : TDOMNodeList;
    lNodes : Integer;
-   i      : Integer;
+   i,l    : Integer;
    strbuf : TStringStream;
+   xstr : string;
 begin
   Result:=TStringList.Create;
   //make the http request
   strbuf:=TStringStream.Create('');
   try
-    WinInet_HttpGet(Format(MicrosoftTranslatorGetLngUri,[BingAppId]),strbuf);
-    try
-      strbuf.Position:=0;
-      ReadXMLFile(XmlDoc,strbuf);
-      (*
-      if (XmlDoc.parseError.errorCode <> 0) then
-       raise Exception.CreateFmt('Error in Xml Data %s',[XmlDoc.parseError]);
-      *)
-      Node:= XmlDoc.DocumentElement;
-      if Node.ChildNodes.Length>0 then
-      begin
-        //get the nodes
-        Nodes := Node.childNodes;
-         if Nodes.Length>0 then
-         begin
-           lNodes:= Nodes.Length;
-             for i:=0 to lNodes-1 do
-              Result.Add(pchar(UTF8Encode(Nodes.Item[i].TextContent)));
-         end;
+    if BingAccessToken='' then
+       BingGetAccessToken(BingAccessToken);
+    i:=HttpGetTranslate(MicrosoftTranslatorGetLngUri,[BingTokenHeader+BingAccessToken],strbuf);
+    if i>=400 then begin
+      BingGetAccessToken(BingAccessToken);
+      i:=HttpGetTranslate(MicrosoftTranslatorGetLngUri,[BingTokenHeader+BingAccessToken],strbuf);
+    end;
+    if i<400 then begin
+      try
+        // skip http header
+        strbuf.Position:=Pos(ResultXMLArray,strbuf.DataString)-1;
+        ReadXMLFile(XmlDoc,strbuf);
+        Node:= XmlDoc.DocumentElement;
+        if Node.ChildNodes.Length>0 then
+        begin
+          //get the nodes
+          Nodes := Node.childNodes;
+           if Nodes.Length>0 then
+           begin
+             lNodes:= Nodes.Length;
+               for i:=0 to lNodes-1 do
+                Result.Add(pchar(UTF8Encode(Nodes.Item[i].TextContent)));
+           end;
+        end;
+      finally
+        XmlDoc.Free;
       end;
-    finally
-      XmlDoc.Free;
     end;
   finally
     strbuf.Free;
@@ -190,27 +228,31 @@ begin
   Result:=TStringList.Create;
   strbuf:=TStringStream.Create('');
   try
-    WinInet_HttpGet(Format(MicrosoftTranslatorGetSpkUri,[BingAppId]),strbuf);
-    try
-      strbuf.Position:=0;
-      ReadXMLFile(XmlDoc,strbuf);
-      (*
-      if (XmlDoc.parseError.errorCode <> 0) then
-       raise Exception.CreateFmt('Error in Xml Data %s',[XmlDoc.parseError]);
-      *)
-      Node:= XmlDoc.documentElement;
-      if Node.ChildNodes.Length>0 then
-      begin
-        Nodes := Node.childNodes;
-         if Nodes.Length>0 then
-         begin
-           lNodes:= Nodes.Length;
-             for i:=0 to lNodes-1 do
-              Result.Add(pchar(UTF8Encode(Nodes.Item[i].TextContent)));
-         end;
+    if BingAccessToken='' then
+       BingGetAccessToken(BingAccessToken);
+    i:=HttpGetTranslate(MicrosoftTranslatorGetSpkUri,[BingTokenHeader+BingAccessToken],strbuf);
+    if i>=400 then begin
+      BingGetAccessToken(BingAccessToken);
+      i:=HttpGetTranslate(MicrosoftTranslatorGetSpkUri,[BingTokenHeader+BingAccessToken],strbuf);
+    end;
+    if i<400 then begin
+      try
+        strbuf.Position:=Pos(ResultXMLArray,strbuf.DataString)-1;
+        ReadXMLFile(XmlDoc,strbuf);
+        Node:= XmlDoc.documentElement;
+        if Node.ChildNodes.Length>0 then
+        begin
+          Nodes := Node.childNodes;
+           if Nodes.Length>0 then
+           begin
+             lNodes:= Nodes.Length;
+               for i:=0 to lNodes-1 do
+                Result.Add(pchar(UTF8Encode(Nodes.Item[i].TextContent)));
+           end;
+        end;
+      finally
+        XmlDoc.Free;
       end;
-    finally
-      XmlDoc.Free;
     end;
   finally
     strbuf.Free;
@@ -220,10 +262,17 @@ end;
 procedure Speak(const FileName:string; const AText:string; const Lng:string);
 var
   Stream : TFileStream;
+  i : Integer;
 begin
   Stream:=TFileStream.Create(FileName,fmCreate);
   try
-    WinInet_HttpGet(Format(MicrosoftTranslatorSpeakUri,[BingAppId,EncodeURLElement(AText),Lng]),Stream);
+    if BingAccessToken='' then
+       BingGetAccessToken(BingAccessToken);
+    i:=HttpGetTranslate(Format(MicrosoftTranslatorSpeakUri,[EncodeURLElement(AText),Lng]),[BingTokenHeader+BingAccessToken],Stream);
+    if i>=400 then begin
+      BingGetAccessToken(BingAccessToken);
+      i:=HttpGetTranslate(Format(MicrosoftTranslatorSpeakUri,[EncodeURLElement(AText),Lng]),[BingTokenHeader+BingAccessToken],Stream);
+    end;
   finally
      Stream.Free;
   end;
@@ -231,48 +280,3 @@ end;
 
 end.
 
-(*
-
-var
-lng       : TList<string>;
-s         : string;
-FileName  : string;
-
-begin
- try
-    ReportMemoryLeaksOnShutdown:=True;
-    CoInitialize(nil);
-    try
-      Writeln(TranslateText('Hello World','en','es'));
-      Writeln(DetectLanguage('Hello World'));
-      Writeln('Languages for translate supported');
-      lng:=GetLanguagesForTranslate;
-      try
-        for s in lng do
-         Writeln(s);
-      finally
-        lng.free;
-      end;
-      Writeln('Languages for speak supported');
-      lng:=GetLanguagesForSpeak;
-      try
-        for s in lng do
-         Writeln(s);
-      finally
-        lng.free;
-      end;
-	      FileName:=ExtractFilePath(ParamStr(0))+'Demo.wav';
-      Speak(FileName,'This is a demo using the Microsoft Translator Api from delphi, enjoy','en');
-      ShellExecute(0, 'open', PChar(FileName),nil,nil, SW_SHOWNORMAL) ;
-	    finally
-      CoUninitialize;
-    end;
- except
-    on E:Exception do
-        Writeln(E.Classname, ':', E.Message);
- end;
- Writeln('Press Enter to exit');
- Readln;
-end.
-
-*)

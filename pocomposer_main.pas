@@ -205,6 +205,8 @@ var
   modified:Boolean=False;
   DisableTranslator:Boolean=False;
   bingapiid:string='';
+  bingclient_id:string='';
+  bingclient_secret:string='';
 
 
 resourcestring
@@ -293,6 +295,8 @@ begin
         f.LoadFromFile(fname);
         DisableTranslator:=StrToIntDef(f.Values['skiptran'],0)<>0;
         bingapiid:=f.Values['bingid'];
+        bingclient_id:=f.Values['bingclientid'];
+        bingclient_secret:=f.Values['bingclientsecret'];
       finally
         f.Free;
       end;
@@ -1120,8 +1124,14 @@ var
 begin
   try
     if not DisableTranslator then begin
+      (*
       if bingapiid<>'' then
         uMSTRanAPI.BingAppId:=bingapiid;
+      *)
+      if bingclient_id<>'' then
+        uMSTRanAPI.BingClientID:=bingclient_id;
+      if bingclient_secret<>'' then
+        uMSTRanAPI.BingClientSecret:=bingclient_secret;
       try
         Langs:=GetLanguagesForTranslate;
       except

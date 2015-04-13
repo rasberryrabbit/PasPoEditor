@@ -13,7 +13,7 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.3'
+  LCLVersion = '1.5'
   object StatusBar1: TStatusBar
     Left = 0
     Height = 22
@@ -44,6 +44,7 @@ object Form1: TForm1
     TabOrder = 0
     object ToolButton1: TToolButton
       Left = 1
+      Height = 22
       Top = 2
       Width = 10
       Caption = 'ToolButton1'
@@ -56,6 +57,7 @@ object Form1: TForm1
     end
     object ToolButton3: TToolButton
       Left = 34
+      Height = 22
       Top = 2
       Width = 5
       Caption = 'ToolButton3'
@@ -68,6 +70,7 @@ object Form1: TForm1
     end
     object ToolButton5: TToolButton
       Left = 62
+      Height = 22
       Top = 2
       Width = 10
       Caption = 'ToolButton5'
@@ -80,6 +83,7 @@ object Form1: TForm1
     end
     object ToolButton7: TToolButton
       Left = 95
+      Height = 22
       Top = 2
       Width = 5
       Caption = 'ToolButton7'
