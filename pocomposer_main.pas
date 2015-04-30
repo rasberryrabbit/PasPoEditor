@@ -372,6 +372,7 @@ procedure TForm1.TranslateMsgExecute(Sender: TObject);
 var
   msg,ret:string;
   memo,memoout:TMemo;
+  spos : Integer;
 begin
   if ComboBoxLang.ItemIndex<>-1 then begin
     if ActiveControl is TMemo then
@@ -392,8 +393,18 @@ begin
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
-          else
-            memoout.Text:=pchar(ret);
+          else begin
+            if memo.SelLength>0 then begin
+              spos:=Pos(msg,memoout.Text);
+              if spos>0 then begin
+                memoout.SelStart:=spos-1;
+                memoout.SelLength:=Length(msg);
+              end else
+                memoout.SelStart:=0;
+              memoout.SelText:=pchar(ret);
+            end else
+              memoout.Text:=pchar(ret);
+          end;
       except
         ret:=TranslateError;
         MemoTran.Append(ret);
