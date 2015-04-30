@@ -255,6 +255,11 @@ msgstr ""
 msgid "&View"
 msgstr "보기(&V)"
 
+#: tform1.menuitem42.caption
+msgctxt "tform1.menuitem42.caption"
+msgid "-"
+msgstr ""
+
 #: tform1.menuitemedit.caption
 msgid "&Edit"
 msgstr "편집(&E)"
@@ -329,6 +334,10 @@ msgstr "메시지 번역"
 msgid "Translate directly"
 msgstr "바로 번역"
 
+#: tform1.translatesetup.caption
+msgid "Set Bing API Info"
+msgstr ""
+
 #: tform1.translatetext1.caption
 msgid "Translate text"
 msgstr "문장 번역"
@@ -347,11 +356,37 @@ msgctxt "tform2.caption"
 msgid "Raw"
 msgstr ""
 
+#: tformbinginfo.buttoncancel.caption
+#, fuzzy
+msgctxt "tformbinginfo.buttoncancel.caption"
+msgid "&Cancel"
+msgstr "취소(&C)"
+
+#: tformbinginfo.buttonok.caption
+#, fuzzy
+msgctxt "tformbinginfo.buttonok.caption"
+msgid "&Ok"
+msgstr "확인(&O)"
+
+#: tformbinginfo.caption
+msgid "Enter Bing API configuration"
+msgstr ""
+
+#: tformbinginfo.label1.caption
+msgid "Name"
+msgstr ""
+
+#: tformbinginfo.label2.caption
+msgid "Secret"
+msgstr ""
+
 #: tformprop.button1.caption
+msgctxt "tformprop.button1.caption"
 msgid "&Ok"
 msgstr "확인(&O)"
 
 #: tformprop.button2.caption
+msgctxt "tformprop.button2.caption"
 msgid "&Cancel"
 msgstr "취소(&C)"
 

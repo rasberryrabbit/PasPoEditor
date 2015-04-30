@@ -482,6 +482,12 @@ object Form1: TForm1
       object MenuItem21: TMenuItem
         Action = TranslateCopy
       end
+      object MenuItem42: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem43: TMenuItem
+        Action = TranslateSetup
+      end
     end
     object MenuItem40: TMenuItem
       Caption = '&View'
@@ -703,6 +709,11 @@ object Form1: TForm1
     object OptionSortComment: TAction
       Caption = 'Sort by comment'
       OnExecute = OptionSortCommentExecute
+    end
+    object TranslateSetup: TAction
+      Category = 'Translator'
+      Caption = 'Set Bing API Info'
+      OnExecute = TranslateSetupExecute
     end
   end
   object MRUManager1: TMRUManager

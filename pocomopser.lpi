@@ -78,7 +78,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="pocomopser.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -102,7 +102,6 @@
       <Unit4>
         <Filename Value="uMSTRanAPI.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uMSTRanAPI"/>
       </Unit4>
       <Unit5>
         <Filename Value="udlgprop.pas"/>
@@ -118,6 +117,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="udlgbingapiinfo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormBingInfo"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="udlgBingApiInfo"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

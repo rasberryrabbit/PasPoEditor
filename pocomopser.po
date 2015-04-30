@@ -255,6 +255,11 @@ msgstr ""
 msgid "&View"
 msgstr ""
 
+#: tform1.menuitem42.caption
+msgctxt "TFORM1.MENUITEM42.CAPTION"
+msgid "-"
+msgstr ""
+
 #: tform1.menuitemedit.caption
 msgid "&Edit"
 msgstr ""
@@ -329,6 +334,10 @@ msgstr ""
 msgid "Translate directly"
 msgstr ""
 
+#: tform1.translatesetup.caption
+msgid "Set Bing API Info"
+msgstr ""
+
 #: tform1.translatetext1.caption
 msgid "Translate text"
 msgstr ""
@@ -347,11 +356,35 @@ msgctxt "tform2.caption"
 msgid "Raw"
 msgstr ""
 
+#: tformbinginfo.buttoncancel.caption
+msgctxt "TFORMBINGINFO.BUTTONCANCEL.CAPTION"
+msgid "&Cancel"
+msgstr ""
+
+#: tformbinginfo.buttonok.caption
+msgctxt "TFORMBINGINFO.BUTTONOK.CAPTION"
+msgid "&Ok"
+msgstr ""
+
+#: tformbinginfo.caption
+msgid "Enter Bing API configuration"
+msgstr ""
+
+#: tformbinginfo.label1.caption
+msgid "Name"
+msgstr ""
+
+#: tformbinginfo.label2.caption
+msgid "Secret"
+msgstr ""
+
 #: tformprop.button1.caption
+msgctxt "tformprop.button1.caption"
 msgid "&Ok"
 msgstr ""
 
 #: tformprop.button2.caption
+msgctxt "tformprop.button2.caption"
 msgid "&Cancel"
 msgstr ""
 

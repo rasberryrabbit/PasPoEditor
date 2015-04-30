@@ -14,6 +14,9 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    MenuItem42: TMenuItem;
+    MenuItem43: TMenuItem;
+    TranslateSetup: TAction;
     MenuItem40: TMenuItem;
     MenuItem41: TMenuItem;
     OptionSortComment: TAction;
@@ -170,6 +173,7 @@ type
     procedure SearchNextExecute(Sender: TObject);
     procedure TranslateCopyExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
+    procedure TranslateSetupExecute(Sender: TObject);
     procedure TranslateText1Execute(Sender: TObject);
     procedure TranslateText1Update(Sender: TObject);
   private
@@ -182,18 +186,22 @@ type
     function EnableTranslate:Boolean;
     procedure RefreshListBoxPO;
     procedure SelectAllItems(untran:Boolean);
+    procedure SetupBingApi;
     { public declarations }
   end;
 
 var
   Form1: TForm1;
 
+const
+  ConfigFile='poEdit.ini';
+
 implementation
 
 {$R *.lfm}
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, uMSTRanAPI, LazUTF8, udlgprop,
-  DefaultTranslator, gettext, Translations, udlgshowraw;
+  DefaultTranslator, gettext, Translations, udlgshowraw, udlgBingApiInfo;
 
 var
   mPo:TPoList=nil;
@@ -219,9 +227,6 @@ resourcestring
   rsItWillLostCh = 'It will lost changes. continue anyway?';
   rsReplace = 'Replace?';
   rsCannotBeUndo = 'Cannot be undo, are you sure?';
-
-const
-  ConfigFile='poEdit.ini';
 
 
 function QueryDialog: Boolean;
@@ -413,6 +418,24 @@ begin
   end;
 end;
 
+procedure TForm1.TranslateSetupExecute(Sender: TObject);
+var
+  bingdlg : TFormBingInfo;
+begin
+  bingdlg := TFormBingInfo.Create(self);
+  try
+    bingdlg.EditBingAppName.Text:=bingclient_id;
+    bingdlg.EditBingAppSecret.Text:=bingclient_secret;
+    if bingdlg.ShowModal = mrOK then begin
+      bingclient_id:=bingdlg.EditBingAppName.Text;
+      bingclient_secret:=bingdlg.EditBingAppSecret.Text;
+      SetupBingApi;
+    end;
+  finally
+    bingdlg.Free;
+  end;
+end;
+
 procedure TForm1.TranslateText1Execute(Sender: TObject);
 var
   ret, msg:string;
@@ -569,6 +592,50 @@ begin
         ListBoxPO.Selected[i]:=True;
     end;
     Inc(i);
+  end;
+end;
+
+procedure TForm1.SetupBingApi;
+var
+  i: Integer;
+  lang: string;
+  Langs: TStringList;
+begin
+  try
+    Langs:=nil;
+    if not DisableTranslator then begin
+      (*
+      if bingapiid<>'' then
+        uMSTRanAPI.BingAppId:=bingapiid;
+      *)
+      if bingclient_id<>'' then
+        uMSTRanAPI.BingClientID:=bingclient_id;
+      if bingclient_secret<>'' then
+        uMSTRanAPI.BingClientSecret:=bingclient_secret;
+      try
+        Langs:=GetLanguagesForTranslate;
+      except
+      end;
+      ComboBoxLang.Items.Assign(Langs);
+      ComboBoxSrcLang.Items.Assign(Langs);
+      ComboBoxSrcLang.Items.Insert(0, rsAuto);
+      ComboBoxSrcLang.ItemIndex:=0;
+      LazGetShortLanguageID(lang);
+      if ComboBoxLang.Items.Count>0 then
+        for i:=0 to ComboBoxLang.Items.Count-1 do
+          if ComboBoxLang.Items[i]=lang then begin
+            ComboBoxLang.ItemIndex:=i;
+            break;
+        end;
+    end else begin
+      ComboBoxLang.ItemIndex:=-1;
+      ComboBoxLang.Enabled:=False;
+      ComboBoxSrcLang.ItemIndex:=-1;
+      ComboBoxSrcLang.Enabled:=False;
+    end;
+  finally
+    if Langs<>nil then
+      Langs.Free;
   end;
 end;
 
@@ -1128,45 +1195,8 @@ begin
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
-var
-  Langs:TStringList;
-  lang:string;
-  i:Integer;
 begin
-  try
-    if not DisableTranslator then begin
-      (*
-      if bingapiid<>'' then
-        uMSTRanAPI.BingAppId:=bingapiid;
-      *)
-      if bingclient_id<>'' then
-        uMSTRanAPI.BingClientID:=bingclient_id;
-      if bingclient_secret<>'' then
-        uMSTRanAPI.BingClientSecret:=bingclient_secret;
-      try
-        Langs:=GetLanguagesForTranslate;
-      except
-      end;
-      ComboBoxLang.Items.Assign(Langs);
-      ComboBoxSrcLang.Items.Assign(Langs);
-      ComboBoxSrcLang.Items.Insert(0, rsAuto);
-      ComboBoxSrcLang.ItemIndex:=0;
-      LazGetShortLanguageID(lang);
-      if ComboBoxLang.Items.Count>0 then
-        for i:=0 to ComboBoxLang.Items.Count-1 do
-          if ComboBoxLang.Items[i]=lang then begin
-            ComboBoxLang.ItemIndex:=i;
-            break;
-        end;
-    end else begin
-      ComboBoxLang.ItemIndex:=-1;
-      ComboBoxLang.Enabled:=False;
-      ComboBoxSrcLang.ItemIndex:=-1;
-      ComboBoxSrcLang.Enabled:=False;
-    end;
-  finally
-    Langs.Free;
-  end;
+  SetupBingApi;
   if Paramcount>0 then begin
     FileOpen1.Dialog.FileName:=ParamStr(1);
     FileOpen1Accept(nil);

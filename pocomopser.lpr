@@ -9,7 +9,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, rx, lazcontrols, pocomposer_main, uPoReader, uMSTRanAPI, udlgprop,
-  udlgshowraw;
+  udlgshowraw, udlgBingApiInfo;
 
 
 {$R *.res}
