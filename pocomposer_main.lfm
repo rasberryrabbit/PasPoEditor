@@ -392,6 +392,12 @@ object Form1: TForm1
       object MenuItem36: TMenuItem
         Action = EditGotoPrevTran
       end
+      object MenuItem44: TMenuItem
+        Action = EditGotoNextFuzzy
+      end
+      object MenuItem45: TMenuItem
+        Action = EditGotoPrevFuzzy
+      end
       object MenuItem37: TMenuItem
         Action = EditSelAllTran
       end
@@ -724,6 +730,18 @@ object Form1: TForm1
       Caption = 'Set Bing API Info'
       OnExecute = TranslateSetupExecute
     end
+    object EditGotoNextFuzzy: TAction
+      Category = 'Edit'
+      Caption = 'Goto Next Fuzzy'
+      OnExecute = EditGotoNextFuzzyExecute
+      ShortCut = 24611
+    end
+    object EditGotoPrevFuzzy: TAction
+      Category = 'Edit'
+      Caption = 'Goto Previous Fuzzy'
+      OnExecute = EditGotoPrevFuzzyExecute
+      ShortCut = 24612
+    end
   end
   object MRUManager1: TMRUManager
     RecentMenu = MenuItemRecent
@@ -878,6 +896,9 @@ object Form1: TForm1
   end
   object ReplaceDialog1: TReplaceDialog
     OnClose = ReplaceDialog1Close
+    OnShow = ReplaceDialog1Show
+    Width = 480
+    Height = 184
     Options = [frDown, frHideWholeWord, frHideUpDown, frHideEntireScope, frPromptOnReplace]
     OnFind = ReplaceDialog1Find
     OnReplace = ReplaceDialog1Replace

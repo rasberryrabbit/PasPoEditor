@@ -38,9 +38,13 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    EditGotoPrevFuzzy: TAction;
+    EditGotoNextFuzzy: TAction;
     CheckBoxFuzzy: TCheckBox;
     MenuItem42: TMenuItem;
     MenuItem43: TMenuItem;
+    MenuItem44: TMenuItem;
+    MenuItem45: TMenuItem;
     TranslateSetup: TAction;
     MenuItem40: TMenuItem;
     MenuItem41: TMenuItem;
@@ -154,8 +158,10 @@ type
     procedure EditDelete1Execute(Sender: TObject);
     procedure EditDownExecute(Sender: TObject);
     procedure EditExportSelExecute(Sender: TObject);
+    procedure EditGotoNextFuzzyExecute(Sender: TObject);
     procedure EditGotoNextTranExecute(Sender: TObject);
     procedure EditGotoNextUnTranExecute(Sender: TObject);
+    procedure EditGotoPrevFuzzyExecute(Sender: TObject);
     procedure EditGotoPrevTranExecute(Sender: TObject);
     procedure EditGotoPrevUntranExecute(Sender: TObject);
     procedure EditMemoLeftExecute(Sender: TObject);
@@ -194,6 +200,7 @@ type
     procedure ReplaceDialog1Close(Sender: TObject);
     procedure ReplaceDialog1Find(Sender: TObject);
     procedure ReplaceDialog1Replace(Sender: TObject);
+    procedure ReplaceDialog1Show(Sender: TObject);
     procedure SearchFindExecute(Sender: TObject);
     procedure SearchNextExecute(Sender: TObject);
     procedure TranslateCopyExecute(Sender: TObject);
@@ -205,8 +212,9 @@ type
     { private declarations }
   public
     PoList:TStringList; // for measure item height
+    mIsFind:Integer;
 
-    procedure GotoItems(untran,up:Boolean);
+    procedure GotoItems(untran, up: Boolean; IsFuzzy: Boolean=False);
     procedure POUpdateMsg;
     function EnableTranslate:Boolean;
     procedure RefreshListBoxPO;
@@ -530,7 +538,7 @@ begin
   ListBoxPO.Invalidate;
 end;
 
-procedure TForm1.GotoItems(untran, up: Boolean);
+procedure TForm1.GotoItems(untran, up: Boolean; IsFuzzy:Boolean = False);
 var
   IsNull: Boolean;
   itemp: TPoItem;
@@ -546,16 +554,19 @@ begin
   while (i>-1) and (i<ListBoxPO.Count) do begin
     itemp:=TPoItem(ListBoxPO.Items.Objects[i]);
     if itemp<>nil then begin
-      k:=itemp.GetMsgstrCount;
-      j:=0;
-      IsNull:=not untran;
-      while j<k do begin
-        if itemp.GetMsgstr(j)='' then begin
-          IsNull:=untran;
-          break;
+      if not IsFuzzy then begin
+        k:=itemp.GetMsgstrCount;
+        j:=0;
+        IsNull:=not untran;
+        while j<k do begin
+          if itemp.GetMsgstr(j)='' then begin
+            IsNull:=untran;
+            break;
+          end;
+          Inc(j);
         end;
-        Inc(j);
-      end;
+      end else
+        IsNull:=itemp.checkflag(strfuzzy);
       if IsNull then begin
         ListBoxPO.ItemIndex:=i;
         ListBoxPO.MakeCurrentVisible;
@@ -925,6 +936,11 @@ begin
   end;
 end;
 
+procedure TForm1.EditGotoNextFuzzyExecute(Sender: TObject);
+begin
+  GotoItems(False,False,True);
+end;
+
 procedure TForm1.EditGotoNextTranExecute(Sender: TObject);
 begin
   GotoItems(False,False);
@@ -933,6 +949,11 @@ end;
 procedure TForm1.EditGotoNextUnTranExecute(Sender: TObject);
 begin
   GotoItems(True,False);
+end;
+
+procedure TForm1.EditGotoPrevFuzzyExecute(Sender: TObject);
+begin
+  GotoItems(False,True,True);
 end;
 
 procedure TForm1.EditGotoPrevTranExecute(Sender: TObject);
@@ -1217,6 +1238,7 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   lng,lngf:string;
 begin
+  mIsFind:=0;
   PoList:=TStringList.Create;
   // translate LCL resource strings
   GetLanguageIDs(lng,lngf);
@@ -1516,6 +1538,7 @@ var
   pcre:TBRRERegExp;
   flag:longint;
 begin
+  mIsFind:=0;
   if Sender<>nil then begin
     lastFindIndex:=Point(-1,0);
     FindCase:=frMatchCase in ReplaceDialog1.Options;
@@ -1603,6 +1626,9 @@ var
   pcre:TBRRERegExp;
   flag:longint;
 begin
+  mIsFind:=1;
+  if frReplaceAll in ReplaceDialog1.Options then
+    Inc(mIsFind);
   if Sender<>nil then begin
     lastFindIndex:=Point(-1,0);
     FindCase:=frMatchCase in ReplaceDialog1.Options;
@@ -1687,6 +1713,26 @@ begin
   ReplaceDialog1.CloseDialog;
   OldFindStr:=ReplaceDialog1.FindText;
   OldReplaceStr:=ReplaceDialog1.ReplaceText;
+end;
+
+procedure TForm1.ReplaceDialog1Show(Sender: TObject);
+var
+  i, bidx:Integer;
+  aForm : TForm;
+  aBtn : TButton;
+begin
+  bidx:=0;
+  aForm:=ReplaceDialog1.Components[0] as TForm;
+  for i:=0 to aForm.ComponentCount-1 do begin
+    if aForm.Components[i] is TButton then begin
+      aBtn:=aForm.Components[i] as TButton;
+      if aBtn.Visible then
+        aBtn.Default:=True;
+      if mIsFind = bidx then
+        break;
+      Inc(bidx);
+    end;
+  end;
 end;
 
 

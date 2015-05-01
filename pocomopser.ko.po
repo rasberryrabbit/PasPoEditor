@@ -93,6 +93,10 @@ msgstr "선택한 것을 내보내기"
 msgid "Export selected items"
 msgstr "선택된 아이템을 내보내기"
 
+#: tform1.editgotonextfuzzy.caption
+msgid "Goto Next Fuzzy"
+msgstr ""
+
 #: tform1.editgotonexttran.caption
 msgid "Goto Next Translated"
 msgstr "번역된 다음 아이템으로"
@@ -100,6 +104,10 @@ msgstr "번역된 다음 아이템으로"
 #: tform1.editgotonextuntran.caption
 msgid "Goto Next Untranslated"
 msgstr "번역없는 다음 아이템으로"
+
+#: tform1.editgotoprevfuzzy.caption
+msgid "Goto Previous Fuzzy"
+msgstr ""
 
 #: tform1.editgotoprevtran.caption
 msgid "Goto Previous Translated"

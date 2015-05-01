@@ -26,7 +26,7 @@ unit uPoReader;
   0.12 - more strict loader.
   0.14 - ngettext support functions
   0.15 - fix multi-msgstr support
-  0.16 - add flag functions, fix comment line position
+  0.16 - add flag functions, fix comment line position, no limit message length
 }
 
 
@@ -44,6 +44,7 @@ type
   TPoItem = class(TList)
     private
       function GetHeader(const str:string):string;
+      function GetHeaderValue(const str:string;var value:string):string;
       function GetStrItem(Index:Integer):string;
       procedure SetStrItem(Index:Integer;const str:string);
     protected
@@ -133,6 +134,40 @@ begin
   end;
 end;
 
+function TPoItem.GetHeaderValue(const str: string; var value: string): string;
+var
+  i,l:Integer;
+  ch :char;
+begin
+  Result:='';
+  l:=Length(str);
+  i:=1;
+  // remove space
+  while i<=l do begin
+    if str[i]>#32 then
+      break;
+    Inc(i);
+  end;
+  while i<=l do begin
+    ch:=str[i];
+    if ch>#32 then begin
+       Result:=Result+ch;
+       Inc(i);
+    end else
+      break;
+  end;
+  // remove space
+  while i<=l do begin
+    if str[i]>#32 then
+      break;
+    Inc(i);
+  end;
+  if i<=l then
+     Value:=Copy(str,i,l-i+1)
+     else
+       Value:='';
+end;
+
 function TPoItem.GetStrItem(Index: Integer): string;
 begin
   Result:=pchar(Items[Index]);
@@ -197,14 +232,14 @@ function TPoItem.GetNameStr(const Name: string): string;
 var
   i:Integer;
 begin
-  Result:='';
   if Count>0 then
     for i:=0 to Count-1 do begin
-      if CompareText(GetHeader(StrItem[i]),Name)=0 then begin
-         Result:=StripQuote(Copy(StrItem[i],Length(Name)+2,4096));
-         break;
+      if CompareText(GetHeaderValue(StrItem[i],Result),Name)=0 then begin
+         Result:=StripQuote(Result);
+         exit;
       end;
     end;
+  Result:='';
 end;
 
 function TPoItem.GetMsgstr(Idx: Integer): string;
@@ -212,19 +247,19 @@ var
   i,j:integer;
   stemp:string;
 begin
-  Result:='';
   j:=0;
   if Count>0 then
     for i:=Idx to Count-1 do begin
-      stemp:=GetHeader(StrItem[i]);
+      stemp:=GetHeaderValue(StrItem[i],Result);
       if CompareText(Copy(stemp,1,6),'msgstr')=0 then begin
         if j=Idx then begin
-          Result:=StripQuote(Copy(StrItem[i],Length(stemp)+2,4096));
-          break;
+          Result:=StripQuote(Result);
+          exit;
         end;
         Inc(j);
       end;
     end;
+  Result:='';
 end;
 
 function TPoItem.GetMsgstrs: TPoItem;
@@ -294,8 +329,7 @@ end;
 
 procedure TPoItem.GetNameValue(Idx: Integer; var Name, Value: string);
 begin
-  Name:=GetHeader(StrItem[Idx]);
-  Value:=Copy(StrItem[Idx],Length(Name)+2,4096);
+  Name:=GetHeaderValue(StrItem[Idx],Value);
 end;
 
 function TPoItem.checkflag(const flag: string): boolean;

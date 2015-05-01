@@ -93,12 +93,20 @@ msgstr ""
 msgid "Export selected items"
 msgstr ""
 
+#: tform1.editgotonextfuzzy.caption
+msgid "Goto Next Fuzzy"
+msgstr ""
+
 #: tform1.editgotonexttran.caption
 msgid "Goto Next Translated"
 msgstr ""
 
 #: tform1.editgotonextuntran.caption
 msgid "Goto Next Untranslated"
+msgstr ""
+
+#: tform1.editgotoprevfuzzy.caption
+msgid "Goto Previous Fuzzy"
 msgstr ""
 
 #: tform1.editgotoprevtran.caption

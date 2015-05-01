@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="release"/>
-    <Units Count="88">
+    <Units Count="89">
       <Unit0>
         <Filename Value="pocomopser.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -18,8 +18,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pocomposer_main"/>
-        <TopLine Value="121"/>
-        <CursorPos X="19" Y="5"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="549"/>
+        <CursorPos X="3" Y="549"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -27,24 +28,22 @@
       <Unit2>
         <Filename Value="uporeader.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uPoReader"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="40"/>
-        <CursorPos X="26" Y="5"/>
+        <CursorPos X="61" Y="163"/>
         <UsageCount Value="201"/>
       </Unit2>
       <Unit3>
         <Filename Value="ulistboxnew.pas"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="29" Y="14"/>
-        <UsageCount Value="166"/>
+        <UsageCount Value="171"/>
       </Unit3>
       <Unit4>
         <Filename Value="uMSTRanAPI.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="74" Y="274"/>
-        <UsageCount Value="136"/>
+        <UsageCount Value="141"/>
       </Unit4>
       <Unit5>
         <Filename Value="udlgprop.pas"/>
@@ -54,7 +53,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="115"/>
+        <UsageCount Value="120"/>
       </Unit5>
       <Unit6>
         <Filename Value="udlgshowraw.pas"/>
@@ -64,7 +63,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="53"/>
+        <UsageCount Value="58"/>
       </Unit6>
       <Unit7>
         <Filename Value="udlgbingapiinfo.pas"/>
@@ -72,14 +71,10 @@
         <ComponentName Value="FormBingInfo"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="udlgBingApiInfo"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
         <CursorPos Y="52"/>
-        <UsageCount Value="28"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
+        <UsageCount Value="33"/>
       </Unit7>
       <Unit8>
         <Filename Value="utranslator.pas"/>
@@ -336,9 +331,10 @@
       </Unit49>
       <Unit50>
         <Filename Value="C:\development\lazarus\lcl\dialogs.pp"/>
-        <TopLine Value="389"/>
-        <CursorPos X="14" Y="402"/>
-        <UsageCount Value="7"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="431"/>
+        <CursorPos X="21" Y="443"/>
+        <UsageCount Value="10"/>
       </Unit50>
       <Unit51>
         <Filename Value="C:\development\lazarus\lcl\forms.pp"/>
@@ -348,8 +344,10 @@
       </Unit51>
       <Unit52>
         <Filename Value="C:\development\lazarus\lcl\include\finddialog.inc"/>
-        <CursorPos X="17" Y="271"/>
-        <UsageCount Value="7"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="18" Y="41"/>
+        <UsageCount Value="10"/>
       </Unit52>
       <Unit53>
         <Filename Value="C:\development\fpc\rtl\objpas\sysutils\sysstrh.inc"/>
@@ -575,36 +573,59 @@
         <CursorPos X="3" Y="702"/>
         <UsageCount Value="10"/>
       </Unit87>
+      <Unit88>
+        <Filename Value="C:\development\lazarus\lcl\include\replacedialog.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="17"/>
+        <CursorPos X="3" Y="50"/>
+        <UsageCount Value="10"/>
+      </Unit88>
     </Units>
-    <JumpHistory Count="7" HistoryIndex="6">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
-        <Filename Value="udlgbingapiinfo.pas"/>
-        <Caret Line="52" TopLine="26"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1710" Column="15" TopLine="1690"/>
       </Position1>
       <Position2>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="527" Column="15" TopLine="510"/>
+        <Caret Line="209" Column="20" TopLine="196"/>
       </Position2>
       <Position3>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="527" Column="17" TopLine="519"/>
+        <Caret Line="1222" Column="13" TopLine="1208"/>
       </Position3>
       <Position4>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1418" Column="57" TopLine="1410"/>
+        <Caret Line="1612" Column="18" TopLine="73"/>
       </Position4>
       <Position5>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1452" Column="10" TopLine="1450"/>
+        <Caret Line="1613" Column="18" TopLine="1585"/>
       </Position5>
       <Position6>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="500" Column="22" TopLine="482"/>
+        <Caret Line="1620" Column="18" TopLine="1592"/>
       </Position6>
       <Position7>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1205" TopLine="1187"/>
+        <Caret Line="940" Column="6" TopLine="927"/>
       </Position7>
+      <Position8>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="566" Column="43" TopLine="554"/>
+      </Position8>
+      <Position9>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="938" Column="7" TopLine="921"/>
+      </Position9>
+      <Position10>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="548" Column="3" TopLine="548"/>
+      </Position10>
+      <Position11>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="955" Column="9" TopLine="935"/>
+      </Position11>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

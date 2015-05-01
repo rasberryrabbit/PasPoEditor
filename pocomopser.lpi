@@ -94,7 +94,6 @@
       <Unit2>
         <Filename Value="uporeader.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uPoReader"/>
       </Unit2>
       <Unit3>
         <Filename Value="ulistboxnew.pas"/>
@@ -124,7 +123,6 @@
         <ComponentName Value="FormBingInfo"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="udlgBingApiInfo"/>
       </Unit7>
     </Units>
   </ProjectOptions>
