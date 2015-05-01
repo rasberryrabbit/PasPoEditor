@@ -19,8 +19,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pocomposer_main"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="549"/>
-        <CursorPos X="3" Y="549"/>
+        <TopLine Value="1616"/>
+        <CursorPos X="3" Y="1541"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -36,14 +36,14 @@
         <Filename Value="ulistboxnew.pas"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="29" Y="14"/>
-        <UsageCount Value="171"/>
+        <UsageCount Value="172"/>
       </Unit3>
       <Unit4>
         <Filename Value="uMSTRanAPI.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="74" Y="274"/>
-        <UsageCount Value="141"/>
+        <UsageCount Value="142"/>
       </Unit4>
       <Unit5>
         <Filename Value="udlgprop.pas"/>
@@ -53,7 +53,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="121"/>
       </Unit5>
       <Unit6>
         <Filename Value="udlgshowraw.pas"/>
@@ -63,7 +63,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="59"/>
       </Unit6>
       <Unit7>
         <Filename Value="udlgbingapiinfo.pas"/>
@@ -74,7 +74,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
         <CursorPos Y="52"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="34"/>
       </Unit7>
       <Unit8>
         <Filename Value="utranslator.pas"/>
@@ -581,51 +581,127 @@
         <UsageCount Value="10"/>
       </Unit88>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1710" Column="15" TopLine="1690"/>
+        <Caret Line="938" Column="7" TopLine="921"/>
       </Position1>
       <Position2>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="209" Column="20" TopLine="196"/>
+        <Caret Line="548" Column="3" TopLine="548"/>
       </Position2>
       <Position3>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1222" Column="13" TopLine="1208"/>
+        <Caret Line="955" Column="9" TopLine="935"/>
       </Position3>
       <Position4>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1612" Column="18" TopLine="73"/>
+        <Caret Line="549" Column="3" TopLine="497"/>
       </Position4>
       <Position5>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1613" Column="18" TopLine="1585"/>
+        <Caret Line="1568" Column="11" TopLine="1551"/>
       </Position5>
       <Position6>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1620" Column="18" TopLine="1592"/>
+        <Caret Line="1663" Column="64" TopLine="1647"/>
       </Position6>
       <Position7>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="940" Column="6" TopLine="927"/>
+        <Caret Line="1567" Column="44" TopLine="1511"/>
       </Position7>
       <Position8>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="566" Column="43" TopLine="554"/>
+        <Caret Line="1659" Column="57" TopLine="1644"/>
       </Position8>
       <Position9>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="938" Column="7" TopLine="921"/>
+        <Caret Line="1541" Column="3" TopLine="1550"/>
       </Position9>
       <Position10>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="548" Column="3" TopLine="548"/>
+        <Caret Line="1564" TopLine="1551"/>
       </Position10>
       <Position11>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="955" Column="9" TopLine="935"/>
+        <Caret Line="1565" TopLine="1551"/>
       </Position11>
+      <Position12>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1566" TopLine="1551"/>
+      </Position12>
+      <Position13>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1567" TopLine="1551"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1564" TopLine="1551"/>
+      </Position14>
+      <Position15>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1565" TopLine="1551"/>
+      </Position15>
+      <Position16>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1566" TopLine="1551"/>
+      </Position16>
+      <Position17>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1564" TopLine="1551"/>
+      </Position17>
+      <Position18>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1565" TopLine="1551"/>
+      </Position18>
+      <Position19>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1654" Column="12" TopLine="1624"/>
+      </Position19>
+      <Position20>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1563" Column="55" TopLine="1548"/>
+      </Position20>
+      <Position21>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1619" Column="7" TopLine="1603"/>
+      </Position21>
+      <Position22>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="244" Column="10" TopLine="229"/>
+      </Position22>
+      <Position23>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="373" Column="44" TopLine="349"/>
+      </Position23>
+      <Position24>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1529" Column="16" TopLine="1505"/>
+      </Position24>
+      <Position25>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1719" Column="16" TopLine="1696"/>
+      </Position25>
+      <Position26>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="244" Column="16" TopLine="230"/>
+      </Position26>
+      <Position27>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="373" Column="44" TopLine="349"/>
+      </Position27>
+      <Position28>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1529" Column="16" TopLine="1505"/>
+      </Position28>
+      <Position29>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1719" Column="16" TopLine="1696"/>
+      </Position29>
+      <Position30>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="244" Column="16" TopLine="1543"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

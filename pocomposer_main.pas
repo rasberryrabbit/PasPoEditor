@@ -1556,12 +1556,14 @@ begin
     pcre:=TBRRERegExp.Create(stemp,flag);
     try
       i:=ListBoxPO.ItemIndex;
+      k:=NoteMsg.PageIndex+1;
+      if (k>=NoteMsg.PageCount) or (NoteMsg.PageCount=1) then
+        Inc(i);
       if i<0 then
         i:=0;
       if i>=ListBoxPO.Count then
-        i:=ListBoxPO.Count-1;
+        i:=0;
       j:=i;
-      k:=NoteMsg.PageIndex+1;
       sUp:=False;
       while i<ListBoxPO.Count do begin
         itemp:=TPoItem(ListBoxPO.Items.Objects[i]);
@@ -1645,12 +1647,14 @@ begin
     pcre:=TBRRERegExp.Create(stemp,flag);
     try
       i:=ListBoxPO.ItemIndex;
+      k:=NoteMsg.PageIndex+1;
+      if (k>=NoteMsg.PageCount) or (NoteMsg.PageCount=1) then
+        Inc(i);
       if i<0 then
         i:=0;
       if i>=ListBoxPO.Count then
-        i:=ListBoxPO.Count-1;
+        i:=0;
       j:=i;
-      k:=NoteMsg.PageIndex+1;
       sUp:=False;
       while i<ListBoxPO.Count do begin
         itemp:=TPoItem(ListBoxPO.Items.Objects[i]);
