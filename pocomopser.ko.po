@@ -53,6 +53,10 @@ msgstr "지우기"
 msgid "PO Editor"
 msgstr "PO 편집기"
 
+#: tform1.checkboxfuzzy.caption
+msgid "fuzzy"
+msgstr ""
+
 #: tform1.editcopy1.caption
 msgid "&Copy"
 msgstr "복사(&C)"
@@ -357,13 +361,11 @@ msgid "Raw"
 msgstr ""
 
 #: tformbinginfo.buttoncancel.caption
-#, fuzzy
 msgctxt "tformbinginfo.buttoncancel.caption"
 msgid "&Cancel"
 msgstr "취소(&C)"
 
 #: tformbinginfo.buttonok.caption
-#, fuzzy
 msgctxt "tformbinginfo.buttonok.caption"
 msgid "&Ok"
 msgstr "확인(&O)"
@@ -378,7 +380,7 @@ msgstr ""
 
 #: tformbinginfo.label2.caption
 msgid "Secret"
-msgstr ""
+msgstr "비밀"
 
 #: tformprop.button1.caption
 msgctxt "tformprop.button1.caption"

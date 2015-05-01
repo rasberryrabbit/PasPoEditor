@@ -53,6 +53,10 @@ msgstr ""
 msgid "PO Editor"
 msgstr ""
 
+#: tform1.checkboxfuzzy.caption
+msgid "fuzzy"
+msgstr ""
+
 #: tform1.editcopy1.caption
 msgid "&Copy"
 msgstr ""

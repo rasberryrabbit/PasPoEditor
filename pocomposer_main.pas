@@ -2,6 +2,30 @@ unit pocomposer_main;
 
 {$mode objfpc}{$H+}
 
+{ Simple PO Editor
+
+  Copyright (c) 2013-2015 Do-wan Kim
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+}
+
+
 interface
 
 uses
@@ -14,6 +38,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    CheckBoxFuzzy: TCheckBox;
     MenuItem42: TMenuItem;
     MenuItem43: TMenuItem;
     TranslateSetup: TAction;
@@ -228,6 +253,8 @@ resourcestring
   rsReplace = 'Replace?';
   rsCannotBeUndo = 'Cannot be undo, are you sure?';
 
+const
+  strfuzzy = 'fuzzy';
 
 function QueryDialog: Boolean;
 begin
@@ -474,6 +501,7 @@ procedure TForm1.POUpdateMsg;
 var
   itemp:TPoItem;
   i:integer;
+  sfuzzy:string;
 begin
   if lastIndex<>-1 then
     itemp:=TPoItem(ListBoxPO.Items.Objects[lastIndex])
@@ -490,6 +518,15 @@ begin
     (NoteMsg.Pages[i].Controls[0] as TMemo).Modified:=False;
     Inc(i);
   end;
+  // fuzzy flag
+  if itemp<>nil then
+    if itemp.checkflag(strfuzzy)<>CheckBoxFuzzy.Checked then begin
+      modified:=True;
+      if not CheckBoxFuzzy.Checked then
+        itemp.RemoveFlag(strfuzzy)
+        else
+          itemp.Addflag(strfuzzy);
+    end;
   ListBoxPO.Invalidate;
 end;
 
@@ -828,7 +865,7 @@ procedure TForm1.EditDelete1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     if not (ActiveControl as TMemo).ReadOnly then
-      TMemo(ActiveControl).ClearSelection;
+      (ActiveControl as TMemo).ClearSelection;
 end;
 
 procedure TForm1.EditDownExecute(Sender: TObject);
@@ -1170,6 +1207,7 @@ end;
 
 procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
+  POUpdateMsg;
   CanClose:=True;
   if modified then
     CanClose:=QueryContinue;
@@ -1335,6 +1373,7 @@ begin
           end;
         end;
       until j>=i;
+      CheckBoxFuzzy.Checked:=itemp.checkflag(strfuzzy);
     end;
   end;
   lastIndex:=ListBoxPO.ItemIndex;
@@ -1369,43 +1408,43 @@ begin
     i:=1;
   end;
 
-    iCanvas:=TListBox(Control).Canvas;
+  iCanvas:=TListBox(Control).Canvas;
 
-    nHeight:=iCanvas.TextHeight('Qj');
+  nHeight:=iCanvas.TextHeight('Qj');
+  if (Index and 1)=0 then
+    iCanvas.Brush.Color:=$00EEEEEE
+    else
+      iCanvas.Brush.Color:=$00DDDDDD;
+  if odSelected in State then
     if (Index and 1)=0 then
-      iCanvas.Brush.Color:=$00EEEEEE
-      else
-        iCanvas.Brush.Color:=$00DDDDDD;
-    if odSelected in State then
-      if (Index and 1)=0 then
-       iCanvas.Brush.Color:=$00CC8888
-       else
-         iCanvas.Brush.Color:=$00BBAA88;
-    iCanvas.FillRect(ARect);
+     iCanvas.Brush.Color:=$00CC8888
+     else
+       iCanvas.Brush.Color:=$00BBAA88;
+  iCanvas.FillRect(ARect);
 
-    j:=0;
-    iHeight:=ARect.Top+7+(nHeight+2)*2;
-    HasValue:=False;
-    while j<i do begin
-      if itemp<>nil then begin
-        smsg:=itemp.GetMsgstr(j);
-        smsg:=StringReplace(smsg,sLineBreak,NextLine,[]);
-        end else
-          smsg:='';
-      if not HasValue then begin
-        HasValue:=smsg<>'';
-        if not HasValue then
-          iCanvas.Font.Color:=clRed
-          else
-            iCanvas.Font.Color:=clBlack;
-      end;
-      iCanvas.TextRect(ARect,ARect.Left+10,iHeight-1,smsg);
-      Inc(j);
-      Inc(iHeight,nHeight+2)
+  j:=0;
+  iHeight:=ARect.Top+7+(nHeight+2)*2;
+  HasValue:=False;
+  while j<i do begin
+    if itemp<>nil then begin
+      smsg:=itemp.GetMsgstr(j);
+      smsg:=StringReplace(smsg,sLineBreak,NextLine,[]);
+      end else
+        smsg:='';
+    if not HasValue then begin
+      HasValue:=smsg<>'';
+      if not HasValue then
+        iCanvas.Font.Color:=clRed
+        else
+          iCanvas.Font.Color:=clBlack;
     end;
-    iCanvas.TextRect(ARect,ARect.Left+10,ARect.Top+7+(nHeight+2),sid);
-    iCanvas.Font.Color:=clGreen;
-    iCanvas.TextRect(ARect,ARect.Left+3,ARect.Top+7,scmt);
+    iCanvas.TextRect(ARect,ARect.Left+10,iHeight-1,smsg);
+    Inc(j);
+    Inc(iHeight,nHeight+2)
+  end;
+  iCanvas.TextRect(ARect,ARect.Left+10,ARect.Top+7+(nHeight+2),sid);
+  iCanvas.Font.Color:=clGreen;
+  iCanvas.TextRect(ARect,ARect.Left+3,ARect.Top+7,scmt);
 end;
 
 

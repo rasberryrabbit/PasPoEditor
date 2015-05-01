@@ -2,7 +2,7 @@ unit uPoReader;
 
 { Simple PO file reader/writer class
 
-  Copyright (c) 2013 parcel
+  Copyright (c) 2013-2015 Do-wan Kim
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -26,6 +26,7 @@ unit uPoReader;
   0.12 - more strict loader.
   0.14 - ngettext support functions
   0.15 - fix multi-msgstr support
+  0.16 - add flag functions, fix comment line position
 }
 
 
@@ -53,12 +54,17 @@ type
       destructor Destroy; override;
 
       function Add(const str:string):pchar; overload;
+      function Insert(Index: Integer; const str: string): pchar; overload;
       function GetNameStr(const Name:string):string;
       function GetMsgstr(Idx:Integer):string;
       function GetMsgstrs:TPoItem;
       procedure SetMsgstr(Idx:Integer;str:string);
       procedure SetNameStr(const Name,str:string);
       procedure GetNameValue(Idx:Integer;var Name,Value:string);
+      //
+      function checkflag(const flag: string): boolean;
+      procedure Addflag(const flag:string);
+      procedure RemoveFlag(const flag:string);
 
       function GetMsgstrCount:Integer;
 
@@ -99,6 +105,7 @@ implementation
 
 const
   _BufSize = 4096;
+  _PO_Flag = '#,';
 
 { TPoItem }
 
@@ -110,6 +117,12 @@ begin
   Result:='';
   l:=Length(str);
   i:=1;
+  // remove space
+  while i<=l do begin
+    if str[i]>#32 then
+      break;
+    Inc(i);
+  end;
   while i<=l do begin
     ch:=str[i];
     if ch>#32 then begin
@@ -163,6 +176,18 @@ begin
     system.Move(str[1],Result^,Length(str));
     Result[Length(str)]:=#0;
     inherited Add(Result);
+  except
+    StrDispose(Result);
+  end;
+end;
+
+function TPoItem.Insert(Index: Integer; const str: string): pchar;
+begin
+  Result:=StrAlloc(Length(str)+1);
+  try
+    system.Move(str[1],Result^,Length(str));
+    Result[Length(str)]:=#0;
+    inherited Insert(Index,Result);
   except
     StrDispose(Result);
   end;
@@ -247,17 +272,93 @@ begin
   if Count>0 then
     for i:=0 to Count-1 do begin
       if CompareText(GetHeader(StrItem[i]),Name)=0 then begin
-         StrItem[i]:=Name+' '+AddQuote(str);
-         exit;
+        if (str='') and (Name=_PO_Flag) then
+          Delete(i)
+          else
+            StrItem[i]:=Name+' '+AddQuote(str);
+        exit;
       end;
     end;
-  Add(Name+' '+AddQuote(str));
+  if (Name<>'') and (Name[1]='#') then begin
+    if Count>0 then
+      for i:=0 to Count-1 do
+        if Pos('#',GetHeader(StrItem[i]))<>1 then begin
+          if (str<>'') or (GetHeader(StrItem[i])<>_PO_Flag) then
+            Insert(i,Name+' '+AddQuote(str));
+          break;
+        end;
+  end else
+    if (str<>'') or (Name<>_PO_Flag) then
+      Add(Name+' '+AddQuote(str));
 end;
 
 procedure TPoItem.GetNameValue(Idx: Integer; var Name, Value: string);
 begin
   Name:=GetHeader(StrItem[Idx]);
   Value:=Copy(StrItem[Idx],Length(Name)+2,4096);
+end;
+
+function TPoItem.checkflag(const flag: string): boolean;
+var
+  s : string;
+  st : TStringList;
+  idx : Integer;
+begin
+  Result:=False;
+  st := TStringList.Create;
+  try
+    s:=GetNameStr(_PO_Flag);
+    st.CaseSensitive:=False;
+    st.Delimiter:=',';
+    st.DelimitedText:=s;
+    Result:= st.Find(flag,idx);
+  finally
+    st.Free;
+  end;
+end;
+
+procedure TPoItem.Addflag(const flag: string);
+var
+  s : string;
+  st : TStringList;
+  idx : Integer;
+begin
+  st := TStringList.Create;
+  try
+    s:=GetNameStr(_PO_Flag);
+    st.CaseSensitive:=False;
+    st.Delimiter:=',';
+    st.DelimitedText:=s;
+    if not st.Find(flag,idx) then begin
+      st.Add(flag);
+      s:=st.DelimitedText;
+      SetNameStr(_PO_Flag,s);
+    end;
+  finally
+    st.Free;
+  end;
+end;
+
+procedure TPoItem.RemoveFlag(const flag: string);
+var
+  s : string;
+  st : TStringList;
+  idx : Integer;
+begin
+  st := TStringList.Create;
+  try
+    s:=GetNameStr(_PO_Flag);
+    st.CaseSensitive:=False;
+    st.Delimiter:=',';
+    st.DelimitedText:=s;
+    if st.Find(flag,idx) then begin
+      st.Delete(idx);
+      s:=st.DelimitedText;
+      SetNameStr(_PO_Flag,s);
+    end;
+  finally
+    st.Free;
+  end;
 end;
 
 function TPoItem.GetMsgstrCount: Integer;
