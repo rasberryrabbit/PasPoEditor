@@ -17,9 +17,8 @@
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pocomposer_main"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1616"/>
+        <TopLine Value="1615"/>
         <CursorPos X="3" Y="1541"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -41,9 +40,11 @@
       <Unit4>
         <Filename Value="uMSTRanAPI.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="74" Y="274"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="20" Y="35"/>
         <UsageCount Value="142"/>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="udlgprop.pas"/>
@@ -616,91 +617,91 @@
       </Position8>
       <Position9>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1541" Column="3" TopLine="1550"/>
+        <Caret Line="1564" TopLine="1551"/>
       </Position9>
       <Position10>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1564" TopLine="1551"/>
+        <Caret Line="1565" TopLine="1551"/>
       </Position10>
       <Position11>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1565" TopLine="1551"/>
+        <Caret Line="1566" TopLine="1551"/>
       </Position11>
       <Position12>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1566" TopLine="1551"/>
+        <Caret Line="1567" TopLine="1551"/>
       </Position12>
       <Position13>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1567" TopLine="1551"/>
+        <Caret Line="1564" TopLine="1551"/>
       </Position13>
       <Position14>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1564" TopLine="1551"/>
+        <Caret Line="1565" TopLine="1551"/>
       </Position14>
       <Position15>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1565" TopLine="1551"/>
+        <Caret Line="1566" TopLine="1551"/>
       </Position15>
       <Position16>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1566" TopLine="1551"/>
+        <Caret Line="1564" TopLine="1551"/>
       </Position16>
       <Position17>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1564" TopLine="1551"/>
+        <Caret Line="1565" TopLine="1551"/>
       </Position17>
       <Position18>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1565" TopLine="1551"/>
+        <Caret Line="1654" Column="12" TopLine="1624"/>
       </Position18>
       <Position19>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1654" Column="12" TopLine="1624"/>
+        <Caret Line="1563" Column="55" TopLine="1548"/>
       </Position19>
       <Position20>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1563" Column="55" TopLine="1548"/>
+        <Caret Line="1619" Column="7" TopLine="1603"/>
       </Position20>
       <Position21>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1619" Column="7" TopLine="1603"/>
+        <Caret Line="244" Column="10" TopLine="229"/>
       </Position21>
       <Position22>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="244" Column="10" TopLine="229"/>
+        <Caret Line="373" Column="44" TopLine="349"/>
       </Position22>
       <Position23>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="373" Column="44" TopLine="349"/>
+        <Caret Line="1529" Column="16" TopLine="1505"/>
       </Position23>
       <Position24>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1529" Column="16" TopLine="1505"/>
+        <Caret Line="1719" Column="16" TopLine="1696"/>
       </Position24>
       <Position25>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1719" Column="16" TopLine="1696"/>
+        <Caret Line="244" Column="16" TopLine="230"/>
       </Position25>
       <Position26>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="244" Column="16" TopLine="230"/>
+        <Caret Line="373" Column="44" TopLine="349"/>
       </Position26>
       <Position27>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="373" Column="44" TopLine="349"/>
+        <Caret Line="1529" Column="16" TopLine="1505"/>
       </Position27>
       <Position28>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1529" Column="16" TopLine="1505"/>
+        <Caret Line="1719" Column="16" TopLine="1696"/>
       </Position28>
       <Position29>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1719" Column="16" TopLine="1696"/>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="274" Column="74"/>
       </Position29>
       <Position30>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="244" Column="16" TopLine="1543"/>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="35" Column="19" TopLine="24"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
