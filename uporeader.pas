@@ -345,7 +345,8 @@ begin
     st.CaseSensitive:=False;
     st.Delimiter:=',';
     st.DelimitedText:=s;
-    Result:= st.Find(flag,idx);
+    //Result:= st.Find(flag,idx);
+    Result:=st.IndexOf(flag) <> -1;
   finally
     st.Free;
   end;

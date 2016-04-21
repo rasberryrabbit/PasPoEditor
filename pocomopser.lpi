@@ -94,6 +94,7 @@
       <Unit2>
         <Filename Value="uporeader.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="uPoReader"/>
       </Unit2>
       <Unit3>
         <Filename Value="ulistboxnew.pas"/>
