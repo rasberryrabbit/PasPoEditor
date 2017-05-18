@@ -2,9 +2,9 @@
 <CONFIG>
   <ProjectSession>
     <PathDelim Value="\"/>
-    <Version Value="9"/>
+    <Version Value="10"/>
     <BuildModes Active="release"/>
-    <Units Count="90">
+    <Units Count="93">
       <Unit0>
         <Filename Value="pocomopser.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -17,8 +17,8 @@
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="1349"/>
-        <CursorPos Y="1366"/>
+        <TopLine Value="650"/>
+        <CursorPos X="71" Y="672"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -36,15 +36,16 @@
         <Filename Value="ulistboxnew.pas"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="29" Y="14"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit3>
       <Unit4>
         <Filename Value="uMSTRanAPI.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="20" Y="35"/>
-        <UsageCount Value="146"/>
+        <TopLine Value="284"/>
+        <CursorPos X="21" Y="66"/>
+        <UsageCount Value="148"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -55,7 +56,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="127"/>
       </Unit5>
       <Unit6>
         <Filename Value="udlgshowraw.pas"/>
@@ -65,7 +66,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="65"/>
       </Unit6>
       <Unit7>
         <Filename Value="udlgbingapiinfo.pas"/>
@@ -76,7 +77,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
         <CursorPos Y="52"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="40"/>
       </Unit7>
       <Unit8>
         <Filename Value="utranslator.pas"/>
@@ -527,9 +528,9 @@
       <Unit80>
         <Filename Value="synapse\httpsend.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="506"/>
-        <CursorPos Y="519"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="55"/>
+        <CursorPos X="7" Y="72"/>
+        <UsageCount Value="10"/>
       </Unit80>
       <Unit81>
         <Filename Value="synapse\synautil.pas"/>
@@ -595,7 +596,51 @@
         <CursorPos Y="8628"/>
         <UsageCount Value="10"/>
       </Unit89>
+      <Unit90>
+        <Filename Value="synapse\synsock.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="41"/>
+        <UsageCount Value="10"/>
+      </Unit90>
+      <Unit91>
+        <Filename Value="synapse\blcksock.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="43"/>
+        <UsageCount Value="10"/>
+      </Unit91>
+      <Unit92>
+        <Filename Value="synapse\sswin32.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="940"/>
+        <CursorPos X="11" Y="958"/>
+        <UsageCount Value="10"/>
+      </Unit92>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="6" HistoryIndex="5">
+      <Position1>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="65" TopLine="47"/>
+      </Position1>
+      <Position2>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="67" TopLine="47"/>
+      </Position2>
+      <Position3>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="64" Column="13" TopLine="47"/>
+      </Position3>
+      <Position4>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="66" Column="68" TopLine="47"/>
+      </Position4>
+      <Position5>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="68" TopLine="47"/>
+      </Position5>
+      <Position6>
+        <Filename Value="uMSTRanAPI.pas"/>
+        <Caret Line="69" TopLine="47"/>
+      </Position6>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>

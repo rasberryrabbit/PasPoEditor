@@ -12,6 +12,9 @@ unit uMSTRanAPI;
 
   - 2015.04 New method Translator API
 
+  - 2017.05 Add checking internet connection.
+
+
 *)
 
 interface
@@ -33,7 +36,7 @@ procedure Speak(const FileName : string; const AText:string; const Lng:string);
 implementation
 
 uses SysUtils, httpsend, synautil, synacode, ssl_openssl, ssl_openssl_lib,
-     DOM, fphttpclient, XmlRead, fpjson;
+     DOM, fphttpclient, XmlRead, fpjson, synsock;
 
 
 const
@@ -49,6 +52,29 @@ const
 
 var
   BingAccessToken : string = '';
+  bInternetConn : Boolean = False;
+
+function CheckInternetConn:Boolean;
+var
+  iplist:TStringList;
+  i:Integer;
+  s:string;
+begin
+  Result:=False;
+  iplist:=TStringList.Create;
+  try
+    ResolveNameToIP('api.microsofttranslator.com',AF_INET,IPPROTO_TCP,SOCK_STREAM,iplist);
+    for i:=0 to iplist.Count-1 do begin
+      s:=iplist[i];
+      if (s<>cAnyHost) and (s<>'10.0.0.1') then begin
+        Result:=True;
+        break;
+      end;
+    end;
+  finally
+    iplist.Free
+  end;
+end;
 
 function HttpGetTranslate(const Url: string;Headers:array of string;Stream:TStream):Integer;
 var
@@ -63,9 +89,12 @@ begin
     if BingAccessToken<>'' then
       if length(Headers)>0 then
         hget.Headers.AddStrings(Headers);
-    if hget.HTTPMethod('GET',Url) then
-       Stream.CopyFrom(hget.Document,0);
-    Result:=hget.ResultCode;
+    if bInternetConn then begin
+      if hget.HTTPMethod('GET',Url) then
+         Stream.CopyFrom(hget.Document,0);
+      Result:=hget.ResultCode;
+    end else
+      Result:=404;
   finally
    hget.Free;
   end;
@@ -89,9 +118,12 @@ begin
     poststr:=Format(postdata,[EncodeURLElement(BingClientID),EncodeURLElement(BingClientSecret)]);
     WriteStrToStream(hget.Document,poststr);
     hget.MimeType:='application/x-www-form-urlencoded';
-    if hget.HTTPMethod('POST',BingAuthUrl) then
-      aToken:=GetJSON(hget.Document).FindPath('access_token').AsString;
-    Result:=hget.ResultCode;
+    if bInternetConn then begin
+      if hget.HTTPMethod('POST',BingAuthUrl) then
+        aToken:=GetJSON(hget.Document).FindPath('access_token').AsString;
+      Result:=hget.ResultCode;
+    end else
+      Result:=404;
     if Result>=400 then
        aToken:='';
   finally
@@ -277,6 +309,9 @@ begin
      Stream.Free;
   end;
 end;
+
+initialization
+  bInternetConn:=CheckInternetConn;
 
 end.
 
