@@ -225,52 +225,17 @@ msgstr "다른 PO 파일에서 번역을 가져오기"
 msgid "&File"
 msgstr "파일(&F)"
 
-#: tform1.menuitem111.caption
-msgctxt "TFORM1.MENUITEM111.CAPTION"
-msgid "-"
-msgstr ""
-
-#: tform1.menuitem16.caption
-msgctxt "TFORM1.MENUITEM16.CAPTION"
-msgid "-"
-msgstr ""
-
 #: tform1.menuitem19.caption
 msgid "&Translate"
 msgstr "번역(&T)"
-
-#: tform1.menuitem2.caption
-msgctxt "TFORM1.MENUITEM2.CAPTION"
-msgid "-"
-msgstr ""
-
-#: tform1.menuitem23.caption
-msgctxt "TFORM1.MENUITEM23.CAPTION"
-msgid "-"
-msgstr ""
-
-#: tform1.menuitem28.caption
-msgctxt "TFORM1.MENUITEM28.CAPTION"
-msgid "-"
-msgstr ""
 
 #: tform1.menuitem3.caption
 msgid "&Search"
 msgstr "찾기(&S)"
 
-#: tform1.menuitem39.caption
-msgctxt "TFORM1.MENUITEM39.CAPTION"
-msgid "-"
-msgstr ""
-
 #: tform1.menuitem40.caption
 msgid "&View"
 msgstr "보기(&V)"
-
-#: tform1.menuitem42.caption
-msgctxt "tform1.menuitem42.caption"
-msgid "-"
-msgstr ""
 
 #: tform1.menuitemedit.caption
 msgid "&Edit"

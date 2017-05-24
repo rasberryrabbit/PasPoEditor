@@ -25,6 +25,8 @@ unit pocomposer_main;
   IN THE SOFTWARE.
 }
 
+{$define USE_TRANSLTR}
+
 
 interface
 
@@ -233,7 +235,7 @@ implementation
 
 {$R *.lfm}
 
-uses uPoReader, LCLType, {RegExpr,} BRRE, uMSTRanAPI, LazUTF8, udlgprop,
+uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}utransltrorg{$endif}, LazUTF8, udlgprop,
   DefaultTranslator, gettext, Translations, udlgshowraw, udlgBingApiInfo;
 
 var
@@ -428,8 +430,9 @@ begin
         if ComboBoxSrcLang.ItemIndex>0 then
           ret:=ComboBoxSrcLang.Text
           else
-            ret:=DetectLanguage(pchar(msg));
-        ret:=TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text));
+            ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
+        ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
+              Transltr_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
@@ -490,8 +493,9 @@ begin
         if ComboBoxSrcLang.ItemIndex>0 then
           ret:=ComboBoxSrcLang.Text
           else
-            ret:=DetectLanguage(pchar(msg));
-        ret:=TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text));
+            ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
+        ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
+             Transltr_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
       except
         ret:=TranslateError;
       end;
@@ -656,6 +660,7 @@ begin
       if bingapiid<>'' then
         uMSTRanAPI.BingAppId:=bingapiid;
       *)
+      {$ifndef USE_TRANSLTR}
       if bingclient_id<>'' then
         uMSTRanAPI.BingClientID:=bingclient_id;
       if bingclient_secret<>'' then
@@ -664,6 +669,13 @@ begin
         Langs:=GetLanguagesForTranslate;
       except
       end;
+      {$else}
+      Langs:=TStringList.Create;
+      try
+        Transltr_GetLangs(Langs);
+      except
+      end;
+      {$endif}
       ComboBoxLang.Items.Assign(Langs);
       ComboBoxSrcLang.Items.Assign(Langs);
       ComboBoxSrcLang.Items.Insert(0, rsAuto);
