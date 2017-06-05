@@ -1460,7 +1460,7 @@ begin
           end;
       end;
     sid:=itemp.GetNameStr('msgid');
-    sid:=StringReplace(sid,sLineBreak,NextLine,[]);
+    sid:=StringReplace(sid,sLineBreak,NextLine,[rfReplaceAll]);
     i:=itemp.GetMsgstrCount;
   end else begin
     scmt:='#:';
