@@ -358,9 +358,9 @@ begin
   if itemp1<>nil then begin
     cstr1:=itemp1.GetNameStr('msgctxt');
     if cstr1='' then
-      cstr1:=itemp1.GetNameStr('#:');
-    if cstr1='' then
       cstr1:=itemp1.GetNameStr('#.');
+    if cstr1='' then
+      cstr1:=itemp1.GetNameStr('#:');
     if cstr1='' then
       cstr1:=itemp1.StrItem[0];
   end else
@@ -368,9 +368,9 @@ begin
   if itemp2<>nil then begin
     cstr2:=itemp2.GetNameStr('msgctxt');
     if cstr2='' then
-      cstr2:=itemp2.GetNameStr('#:');
-    if cstr2='' then
       cstr2:=itemp2.GetNameStr('#.');
+    if cstr2='' then
+      cstr2:=itemp2.GetNameStr('#:');
     if cstr2='' then
       cstr2:=itemp2.StrItem[0];
   end else
