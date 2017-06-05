@@ -1422,7 +1422,7 @@ procedure TForm1.ListBoxPODrawItem(Control: TWinControl; Index: Integer;
   ARect: TRect; State: TOwnerDrawState);
 var
   itemp:TPoItem;
-  scmt, sid, smsg : string;
+  scmt, sid, smsg, sdisp : string;
   nHeight,iHeight,i,j:Integer;
   iCanvas:TCanvas;
   HasValue:Boolean;
@@ -1430,8 +1430,23 @@ const
   NextLine = #$E2#$86#$98;
 begin
   itemp := TPoItem(TListBox(Control).Items.Objects[Index]);
+  // disp text
   if itemp<>nil then begin
-    scmt:='#: '+itemp.GetNameStr('#:');
+    sdisp:=itemp.GetNameStr('msgctxt');
+    if sdisp<>'' then
+      scmt:='msgctxt '+sdisp
+      else begin
+        sdisp:=itemp.GetNameStr('#.');
+        if sdisp<>'' then
+          scmt:='#. '+sdisp
+          else begin
+            sdisp:=itemp.GetNameStr('#:');
+            if sdisp<>'' then
+              scmt:='#: '+sdisp
+              else
+                scmt:=itemp.StrItem[0];
+          end;
+      end;
     sid:=itemp.GetNameStr('msgid');
     sid:=StringReplace(sid,sLineBreak,NextLine,[]);
     i:=itemp.GetMsgstrCount;

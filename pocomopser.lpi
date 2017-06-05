@@ -19,7 +19,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="1"/>
+      <BuildNr Value="4"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -63,7 +63,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="test1.po"/>
+        <CommandLineParams Value="strings.po"/>
         <WorkingDirectory Value="F:\delphiprj-new\lr_proj\pocompo"/>
       </local>
     </RunParams>

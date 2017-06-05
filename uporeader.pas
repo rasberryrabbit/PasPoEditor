@@ -488,7 +488,7 @@ begin
     if ch in [#13,#10] then begin
       Inc(FBufIdx);
       ch1:=PeekChar;
-      if (not Eof) and (ch1<>ch) then
+      if (not Eof) and (ch1 in [#13,#10]) and (ch1<>ch) then
          Inc(FBufIdx);
       PeekChar;
       break;
@@ -527,9 +527,8 @@ end;
 
 function TPoList.Load(const FileName: string): Boolean;
 var
-  stemp,shead:string;
+  stemp,shead,sBody:string;
   itemp:TPoItem;
-  IsFirst,LastItem:Boolean;
 begin
   Result:=False;
   Getmem(FStrBuf,_BufSize);
@@ -540,33 +539,26 @@ begin
     FStream:=TFileStream.Create(FileName,fmOpenRead or fmShareDenyWrite);
     try
       while not Eof do begin
-        IsFirst:=True;
-        LastItem:=False;
         itemp:=AddItem;
+        stemp:='';
         while not Eof do begin
           shead:=ReadHeader;
           if SkipSpace then begin
-             if not IsFirst then
-               itemp.Add(stemp)
-               else
-                 IsFirst:=False;
-             stemp:=shead+' '+ReadLine;
-             if LastItem then begin
-               // new item
-               if (Length(shead)>0) and
-                  ((shead[1]='#') or (CompareText(Copy(shead,1,6),'msgstr')<>0)) then begin
-                 itemp:=AddItem;
-                 IsFirst:=False;
-                 LastItem:=False;
-               end;
-             end else
-               LastItem:=CompareText(Copy(shead,1,6),'msgstr')=0;
-          end else
-               if shead='' then begin
-                 itemp.Add(stemp);
-                 break;
-                 end else
-                   stemp:=stemp+sLineBreak+shead;
+            // valid header
+            if (Trim(shead)<>'') and (stemp<>'') then
+              itemp.Add(stemp);
+            sBody:=ReadLine;
+            stemp:=shead+' '+sBody;
+          end else begin
+            // addtional lines
+            if Trim(shead)<>'' then
+              stemp:=stemp+LineEnding+shead
+              else
+                begin
+                  itemp.Add(stemp);
+                  break;
+                end;
+          end;
           if Eof then
             itemp.Add(stemp);
         end;
@@ -638,7 +630,7 @@ begin
         ch1:=ch;
         if i<=l then begin
           ch:=str[i];
-          if ch1=ch then
+          if (ch in [#13,#10]) and (ch1=ch) then
             Dec(i);
         end;
         if Result<>'' then
@@ -687,7 +679,7 @@ begin
       inc(i);
       if i<=l then begin
         ch:=str[i];
-        if ch<>ch1 then
+        if (ch in [#13,#10]) and (ch<>ch1) then
           Result:=Result+ch
           else
           Dec(i);
