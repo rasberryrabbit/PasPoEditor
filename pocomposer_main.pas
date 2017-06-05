@@ -355,13 +355,25 @@ var
 begin
   itemp1:=TPoItem(List.Objects[Index1]);
   itemp2:=TPoItem(List.Objects[Index2]);
-  if itemp1<>nil then
-    cstr1:=itemp1.GetNameStr('#:')
-    else
+  if itemp1<>nil then begin
+    cstr1:=itemp1.GetNameStr('msgctxt');
+    if cstr1='' then
+      cstr1:=itemp1.GetNameStr('#:');
+    if cstr1='' then
+      cstr1:=itemp1.GetNameStr('#.');
+    if cstr1='' then
+      cstr1:=itemp1.StrItem[0];
+  end else
       cstr1:='';
-  if itemp2<>nil then
-    cstr2:=itemp2.GetNameStr('#:')
-    else
+  if itemp2<>nil then begin
+    cstr2:=itemp2.GetNameStr('msgctxt');
+    if cstr2='' then
+      cstr2:=itemp2.GetNameStr('#:');
+    if cstr2='' then
+      cstr2:=itemp2.GetNameStr('#.');
+    if cstr2='' then
+      cstr2:=itemp2.StrItem[0];
+  end else
       cstr2:='';
   Result:=CompareStr(cstr1,cstr2);
 end;
