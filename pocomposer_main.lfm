@@ -374,6 +374,7 @@ object Form1: TForm1
       end
       object MenuItem43: TMenuItem
         Action = TranslateSetup
+        Visible = False
       end
     end
     object MenuItem40: TMenuItem

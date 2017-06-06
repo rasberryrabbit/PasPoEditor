@@ -650,6 +650,7 @@ begin
     self.Height:=FormDataJson.ReadInteger('FormHeight', self.Height);
     Panel1.Height:=FormDataJson.ReadInteger('Panel1Height', Panel1.Height);
     MemoId.Height:=FormDataJson.ReadInteger('MemoOldHeight', MemoId.Height);
+    OptionSortComment.Checked:=FormDataJson.ReadBoolean('CommentSort', OptionSortComment.Checked);
   except
   end;
 end;
@@ -661,6 +662,7 @@ begin
   FormDataJson.WriteInteger('FormHeight', self.Height);
   FormDataJson.WriteInteger('Panel1Height', Panel1.Height);
   FormDataJson.WriteInteger('MemoOldHeight', MemoId.Height);
+  FormDataJson.WriteBoolean('CommentSort', OptionSortComment.Checked);
   try
     FormDataJson.Save;
   except
