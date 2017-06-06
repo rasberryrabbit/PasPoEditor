@@ -33,20 +33,23 @@ interface
 uses
   Classes, SysUtils, FileUtil, MRUList, ExtendedNotebook, Forms, Controls,
   Graphics, Dialogs, Menus, ActnList, StdActns, ComCtrls, StdCtrls, ExtCtrls,
-  types, contnrs;
+  JSONPropStorage, types, contnrs;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    CheckBoxFuzzy: TCheckBox;
     EditGotoPrevFuzzy: TAction;
     EditGotoNextFuzzy: TAction;
-    CheckBoxFuzzy: TCheckBox;
+    FormDataJson: TJSONPropStorage;
     MenuItem42: TMenuItem;
     MenuItem43: TMenuItem;
     MenuItem44: TMenuItem;
     MenuItem45: TMenuItem;
+    Splitter1: TSplitter;
+    Splitter2: TSplitter;
     TranslateSetup: TAction;
     MenuItem40: TMenuItem;
     MenuItem41: TMenuItem;
@@ -186,6 +189,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormWindowStateChange(Sender: TObject);
     procedure ImportPOExecute(Sender: TObject);
     procedure ListBoxPOClick(Sender: TObject);
     procedure ListBoxPODblClick(Sender: TObject);
@@ -205,6 +209,7 @@ type
     procedure ReplaceDialog1Show(Sender: TObject);
     procedure SearchFindExecute(Sender: TObject);
     procedure SearchNextExecute(Sender: TObject);
+    procedure Splitter1Moved(Sender: TObject);
     procedure TranslateCopyExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
     procedure TranslateSetupExecute(Sender: TObject);
@@ -220,6 +225,8 @@ type
     procedure POUpdateMsg;
     function EnableTranslate:Boolean;
     procedure RefreshListBoxPO;
+    procedure LoadMainFormData;
+    procedure SaveMainFormData;
     procedure SelectAllItems(untran:Boolean);
     procedure SetupBingApi;
     { public declarations }
@@ -402,6 +409,11 @@ begin
          else
            ReplaceDialog1Find(nil);
   end;
+end;
+
+procedure TForm1.Splitter1Moved(Sender: TObject);
+begin
+  FormWindowStateChange(nil);
 end;
 
 
@@ -628,6 +640,31 @@ begin
     end else
       PoList.Sort;
   ListBoxPO.Items.Assign(PoList);
+end;
+
+procedure TForm1.LoadMainFormData;
+begin
+  try
+    FormDataJson.Restore;
+    self.Width:=FormDataJson.ReadInteger('FormWidth', self.Width);
+    self.Height:=FormDataJson.ReadInteger('FormHeight', self.Height);
+    Panel1.Height:=FormDataJson.ReadInteger('Panel1Height', Panel1.Height);
+    MemoId.Height:=FormDataJson.ReadInteger('MemoOldHeight', MemoId.Height);
+  except
+  end;
+end;
+
+
+procedure TForm1.SaveMainFormData;
+begin
+  FormDataJson.WriteInteger('FormWidth', self.Width);
+  FormDataJson.WriteInteger('FormHeight', self.Height);
+  FormDataJson.WriteInteger('Panel1Height', Panel1.Height);
+  FormDataJson.WriteInteger('MemoOldHeight', MemoId.Height);
+  try
+    FormDataJson.Save;
+  except
+  end;
 end;
 
 procedure TForm1.SelectAllItems(untran: Boolean);
@@ -1268,6 +1305,7 @@ begin
   GetLanguageIDs(lng,lngf);
   Translations.TranslateUnitResourceStrings('LCLStrConsts', 'lclstrconsts.%s.po', lng, lngf);
   CheckConfigFile;
+  LoadMainFormData;
 end;
 
 
@@ -1276,6 +1314,7 @@ begin
   ListBoxPO.Clear;
   PoList.Free;
   FreeAndNil(mPo);
+  SaveMainFormData;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
@@ -1285,6 +1324,11 @@ begin
     FileOpen1.Dialog.FileName:=ParamStr(1);
     FileOpen1Accept(nil);
   end;
+end;
+
+procedure TForm1.FormWindowStateChange(Sender: TObject);
+begin
+  MemoId.Height:=(Panel1.Height shr 1)-CheckBoxFuzzy.Height;
 end;
 
 procedure TForm1.ImportPOExecute(Sender: TObject);
