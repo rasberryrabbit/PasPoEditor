@@ -1570,7 +1570,7 @@ end;
 
 procedure TForm1.ReplaceDialog1Find(Sender: TObject);
 var
-  i,j,k,l:Integer;
+  i,j,k,l,m:Integer;
   itemp:TPoItem;
   stemp:string;
   sFound,sUp:Boolean;
@@ -1607,12 +1607,14 @@ begin
       while i<ListBoxPO.Count do begin
         itemp:=TPoItem(ListBoxPO.Items.Objects[i]);
         if itemp<>nil then begin
+          // search msgid
           stemp:=itemp.GetNameStr('msgid');
           if Length(stemp)>0 then
             if pcre.Find(pchar(stemp),brresuPOSSIBLEUTF8)<>-1 then begin
               sFound:=True;
               break;
             end;
+          // search msgstr
           l:=itemp.GetMsgstrCount;
           while k<l do begin
             stemp:=itemp.GetMsgstr(k);
@@ -1622,6 +1624,18 @@ begin
                 break;
               end;
             Inc(k);
+          end;
+          // search all in item strings
+          m:=0;
+          l:=itemp.Count;
+          while m<l do begin
+            stemp:=itemp.StrItem[m];
+            if Length(stemp)>0 then
+              if pcre.Find(pchar(stemp),brresuPOSSIBLEUTF8)<>-1 then begin
+                sFound:=True;
+                break;
+              end;
+            Inc(m);
           end;
           if sFound then
             break;
@@ -1700,9 +1714,8 @@ begin
         if itemp<>nil then begin
           l:=itemp.GetMsgstrCount;
           while k<l do begin
+            // replace works on msgstr only
             stemp:=itemp.GetMsgstr(k);
-            if Length(stemp)=0 then
-              stemp:=itemp.GetNameStr('msgid');
             if Length(stemp)>0 then begin
               if pcre.Find(pchar(stemp),brresuPOSSIBLEUTF8)<>-1 then begin
                 lastFindIndex:=Point(i,k);
