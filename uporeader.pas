@@ -51,6 +51,7 @@ type
     protected
       procedure Notify(Ptr: Pointer; Action: TListNotification); override;
     public
+      StrLineBreak:PChar;
 
       constructor Create;
       destructor Destroy; override;
@@ -82,13 +83,16 @@ type
       FLastRead,
       FBufIdx:Integer;
       FLineBreak:string;
-      FFileLineBreak:string;
+      FFileLineBreak:array[0..7] of char;
       FLineBreakCheck:Boolean;
 
+      function GetFileLineBreak: string;
+      function GetPoItem(Index: Integer): TPoItem;
       function PeekChar: char;
       function Eof:Boolean;
       function ReadLine:string;
       function ReadHeader:string;
+      procedure SetFileLineBreak(AValue: string);
       procedure SetLineBreak(AValue: string);
       function SkipSpace:boolean;
     protected
@@ -104,20 +108,20 @@ type
 
       // valid after load
       property LineBreak:string read FLineBreak write SetLineBreak;
-      property FileLineBreak:string read FFileLineBreak;
+      property FileLineBreak:string read GetFileLineBreak write SetFileLineBreak;
+      property PoItem[Index:Integer]:TPoItem read GetPoItem;
   end;
 
-  function StripQuote(const str: string): string;
-  function AddQuote(const str:string):string;
+  function StripQuote(const str: string; const strlinebrk:string=#13#10): string;
+  function AddQuote(const str:string; const strlinebrk:string=#13#10):string;
 
-var
-  POLineBreak:string=#13#10;
 
 implementation
 
 const
   _BufSize = 4096;
   _PO_Flag = '#,';
+  dummyLineBrk:array[0..2] of char=(#13,#10,#0);
 
 { TPoItem }
 
@@ -208,6 +212,7 @@ end;
 constructor TPoItem.Create;
 begin
   inherited;
+  StrLineBreak:=@dummyLineBrk[0];
 end;
 
 destructor TPoItem.Destroy;
@@ -246,7 +251,7 @@ begin
   if Count>0 then
     for i:=0 to Count-1 do begin
       if CompareText(GetHeaderValue(StrItem[i],Result),Name)=0 then begin
-         Result:=StripQuote(Result);
+         Result:=StripQuote(Result,StrLineBreak);
          exit;
       end;
     end;
@@ -264,7 +269,7 @@ begin
       stemp:=GetHeaderValue(StrItem[i],Result);
       if CompareText(Copy(stemp,1,6),'msgstr')=0 then begin
         if j=Idx then begin
-          Result:=StripQuote(Result);
+          Result:=StripQuote(Result,StrLineBreak);
           exit;
         end;
         Inc(j);
@@ -298,7 +303,7 @@ begin
       stemp:=GetHeader(StrItem[i]);
       if CompareText(Copy(stemp,1,6),'msgstr')=0 then begin
         if j=idx then begin
-         StrItem[i]:=stemp+' '+AddQuote(str);
+         StrItem[i]:=stemp+' '+AddQuote(str,StrLineBreak);
          exit;
         end;
         Inc(j);
@@ -308,7 +313,7 @@ begin
     ntemp:='msgstr'
     else
       ntemp:='msgstr['+IntToStr(Idx)+']';
-  Add(ntemp+' '+AddQuote(str));
+  Add(ntemp+' '+AddQuote(str,StrLineBreak));
 end;
 
 procedure TPoItem.SetNameStr(const Name, str: string);
@@ -321,7 +326,7 @@ begin
         if (str='') and (Name=_PO_Flag) then
           Delete(i)
           else
-            StrItem[i]:=Name+' '+AddQuote(str);
+            StrItem[i]:=Name+' '+AddQuote(str,StrLineBreak);
         exit;
       end;
     end;
@@ -330,12 +335,12 @@ begin
       for i:=0 to Count-1 do
         if Pos('#',GetHeader(StrItem[i]))<>1 then begin
           if (str<>'') or (GetHeader(StrItem[i])<>_PO_Flag) then
-            Insert(i,Name+' '+AddQuote(str));
+            Insert(i,Name+' '+AddQuote(str,StrLineBreak));
           break;
         end;
   end else
     if (str<>'') or (Name<>_PO_Flag) then
-      Add(Name+' '+AddQuote(str));
+      Add(Name+' '+AddQuote(str,StrLineBreak));
 end;
 
 procedure TPoItem.GetNameValue(Idx: Integer; var Name, Value: string);
@@ -439,6 +444,16 @@ begin
   Result:=FStrBuf[FBufIdx];
 end;
 
+function TPoList.GetPoItem(Index: Integer): TPoItem;
+begin
+  Result:=TPoItem(Items[Index]);
+end;
+
+function TPoList.GetFileLineBreak: string;
+begin
+  Result:=FFileLineBreak;
+end;
+
 function TPoList.Eof: Boolean;
 begin
   Result:=FLastRead=0;
@@ -487,9 +502,16 @@ begin
   end;
 end;
 
+procedure TPoList.SetFileLineBreak(AValue: string);
+var
+  i:Integer;
+begin
+  if FFileLineBreak=Copy(AValue,1,6) then Exit;
+  FFileLineBreak:=Copy(AValue,1,6);
+end;
+
 procedure TPoList.SetLineBreak(AValue: string);
 begin
-  POLineBreak:=AValue;
   if FLineBreak=AValue then Exit;
   FLineBreak:=AValue;
 end;
@@ -512,21 +534,21 @@ begin
           // check linebreak
           if FLineBreakCheck then begin
             FFileLineBreak:=ch+ch1;
-            LineBreak:=FFileLineBreak;
+            FLineBreak:=FileLineBreak;
             FLineBreakCheck:=False;
           end;
         end else begin
           // check linebreak
           if FLineBreakCheck then begin
             FFileLineBreak:=ch;
-            LineBreak:=FFileLineBreak;
+            FLineBreak:=FileLineBreak;
             FLineBreakCheck:=False;
           end;
         end;
       end else
         if (not Eof) and FLineBreakCheck then begin
           FFileLineBreak:=ch;
-          LineBreak:=FFileLineBreak;
+          FLineBreak:=FileLineBreak;
           FLineBreakCheck:=False;
         end;
       PeekChar;
@@ -561,6 +583,7 @@ function TPoList.AddItem: TPoItem;
 begin
   Result:=TPoItem.Create;
   try
+    Result.StrLineBreak:=@FFileLineBreak[0];
     inherited Add(Pointer(Result));
   except
     Result.Free;
@@ -588,22 +611,27 @@ begin
           shead:=ReadHeader;
           if SkipSpace then begin
             // valid header
-            if (Trim(shead)<>'') and (stemp<>'') then
+            if (Trim(shead)<>'') and (stemp<>'') then begin
+              itemp.StrLineBreak:=@FFileLineBreak[0];
               itemp.Add(stemp);
+            end;
             sBody:=ReadLine;
             stemp:=shead+' '+sBody;
           end else begin
             // addtional lines
             if Trim(shead)<>'' then
-              stemp:=stemp+FLineBreak+shead
+              stemp:=stemp+FFileLineBreak+shead
               else
                 begin
+                  itemp.StrLineBreak:=@FFileLineBreak[0];
                   itemp.Add(stemp);
                   break;
                 end;
           end;
-          if Eof then
+          if Eof then begin
+            itemp.StrLineBreak:=@FFileLineBreak[0];
             itemp.Add(stemp);
+          end;
         end;
       end;
       Result:=True;
@@ -634,6 +662,8 @@ begin
           stemp:=stemp+' '+stemp1
           else
             stemp:=stemp1;
+        if FFileLineBreak<>FLineBreak then
+          stemp:=StringReplace(stemp,FFileLineBreak,FLineBreak,[rfReplaceAll]);
         FStream.Write(stemp[1],Length(stemp));
         FStream.Write(FLineBreak[1],Length(FLineBreak));
       end;
@@ -646,7 +676,7 @@ begin
   end;
 end;
 
-function StripQuote(const str: string): string;
+function StripQuote(const str: string; const strlinebrk: string): string;
 var
   ch,ch1:char;
   l,i:integer;
@@ -677,7 +707,7 @@ begin
             Dec(i);
         end;
         if Result<>'' then
-           Result:=Result+POLineBreak;
+           Result:=Result+strlinebrk;
       end else
       if IsEscape or (ch<>'"') then begin
         if IsEscape and ((ch<#33) or (ch>#127)) then
@@ -691,7 +721,7 @@ begin
   end;
 end;
 
-function AddQuote(const str: string): string;
+function AddQuote(const str: string; const strlinebrk: string): string;
 var
   ch,ch1:char;
   l,i:integer;
@@ -744,7 +774,7 @@ begin
   if IsEscape then
     Result:=Result+'\';
   if IsMultiLine then
-    Result:='""'+POLineBreak+Result;
+    Result:='""'+strlinebrk+Result;
   Result:=Result+'"';
 end;
 

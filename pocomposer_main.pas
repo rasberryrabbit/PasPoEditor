@@ -819,6 +819,8 @@ var
   stemp,dtemp:string;
   DoOverwrite,WriteMsg,FirstMsg:Boolean;
 begin
+  if mPo=nil then
+    exit;
   if OpenDialogImport.Execute then begin
     FirstMsg:=True;
     ListImp:=TFPDataHashTable.Create;
@@ -839,6 +841,7 @@ begin
       try
         try
           mPOimport.Load(OpenDialogImport.FileName);
+          mPOimport.FileLineBreak:=mPo.FileLineBreak;
           MRUManager1.Add(OpenDialogImport.FileName,0);
         except
           on e:exception do
@@ -970,6 +973,8 @@ begin
       if ListBoxPO.Count>0 then begin
         newPo:=TPoList.Create;
         try
+          newPo.FileLineBreak:=mPo.FileLineBreak;
+          newPo.LineBreak:=mPo.LineBreak;
           with newPo.AddItem do begin
             Add('msgid ""');
             Add('msgstr ""');
@@ -1215,6 +1220,8 @@ begin
       if ListBoxPO.Count>0 then begin
         newPo:=TPoList.Create;
         try
+          newPo.FileLineBreak:=mPo.FileLineBreak;
+          newPo.LineBreak:=mPo.LineBreak;
           with newPo.AddItem do begin
             Add('msgid ""');
             Add('msgstr ""');
@@ -1260,6 +1267,10 @@ procedure TForm1.FileSaveAs1Accept(Sender: TObject);
 begin
   if Assigned(mPo) then begin
     try
+      if OptionUseLinuxLineBreak.Checked then
+        mPo.LineBreak:=#10
+        else
+          mPo.LineBreak:=#13#10;
       mPo.Save(FileSaveAs1.Dialog.FileName);
       MRUManager1.Add(FileSaveAs1.Dialog.FileName,0);
       modified:=False;
@@ -1359,6 +1370,7 @@ begin
       try
         try
           mPOimport.Load(OpenDialogImport.FileName);
+          mPOimport.FileLineBreak:=mPo.FileLineBreak;
           MRUManager1.Add(OpenDialogImport.FileName,0);
         except
           on e:exception do
@@ -1614,12 +1626,13 @@ end;
 
 procedure TForm1.OptionUseLinuxLineBreakExecute(Sender: TObject);
 begin
+  TAction(Sender).Checked:=not TAction(Sender).Checked;
+  if mPo=nil then
+    exit;
   if OptionUseLinuxLineBreak.Checked then begin
-    uLineBreak:=#10;
-    PoList.LineBreak:=#10;
+    mPo.LineBreak:=#10;
   end else begin
-    uLineBreak:=#13#10;
-    PoList.LineBreak:=#13#10;
+    mPo.LineBreak:=#13#10;
   end;
 end;
 
