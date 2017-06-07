@@ -413,6 +413,7 @@ object Form1: TForm1
       Category = 'File'
       Caption = 'Save &As ...'
       Dialog.Filter = 'PO files|*.po|All files|*.*'
+      Dialog.Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
       Hint = 'Save As'
       ImageIndex = 1
       BeforeExecute = FileSaveAs1BeforeExecute
@@ -774,6 +775,7 @@ object Form1: TForm1
   end
   object SaveDialogExport: TSaveDialog
     Filter = 'PO Files|*.po|All Files|*.*'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     Left = 128
     Top = 128
   end

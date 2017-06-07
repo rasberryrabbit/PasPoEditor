@@ -21,6 +21,12 @@ msgstr "%d 번역을 가져왔습니다."
 msgid "%d patched, %d added"
 msgstr "%d 패치되고 %d 추가 되었습니다"
 
+#: pocomposer_main.rsformcaption
+#, fuzzy
+msgctxt "pocomposer_main.rsformcaption"
+msgid "PO Editor"
+msgstr "PO 편집기"
+
 #: pocomposer_main.rsitwilllostch
 msgid "It will lost changes. continue anyway?"
 msgstr "변경한 내용을 잃습니다. 계속하시겠습니까?"
@@ -50,6 +56,7 @@ msgid "clear"
 msgstr "지우기"
 
 #: tform1.caption
+msgctxt "tform1.caption"
 msgid "PO Editor"
 msgstr "PO 편집기"
 

@@ -21,6 +21,11 @@ msgstr ""
 msgid "%d patched, %d added"
 msgstr ""
 
+#: pocomposer_main.rsformcaption
+msgctxt "pocomposer_main.rsformcaption"
+msgid "PO Editor"
+msgstr ""
+
 #: pocomposer_main.rsitwilllostch
 msgid "It will lost changes. continue anyway?"
 msgstr ""
@@ -50,6 +55,7 @@ msgid "clear"
 msgstr ""
 
 #: tform1.caption
+msgctxt "tform1.caption"
 msgid "PO Editor"
 msgstr ""
 

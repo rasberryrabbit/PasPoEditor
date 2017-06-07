@@ -274,6 +274,7 @@ resourcestring
   rsItWillLostCh = 'It will lost changes. continue anyway?';
   rsReplace = 'Replace?';
   rsCannotBeUndo = 'Cannot be undo, are you sure?';
+  rsFormCaption = 'PO Editor';
 
 const
   strfuzzy = 'fuzzy';
@@ -420,7 +421,6 @@ procedure TForm1.Splitter1Moved(Sender: TObject);
 begin
   FormWindowStateChange(nil);
 end;
-
 
 procedure TForm1.TranslateCopyExecute(Sender: TObject);
 var
