@@ -250,6 +250,10 @@ msgstr "최근 파일"
 msgid "Sort by comment"
 msgstr "주석문으로 정렬"
 
+#: tform1.optionuselinuxlinebreak.caption
+msgid "Use Linux LineBreak"
+msgstr ""
+
 #: tform1.searchfind.caption
 msgid "Find"
 msgstr "찾기"

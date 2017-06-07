@@ -250,6 +250,10 @@ msgstr ""
 msgid "Sort by comment"
 msgstr ""
 
+#: tform1.optionuselinuxlinebreak.caption
+msgid "Use Linux LineBreak"
+msgstr ""
+
 #: tform1.searchfind.caption
 msgid "Find"
 msgstr ""

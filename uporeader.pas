@@ -27,6 +27,7 @@ unit uPoReader;
   0.14 - ngettext support functions
   0.15 - fix multi-msgstr support
   0.16 - add flag functions, fix comment line position, no limit message length
+  0.17 - rewrite load method
 }
 
 
@@ -80,11 +81,15 @@ type
       FStrBuf:PChar;
       FLastRead,
       FBufIdx:Integer;
+      FLineBreak:string;
+      FFileLineBreak:string;
+      FLineBreakCheck:Boolean;
 
       function PeekChar: char;
       function Eof:Boolean;
       function ReadLine:string;
       function ReadHeader:string;
+      procedure SetLineBreak(AValue: string);
       function SkipSpace:boolean;
     protected
       procedure Notify(Ptr: Pointer; Action: TListNotification); override;
@@ -97,10 +102,16 @@ type
       function Load(const FileName:string):Boolean;
       function Save(const FileName:string):Boolean;
 
+      // valid after load
+      property LineBreak:string read FLineBreak write SetLineBreak;
+      property FileLineBreak:string read FFileLineBreak;
   end;
 
   function StripQuote(const str: string): string;
   function AddQuote(const str:string):string;
+
+var
+  POLineBreak:string=#13#10;
 
 implementation
 
@@ -476,6 +487,13 @@ begin
   end;
 end;
 
+procedure TPoList.SetLineBreak(AValue: string);
+begin
+  POLineBreak:=AValue;
+  if FLineBreak=AValue then Exit;
+  FLineBreak:=AValue;
+end;
+
 // return true, if there is space char.
 function TPoList.SkipSpace: boolean;
 var
@@ -488,8 +506,29 @@ begin
     if ch in [#13,#10] then begin
       Inc(FBufIdx);
       ch1:=PeekChar;
-      if (not Eof) and (ch1 in [#13,#10]) and (ch1<>ch) then
-         Inc(FBufIdx);
+      if (not Eof) and (ch1 in [#13,#10]) then begin
+        if ch1<>ch then begin
+          Inc(FBufIdx);
+          // check linebreak
+          if FLineBreakCheck then begin
+            FFileLineBreak:=ch+ch1;
+            LineBreak:=FFileLineBreak;
+            FLineBreakCheck:=False;
+          end;
+        end else begin
+          // check linebreak
+          if FLineBreakCheck then begin
+            FFileLineBreak:=ch;
+            LineBreak:=FFileLineBreak;
+            FLineBreakCheck:=False;
+          end;
+        end;
+      end else
+        if (not Eof) and FLineBreakCheck then begin
+          FFileLineBreak:=ch;
+          LineBreak:=FFileLineBreak;
+          FLineBreakCheck:=False;
+        end;
       PeekChar;
       break;
     end else
@@ -513,6 +552,9 @@ end;
 constructor TPoList.Create;
 begin
   inherited;
+  FLineBreak:=#13#10;
+  FFileLineBreak:=#13#10;
+  FLineBreakCheck:=False;
 end;
 
 function TPoList.AddItem: TPoItem;
@@ -531,6 +573,7 @@ var
   itemp:TPoItem;
 begin
   Result:=False;
+  FLineBreakCheck:=True;
   Getmem(FStrBuf,_BufSize);
   try
     // for read buffer
@@ -552,7 +595,7 @@ begin
           end else begin
             // addtional lines
             if Trim(shead)<>'' then
-              stemp:=stemp+LineEnding+shead
+              stemp:=stemp+FLineBreak+shead
               else
                 begin
                   itemp.Add(stemp);
@@ -592,10 +635,10 @@ begin
           else
             stemp:=stemp1;
         FStream.Write(stemp[1],Length(stemp));
-        FStream.Write(sLineBreak[1],Length(sLineBreak));
+        FStream.Write(FLineBreak[1],Length(FLineBreak));
       end;
       if stemp<>'' then
-        Fstream.Write(sLineBreak[1],Length(sLineBreak));
+        Fstream.Write(FLineBreak[1],Length(FLineBreak));
     end;
     Result:=True;
   finally
@@ -634,7 +677,7 @@ begin
             Dec(i);
         end;
         if Result<>'' then
-           Result:=Result+sLineBreak;
+           Result:=Result+POLineBreak;
       end else
       if IsEscape or (ch<>'"') then begin
         if IsEscape and ((ch<#33) or (ch>#127)) then
@@ -701,7 +744,7 @@ begin
   if IsEscape then
     Result:=Result+'\';
   if IsMultiLine then
-    Result:='""'+sLineBreak+Result;
+    Result:='""'+POLineBreak+Result;
   Result:=Result+'"';
 end;
 

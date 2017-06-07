@@ -40,6 +40,9 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    MenuItem46: TMenuItem;
+    MenuItem47: TMenuItem;
+    OptionUseLinuxLineBreak: TAction;
     CheckBoxFuzzy: TCheckBox;
     EditGotoPrevFuzzy: TAction;
     EditGotoNextFuzzy: TAction;
@@ -203,6 +206,7 @@ type
       ACaption: string; UserData: PtrInt);
     procedure NoteMsgChange(Sender: TObject);
     procedure OptionSortCommentExecute(Sender: TObject);
+    procedure OptionUseLinuxLineBreakExecute(Sender: TObject);
     procedure ReplaceDialog1Close(Sender: TObject);
     procedure ReplaceDialog1Find(Sender: TObject);
     procedure ReplaceDialog1Replace(Sender: TObject);
@@ -257,6 +261,7 @@ var
   bingapiid:string='';
   bingclient_id:string='';
   bingclient_secret:string='';
+  uLineBreak:string=#13#10;
 
 
 resourcestring
@@ -774,6 +779,8 @@ begin
   mPo:=TPoList.Create;
   try
     mPo.Load(FileOpen1.Dialog.FileName);
+    OptionUseLinuxLineBreak.Checked:=mPo.FileLineBreak=#10;
+    uLineBreak:=mPo.FileLineBreak;
     MRUManager1.Add(FileOpen1.Dialog.FileName,0);
     if mPo.Count>0 then begin
       for i:=0 to mPo.Count-1 do begin
@@ -1506,7 +1513,7 @@ begin
           end;
       end;
     sid:=itemp.GetNameStr('msgid');
-    sid:=StringReplace(sid,sLineBreak,NextLine,[rfReplaceAll]);
+    sid:=StringReplace(sid,uLineBreak,NextLine,[rfReplaceAll]);
     i:=itemp.GetMsgstrCount;
   end else begin
     scmt:='#:';
@@ -1535,7 +1542,7 @@ begin
   while j<i do begin
     if itemp<>nil then begin
       smsg:=itemp.GetMsgstr(j);
-      smsg:=StringReplace(smsg,sLineBreak,NextLine,[]);
+      smsg:=StringReplace(smsg,uLineBreak,NextLine,[rfReplaceAll]);
       end else
         smsg:='';
     if not HasValue then begin
@@ -1603,6 +1610,17 @@ procedure TForm1.OptionSortCommentExecute(Sender: TObject);
 begin
   TAction(Sender).Checked:=not TAction(Sender).Checked;
   RefreshListBoxPO;
+end;
+
+procedure TForm1.OptionUseLinuxLineBreakExecute(Sender: TObject);
+begin
+  if OptionUseLinuxLineBreak.Checked then begin
+    uLineBreak:=#10;
+    PoList.LineBreak:=#10;
+  end else begin
+    uLineBreak:=#13#10;
+    PoList.LineBreak:=#13#10;
+  end;
 end;
 
 procedure TForm1.ReplaceDialog1Close(Sender: TObject);
