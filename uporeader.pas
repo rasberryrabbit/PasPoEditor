@@ -28,6 +28,7 @@ unit uPoReader;
   0.15 - fix multi-msgstr support
   0.16 - add flag functions, fix comment line position, no limit message length
   0.17 - rewrite load method
+  0.18 - validdate multiline and linebreak enhancement
 }
 
 
@@ -44,8 +45,6 @@ type
 
   TPoItem = class(TList)
     private
-      function GetHeader(const str:string):string;
-      function GetHeaderValue(const str:string;var value:string):string;
       function GetStrItem(Index:Integer):string;
       procedure SetStrItem(Index:Integer;const str:string);
     protected
@@ -56,6 +55,10 @@ type
       constructor Create;
       destructor Destroy; override;
 
+      function GetHeader(const str:string):string;
+      function GetHeaderValue(const str:string;var value:string):string;
+      function ValidateValue(const str:string):string;
+
       function Add(const str:string):pchar; overload;
       function Insert(Index: Integer; const str: string): pchar; overload;
       function GetNameStr(const Name:string):string;
@@ -64,7 +67,7 @@ type
       procedure SetMsgstr(Idx:Integer;str:string);
       procedure SetNameStr(const Name,str:string);
       procedure GetNameValue(Idx:Integer;var Name,Value:string);
-      //
+
       function checkflag(const flag: string): boolean;
       procedure Addflag(const flag:string);
       procedure RemoveFlag(const flag:string);
@@ -127,23 +130,35 @@ const
 
 function TPoItem.GetHeader(const str: string): string;
 var
+  ch:char;
+  InQ:Boolean;
+  IsEscape:Boolean;
   i,l:Integer;
-  ch :char;
 begin
   Result:='';
+  InQ:=False;
+  IsEscape:=False;
   l:=Length(str);
   i:=1;
-  // remove space
+  // skip space
   while i<=l do begin
     if str[i]>#32 then
       break;
     Inc(i);
   end;
+  // get header
   while i<=l do begin
     ch:=str[i];
-    if ch>#32 then begin
+    if (ch>#32) or InQ then begin
        Result:=Result+ch;
        Inc(i);
+       if (not IsEscape) then begin
+         if ch='"' then
+           InQ:=not InQ
+         else if ch='\' then
+           IsEscape:=True;
+       end else
+         IsEscape:=False;
     end else
       break;
   end;
@@ -153,8 +168,12 @@ function TPoItem.GetHeaderValue(const str: string; var value: string): string;
 var
   i,l:Integer;
   ch :char;
+  InQ:Boolean;
+  IsEscape:Boolean;
 begin
   Result:='';
+  InQ:=False;
+  IsEscape:=False;
   l:=Length(str);
   i:=1;
   // remove space
@@ -163,11 +182,19 @@ begin
       break;
     Inc(i);
   end;
+  // get header
   while i<=l do begin
     ch:=str[i];
-    if ch>#32 then begin
+    if (ch>#32) or InQ then begin
        Result:=Result+ch;
        Inc(i);
+       if (not IsEscape) then begin
+         if ch='"' then
+           InQ:=not InQ
+         else if ch='\' then
+           IsEscape:=True;
+       end else
+         IsEscape:=False;
     end else
       break;
   end;
@@ -181,6 +208,26 @@ begin
      Value:=Copy(str,i,l-i+1)
      else
        Value:='';
+end;
+
+// check multiline
+function TPoItem.ValidateValue(const str: string): string;
+var
+  s1, s2:string;
+  ip:Integer;
+begin
+  Result:='';
+  s1:=GetHeaderValue(str,s2);
+  ip:=Pos(#13#10,s2);
+  if ip=0 then
+     ip:=Pos(#10,s2);
+  if ip=0 then
+     ip:=Pos(StrPas(StrLineBreak),s2);
+  if ip>0 then begin
+    if Copy(s2,1,ip-1)<>'""' then
+       s2:='""'+StrLineBreak+s2;
+  end;
+  Result:=s1+' '+s2;
 end;
 
 function TPoItem.GetStrItem(Index: Integer): string;
@@ -221,11 +268,14 @@ begin
 end;
 
 function TPoItem.Add(const str: string): pchar;
+var
+  s:string;
 begin
-  Result:=StrAlloc(Length(str)+1);
+  s:=ValidateValue(str);
+  Result:=StrAlloc(Length(s)+1);
   try
-    system.Move(str[1],Result^,Length(str));
-    Result[Length(str)]:=#0;
+    system.Move(s[1],Result^,Length(s));
+    Result[Length(s)]:=#0;
     inherited Add(Result);
   except
     StrDispose(Result);
@@ -233,11 +283,14 @@ begin
 end;
 
 function TPoItem.Insert(Index: Integer; const str: string): pchar;
+var
+  s:string;
 begin
-  Result:=StrAlloc(Length(str)+1);
+  s:=ValidateValue(str);
+  Result:=StrAlloc(Length(s)+1);
   try
-    system.Move(str[1],Result^,Length(str));
-    Result[Length(str)]:=#0;
+    system.Move(s[1],Result^,Length(s));
+    Result[Length(s)]:=#0;
     inherited Insert(Index,Result);
   except
     StrDispose(Result);
