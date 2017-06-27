@@ -246,7 +246,7 @@ implementation
 
 {$R *.lfm}
 
-uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}utransltrorg{$endif}, LazUTF8, udlgprop,
+uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}uGoogleTranApi{$endif}, LazUTF8, udlgprop,
   DefaultTranslator, gettext, Translations, udlgshowraw, udlgBingApiInfo;
 
 var
@@ -445,7 +445,7 @@ var
   memo,memoout:TMemo;
   spos : Integer;
 begin
-  if ComboBoxLang.ItemIndex<>-1 then begin
+  //if ComboBoxLang.ItemIndex<>-1 then begin
     if ActiveControl is TMemo then
       memo:=TMemo(ActiveControl)
       else
@@ -461,7 +461,7 @@ begin
           else
             ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
         ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-              Transltr_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
+              GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
@@ -482,7 +482,7 @@ begin
         MemoTran.Append(ret);
       end;
     end;
-  end;
+  //end;
 end;
 
 procedure TForm1.TranslateSetupExecute(Sender: TObject);
@@ -508,7 +508,7 @@ var
   ret, msg:string;
   memo:TMemo;
 begin
-  if ComboBoxLang.ItemIndex<>-1 then begin
+  //if ComboBoxLang.ItemIndex<>-1 then begin
     if ActiveControl is TMemo then
       memo:=TMemo(ActiveControl)
       else
@@ -524,13 +524,13 @@ begin
           else
             ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
         ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-             Transltr_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
+             GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
       except
         ret:=TranslateError;
       end;
       MemoTran.Append(pchar(ret));
     end;
-  end;
+  //end;
 end;
 
 procedure TForm1.TranslateText1Update(Sender: TObject);
@@ -728,7 +728,7 @@ begin
       {$else}
       Langs:=TStringList.Create;
       try
-        Transltr_GetLangs(Langs);
+        GoogleTranAPI_GetLangs(Langs);
       except
       end;
       {$endif}

@@ -186,11 +186,10 @@ object Form1: TForm1
     TabOrder = 3
     object ComboBoxLang: TComboBox
       Left = 69
-      Height = 23
+      Height = 20
       Top = 6
       Width = 54
-      ItemHeight = 15
-      Style = csDropDownList
+      ItemHeight = 12
       TabOrder = 1
     end
     object MemoTran: TMemo
@@ -214,10 +213,10 @@ object Form1: TForm1
     end
     object ComboBoxSrcLang: TComboBox
       Left = 8
-      Height = 23
+      Height = 20
       Top = 6
       Width = 52
-      ItemHeight = 15
+      ItemHeight = 12
       Style = csDropDownList
       TabOrder = 0
     end

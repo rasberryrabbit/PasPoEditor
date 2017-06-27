@@ -149,7 +149,7 @@ begin
     hget:=THTTPSend.Create;
     try
       hget.Headers.Add('Accept: application/json');
-      if hget.HTTPMethod('GET',transltr_langget_url)  then begin
+      if hget.HTTPMethod('GET',transltr_langget_url) then begin
         hget.Document.Position:=0;
         jparser:=TJSONParser.Create(hget.Document);
         try
