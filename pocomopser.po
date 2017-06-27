@@ -281,10 +281,6 @@ msgctxt "tform1.sheetmsg1.caption"
 msgid "0"
 msgstr ""
 
-#: tform1.statusbar1.panels[0].text
-msgid "."
-msgstr ""
-
 #: tform1.toolbar1.caption
 msgid "ToolBar1"
 msgstr ""

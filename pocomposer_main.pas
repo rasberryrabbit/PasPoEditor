@@ -53,6 +53,7 @@ type
     MenuItem45: TMenuItem;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
+    StatusBar1: TStatusBar;
     TranslateSetup: TAction;
     MenuItem40: TMenuItem;
     MenuItem41: TMenuItem;
@@ -148,7 +149,6 @@ type
     MenuItem9: TMenuItem;
     MRUManager1: TMRUManager;
     Panel1: TPanel;
-    StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
@@ -1348,7 +1348,7 @@ end;
 
 procedure TForm1.FormWindowStateChange(Sender: TObject);
 begin
-  MemoId.Height:=(Panel1.Height shr 1)-CheckBoxFuzzy.Height;
+  MemoId.Height:=((Panel1.Height-Panel2.Height) shr 1)-CheckBoxFuzzy.Height;
 end;
 
 procedure TForm1.ImportPOExecute(Sender: TObject);
