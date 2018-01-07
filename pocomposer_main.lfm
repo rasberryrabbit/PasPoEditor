@@ -117,7 +117,7 @@ object Form1: TForm1
       ActivePage = SheetMsg1
       Align = alClient
       TabIndex = 0
-      TabOrder = 2
+      TabOrder = 1
       OnChange = NoteMsgChange
       object SheetMsg1: TTabSheet
         Caption = '0'
@@ -143,7 +143,7 @@ object Form1: TForm1
       Width = 709
       Align = alTop
       Caption = 'fuzzy'
-      TabOrder = 3
+      TabOrder = 2
     end
     object Panel2: TPanel
       Left = 1
@@ -156,10 +156,10 @@ object Form1: TForm1
       TabOrder = 4
       object ComboBoxLang: TComboBox
         Left = 69
-        Height = 20
+        Height = 23
         Top = 6
         Width = 54
-        ItemHeight = 12
+        ItemHeight = 15
         TabOrder = 1
       end
       object MemoTran: TMemo
@@ -183,10 +183,10 @@ object Form1: TForm1
       end
       object ComboBoxSrcLang: TComboBox
         Left = 8
-        Height = 20
+        Height = 23
         Top = 6
         Width = 52
-        ItemHeight = 12
+        ItemHeight = 15
         Style = csDropDownList
         TabOrder = 0
       end
@@ -622,12 +622,6 @@ object Form1: TForm1
       Caption = 'Use Linux LineBreak'
       OnExecute = OptionUseLinuxLineBreakExecute
     end
-  end
-  object MRUManager1: TMRUManager
-    RecentMenu = MenuItemRecent
-    OnClick = MRUManager1Click
-    Left = 288
-    Top = 16
   end
   object ImageList1: TImageList
     Left = 464

@@ -8,7 +8,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, rx, lazcontrols, pocomposer_main, uPoReader, uMSTRanAPI, udlgprop,
+  Forms, lazcontrols, pocomposer_main, uPoReader, uMSTRanAPI, udlgprop,
   udlgshowraw, udlgBingApiInfo, uGoogleTranApi;
 
 

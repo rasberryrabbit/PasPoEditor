@@ -147,7 +147,6 @@ type
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
-    MRUManager1: TMRUManager;
     Panel1: TPanel;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
@@ -224,6 +223,7 @@ type
   public
     PoList:TStringList; // for measure item height
     mIsFind:Integer;
+    MRUManager1:TMRUManager;
 
     procedure GotoItems(untran, up: Boolean; IsFuzzy: Boolean=False);
     procedure POUpdateMsg;
@@ -1326,6 +1326,9 @@ begin
   Translations.TranslateUnitResourceStrings('LCLStrConsts', 'lclstrconsts.%s.po', lng, lngf);
   CheckConfigFile;
   LoadMainFormData;
+  MRUManager1:=TMRUManager.Create(self);
+  MRUManager1.RecentMenu:=MenuItemRecent;
+  MRUManager1.OnClick:=@MRUManager1Click;
 end;
 
 
