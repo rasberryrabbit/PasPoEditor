@@ -40,7 +40,7 @@ function GoogleTranAPI_Translate(const fromlang,tolang,text:string):string;
 implementation
 
 uses
-  fpjson, jsonparser, httpsend, synsock, synacode;
+  fpjson, jsonparser, httpsend, synsock, synacode, ssl_openssl;
 
 const
  user_agent_browser = 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64)';
