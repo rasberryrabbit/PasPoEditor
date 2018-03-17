@@ -248,7 +248,6 @@ msgid "&Edit"
 msgstr ""
 
 #: tform1.menuitemrecent.caption
-msgctxt "tform1.menuitemrecent.caption"
 msgid "Recent Files"
 msgstr ""
 
@@ -277,7 +276,6 @@ msgid "Find next match text"
 msgstr ""
 
 #: tform1.sheetmsg1.caption
-msgctxt "tform1.sheetmsg1.caption"
 msgid "0"
 msgstr ""
 
@@ -327,61 +325,5 @@ msgstr ""
 
 #: tform1.translatetext1.hint
 msgid "Translate text to bottom window"
-msgstr ""
-
-#: tform2.button1.caption
-msgctxt "tform2.button1.caption"
-msgid "&Close"
-msgstr ""
-
-#: tform2.caption
-msgctxt "tform2.caption"
-msgid "Raw"
-msgstr ""
-
-#: tformbinginfo.buttoncancel.caption
-msgctxt "TFORMBINGINFO.BUTTONCANCEL.CAPTION"
-msgid "&Cancel"
-msgstr ""
-
-#: tformbinginfo.buttonok.caption
-msgctxt "TFORMBINGINFO.BUTTONOK.CAPTION"
-msgid "&Ok"
-msgstr ""
-
-#: tformbinginfo.caption
-msgid "Enter Bing API configuration"
-msgstr ""
-
-#: tformbinginfo.label1.caption
-msgid "Name"
-msgstr ""
-
-#: tformbinginfo.label2.caption
-msgid "Secret"
-msgstr ""
-
-#: tformprop.button1.caption
-msgctxt "tformprop.button1.caption"
-msgid "&Ok"
-msgstr ""
-
-#: tformprop.button2.caption
-msgctxt "tformprop.button2.caption"
-msgid "&Cancel"
-msgstr ""
-
-#: tformprop.caption
-msgid "PO Comment"
-msgstr ""
-
-#: tformshowraw.button1.caption
-msgctxt "TFORMSHOWRAW.BUTTON1.CAPTION"
-msgid "&Close"
-msgstr ""
-
-#: tformshowraw.caption
-msgctxt "TFORMSHOWRAW.CAPTION"
-msgid "Raw"
 msgstr ""
 

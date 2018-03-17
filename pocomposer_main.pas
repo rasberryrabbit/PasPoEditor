@@ -1527,6 +1527,7 @@ begin
                 scmt:=itemp.StrItem[0];
           end;
       end;
+    scmt:=scmt+Format(' (%d)',[Index]);
     sid:=itemp.GetNameStr('msgid');
     sid:=StringReplace(sid,uLineBreak,NextLine,[rfReplaceAll]);
     i:=itemp.GetMsgstrCount;
