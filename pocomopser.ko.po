@@ -3,23 +3,23 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: pocomposer_main.rsalreadyhavetranslation
 msgid "Already have translation, Do you overwrite all?"
-msgstr ""
+msgstr "이미 번역내용이 있습니다. 모두 덮어쓰기할까요?"
 
 #: pocomposer_main.rsauto
 msgid "Auto"
-msgstr ""
+msgstr "자동"
 
 #: pocomposer_main.rscannotbeundo
 msgid "Cannot be undo, are you sure?"
-msgstr ""
+msgstr "되돌릴 수 없어집니다. 정말 하시겠습니까?"
 
 #: pocomposer_main.rsdmessagesimp
 msgid "%d messages imported."
-msgstr ""
+msgstr "%d 번역을 가져왔습니다."
 
 #: pocomposer_main.rsdpatcheddadd
 msgid "%d patched, %d added"
-msgstr ""
+msgstr "%d 패치되고 %d 추가 되었습니다"
 
 #: pocomposer_main.rsformcaption
 #, fuzzy
@@ -29,19 +29,19 @@ msgstr "PO 편집기"
 
 #: pocomposer_main.rsitwilllostch
 msgid "It will lost changes. continue anyway?"
-msgstr ""
+msgstr "변경한 내용을 잃습니다. 계속하시겠습니까?"
 
 #: pocomposer_main.rsnomatchesfound
 msgid "No Matches found."
-msgstr ""
+msgstr "일치하는 것이 없습니다."
 
 #: pocomposer_main.rsreplace
 msgid "Replace?"
-msgstr ""
+msgstr "바꾸시겠습니까?"
 
 #: pocomposer_main.translateerror
 msgid "Translator Error"
-msgstr ""
+msgstr "번역 오류"
 
 #: tform1.addpo.caption
 msgid "Add PO File"
