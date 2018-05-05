@@ -18,7 +18,7 @@ begin
   Application.Title:='poEditor';
   RequireDerivedFormResource := True;
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormPoEditor, FormPoEditor);
   Application.Run;
 end.
 

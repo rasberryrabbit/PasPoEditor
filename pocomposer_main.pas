@@ -4,7 +4,7 @@ unit pocomposer_main;
 
 { Simple PO Editor
 
-  Copyright (c) 2013-2015 Do-wan Kim
+  Copyright (c) 2013-2018 rasberryrabbit
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -37,11 +37,13 @@ uses
 
 type
 
-  { TForm1 }
+  { TFormPoEditor }
 
-  TForm1 = class(TForm)
+  TFormPoEditor = class(TForm)
+    FileSave: TAction;
     MenuItem46: TMenuItem;
     MenuItem47: TMenuItem;
+    MenuItem48: TMenuItem;
     OptionUseLinuxLineBreak: TAction;
     CheckBoxFuzzy: TCheckBox;
     EditGotoPrevFuzzy: TAction;
@@ -187,6 +189,7 @@ type
     procedure FileOpen1BeforeExecute(Sender: TObject);
     procedure FileSaveAs1Accept(Sender: TObject);
     procedure FileSaveAs1BeforeExecute(Sender: TObject);
+    procedure FileSaveExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -224,6 +227,7 @@ type
     PoList:TStringList; // for measure item height
     mIsFind:Integer;
     MRUManager1:TMRUManager;
+    IsOpened:Boolean;
 
     procedure GotoItems(untran, up: Boolean; IsFuzzy: Boolean=False);
     procedure POUpdateMsg;
@@ -232,12 +236,12 @@ type
     procedure LoadMainFormData;
     procedure SaveMainFormData;
     procedure SelectAllItems(untran:Boolean);
-    procedure SetupBingApi;
+    procedure SetupTranslatorApi;
     { public declarations }
   end;
 
 var
-  Form1: TForm1;
+  FormPoEditor: TFormPoEditor;
 
 const
   ConfigFile='poEdit.ini';
@@ -391,10 +395,10 @@ begin
   Result:=CompareStr(cstr1,cstr2);
 end;
 
-{ TForm1 }
+{ TFormPoEditor }
 
 
-procedure TForm1.SearchFindExecute(Sender: TObject);
+procedure TFormPoEditor.SearchFindExecute(Sender: TObject);
 begin
   ReplaceDialog1.FindText:=OldFindStr;
   ReplaceDialog1.ReplaceText:=OldReplaceStr;
@@ -404,7 +408,7 @@ begin
   ReplaceDialog1.Execute;
 end;
 
-procedure TForm1.SearchNextExecute(Sender: TObject);
+procedure TFormPoEditor.SearchNextExecute(Sender: TObject);
 begin
   if ReplaceDialog1.FindText='' then begin
     ReplaceDialog1.Execute;
@@ -417,12 +421,12 @@ begin
   end;
 end;
 
-procedure TForm1.Splitter1Moved(Sender: TObject);
+procedure TFormPoEditor.Splitter1Moved(Sender: TObject);
 begin
   FormWindowStateChange(nil);
 end;
 
-procedure TForm1.TranslateCopyExecute(Sender: TObject);
+procedure TFormPoEditor.TranslateCopyExecute(Sender: TObject);
 var
   msg:string;
   memo:TMemo;
@@ -439,7 +443,7 @@ begin
   end;
 end;
 
-procedure TForm1.TranslateMsgExecute(Sender: TObject);
+procedure TFormPoEditor.TranslateMsgExecute(Sender: TObject);
 var
   msg,ret:string;
   memo,memoout:TMemo;
@@ -485,7 +489,7 @@ begin
   //end;
 end;
 
-procedure TForm1.TranslateSetupExecute(Sender: TObject);
+procedure TFormPoEditor.TranslateSetupExecute(Sender: TObject);
 var
   bingdlg : TFormBingInfo;
 begin
@@ -496,14 +500,14 @@ begin
     if bingdlg.ShowModal = mrOK then begin
       bingclient_id:=bingdlg.EditBingAppName.Text;
       bingclient_secret:=bingdlg.EditBingAppSecret.Text;
-      SetupBingApi;
+      SetupTranslatorApi;
     end;
   finally
     bingdlg.Free;
   end;
 end;
 
-procedure TForm1.TranslateText1Execute(Sender: TObject);
+procedure TFormPoEditor.TranslateText1Execute(Sender: TObject);
 var
   ret, msg:string;
   memo:TMemo;
@@ -533,12 +537,12 @@ begin
   //end;
 end;
 
-procedure TForm1.TranslateText1Update(Sender: TObject);
+procedure TFormPoEditor.TranslateText1Update(Sender: TObject);
 begin
   TAction(Sender).Enabled:=EnableTranslate;
 end;
 
-procedure TForm1.POUpdateMsg;
+procedure TFormPoEditor.POUpdateMsg;
 var
   itemp:TPoItem;
   i:integer;
@@ -571,7 +575,7 @@ begin
   ListBoxPO.Invalidate;
 end;
 
-procedure TForm1.GotoItems(untran, up: Boolean; IsFuzzy:Boolean = False);
+procedure TFormPoEditor.GotoItems(untran, up: Boolean; IsFuzzy:Boolean = False);
 var
   IsNull: Boolean;
   itemp: TPoItem;
@@ -614,12 +618,12 @@ begin
   end;
 end;
 
-function TForm1.EnableTranslate: Boolean;
+function TFormPoEditor.EnableTranslate: Boolean;
 begin
   Result:=(ActiveControl is TMemo) or (ActiveControl is TListBox);
 end;
 
-procedure TForm1.RefreshListBoxPO;
+procedure TFormPoEditor.RefreshListBoxPO;
 var
   stemp:string;
   i:Integer;
@@ -647,7 +651,7 @@ begin
   ListBoxPO.Items.Assign(PoList);
 end;
 
-procedure TForm1.LoadMainFormData;
+procedure TFormPoEditor.LoadMainFormData;
 begin
   try
     FormDataJson.Restore;
@@ -661,7 +665,7 @@ begin
 end;
 
 
-procedure TForm1.SaveMainFormData;
+procedure TFormPoEditor.SaveMainFormData;
 begin
   FormDataJson.WriteInteger('FormWidth', self.Width);
   FormDataJson.WriteInteger('FormHeight', self.Height);
@@ -674,7 +678,7 @@ begin
   end;
 end;
 
-procedure TForm1.SelectAllItems(untran: Boolean);
+procedure TFormPoEditor.SelectAllItems(untran: Boolean);
 var
   itemp: TPoItem;
   k: integer;
@@ -703,7 +707,7 @@ begin
   end;
 end;
 
-procedure TForm1.SetupBingApi;
+procedure TFormPoEditor.SetupTranslatorApi;
 var
   i: Integer;
   lang: string;
@@ -755,7 +759,7 @@ begin
   end;
 end;
 
-procedure TForm1.FileOpen1Accept(Sender: TObject);
+procedure TFormPoEditor.FileOpen1Accept(Sender: TObject);
 var
   i:integer;
   stemp:string;
@@ -795,22 +799,23 @@ begin
           PoList.Sort;
       ListBoxPO.Items.Assign(PoList);
     end;
+    IsOpened:=True;
   except
     on e:Exception do ShowMessage(e.Message);
   end;
   StatusBar1.Panels[1].Text:=IntToStr(ListBoxPO.Count);
 end;
 
-procedure TForm1.FileOpen1BeforeExecute(Sender: TObject);
+procedure TFormPoEditor.FileOpen1BeforeExecute(Sender: TObject);
 begin
 end;
 
-procedure TForm1.ActionList1Update(AAction: TBasicAction; var Handled: Boolean);
+procedure TFormPoEditor.ActionList1Update(AAction: TBasicAction; var Handled: Boolean);
 begin
   FileSaveAs1.Enabled:=Assigned(mPo);
 end;
 
-procedure TForm1.AddPOExecute(Sender: TObject);
+procedure TFormPoEditor.AddPOExecute(Sender: TObject);
 var
   mPOimport:TPoList;
   ListImp : TFPDataHashTable;
@@ -928,31 +933,31 @@ begin
   end;
 end;
 
-procedure TForm1.ButtonclrClick(Sender: TObject);
+procedure TFormPoEditor.ButtonclrClick(Sender: TObject);
 begin
   MemoTran.Clear;
 end;
 
-procedure TForm1.EditCopy1Execute(Sender: TObject);
+procedure TFormPoEditor.EditCopy1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     TMemo(ActiveControl).CopyToClipboard;
 end;
 
-procedure TForm1.EditCut1Execute(Sender: TObject);
+procedure TFormPoEditor.EditCut1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     TMemo(ActiveControl).CutToClipboard;
 end;
 
-procedure TForm1.EditDelete1Execute(Sender: TObject);
+procedure TFormPoEditor.EditDelete1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     if not (ActiveControl as TMemo).ReadOnly then
       (ActiveControl as TMemo).ClearSelection;
 end;
 
-procedure TForm1.EditDownExecute(Sender: TObject);
+procedure TFormPoEditor.EditDownExecute(Sender: TObject);
 begin
   if ListBoxPO.ItemIndex<ListBoxPO.Count-1 then
     begin
@@ -961,7 +966,7 @@ begin
     end;
 end;
 
-procedure TForm1.EditExportSelExecute(Sender: TObject);
+procedure TFormPoEditor.EditExportSelExecute(Sender: TObject);
 var
   i,j: Integer;
   newPo : TPoList;
@@ -1011,37 +1016,37 @@ begin
   end;
 end;
 
-procedure TForm1.EditGotoNextFuzzyExecute(Sender: TObject);
+procedure TFormPoEditor.EditGotoNextFuzzyExecute(Sender: TObject);
 begin
   GotoItems(False,False,True);
 end;
 
-procedure TForm1.EditGotoNextTranExecute(Sender: TObject);
+procedure TFormPoEditor.EditGotoNextTranExecute(Sender: TObject);
 begin
   GotoItems(False,False);
 end;
 
-procedure TForm1.EditGotoNextUnTranExecute(Sender: TObject);
+procedure TFormPoEditor.EditGotoNextUnTranExecute(Sender: TObject);
 begin
   GotoItems(True,False);
 end;
 
-procedure TForm1.EditGotoPrevFuzzyExecute(Sender: TObject);
+procedure TFormPoEditor.EditGotoPrevFuzzyExecute(Sender: TObject);
 begin
   GotoItems(False,True,True);
 end;
 
-procedure TForm1.EditGotoPrevTranExecute(Sender: TObject);
+procedure TFormPoEditor.EditGotoPrevTranExecute(Sender: TObject);
 begin
   GotoItems(False,True);
 end;
 
-procedure TForm1.EditGotoPrevUntranExecute(Sender: TObject);
+procedure TFormPoEditor.EditGotoPrevUntranExecute(Sender: TObject);
 begin
   GotoItems(True,True);
 end;
 
-procedure TForm1.EditMemoLeftExecute(Sender: TObject);
+procedure TFormPoEditor.EditMemoLeftExecute(Sender: TObject);
 var
   i:integer;
 begin
@@ -1051,7 +1056,7 @@ begin
   NoteMsg.PageIndex:=i;
 end;
 
-procedure TForm1.EditMemoRightExecute(Sender: TObject);
+procedure TFormPoEditor.EditMemoRightExecute(Sender: TObject);
 var
   i:integer;
 begin
@@ -1061,13 +1066,13 @@ begin
   NoteMsg.PageIndex:=i;
 end;
 
-procedure TForm1.EditPaste1Execute(Sender: TObject);
+procedure TFormPoEditor.EditPaste1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     TMemo(ActiveControl).PasteFromClipboard;
 end;
 
-procedure TForm1.EditPOFilePropExecute(Sender: TObject);
+procedure TFormPoEditor.EditPOFilePropExecute(Sender: TObject);
 var
   propform:TFormProp;
   i:integer;
@@ -1102,23 +1107,23 @@ begin
   end;
 end;
 
-procedure TForm1.EditSelAllTranExecute(Sender: TObject);
+procedure TFormPoEditor.EditSelAllTranExecute(Sender: TObject);
 begin
   SelectAllItems(False);
 end;
 
-procedure TForm1.EditSelAllUntranExecute(Sender: TObject);
+procedure TFormPoEditor.EditSelAllUntranExecute(Sender: TObject);
 begin
   SelectAllItems(True);
 end;
 
-procedure TForm1.EditSelectAll1Execute(Sender: TObject);
+procedure TFormPoEditor.EditSelectAll1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     TMemo(ActiveControl).SelectAll;
 end;
 
-procedure TForm1.EditShowRawItemExecute(Sender: TObject);
+procedure TFormPoEditor.EditShowRawItemExecute(Sender: TObject);
 var
   itemp:TPoItem;
   RawDlg:TFormShowRaw;
@@ -1140,7 +1145,7 @@ begin
   end;
 end;
 
-procedure TForm1.EditStripUntranExecute(Sender: TObject);
+procedure TFormPoEditor.EditStripUntranExecute(Sender: TObject);
 var
   i,j,k,l:Integer;
   itemp:TPoItem;
@@ -1192,13 +1197,13 @@ begin
   StatusBar1.Panels[1].Text:=IntToStr(ListBoxPO.Count);
 end;
 
-procedure TForm1.EditUndo1Execute(Sender: TObject);
+procedure TFormPoEditor.EditUndo1Execute(Sender: TObject);
 begin
   if ActiveControl is TMemo then
     TMemo(ActiveControl).Undo;
 end;
 
-procedure TForm1.EditUpExecute(Sender: TObject);
+procedure TFormPoEditor.EditUpExecute(Sender: TObject);
 begin
   if ListBoxPO.ItemIndex>0 then
     begin
@@ -1207,7 +1212,7 @@ begin
     end;
 end;
 
-procedure TForm1.ExportPOExecute(Sender: TObject);
+procedure TFormPoEditor.ExportPOExecute(Sender: TObject);
 var
   i,j,l: Integer;
   newPo : TPoList;
@@ -1263,7 +1268,7 @@ begin
   end;
 end;
 
-procedure TForm1.FileSaveAs1Accept(Sender: TObject);
+procedure TFormPoEditor.FileSaveAs1Accept(Sender: TObject);
 begin
   if Assigned(mPo) then begin
     try
@@ -1271,23 +1276,33 @@ begin
         mPo.LineBreak:=#10
         else
           mPo.LineBreak:=#13#10;
-      mPo.Save(FileSaveAs1.Dialog.FileName);
-      MRUManager1.Add(FileSaveAs1.Dialog.FileName,0);
+      mPo.Save(TFileSaveAs(Sender).Dialog.FileName);
+      MRUManager1.Add(TFileSaveAs(Sender).Dialog.FileName,0);
       modified:=False;
-      FileOpen1.Dialog.FileName:=FileSaveAs1.Dialog.FileName;
-      StatusBar1.Panels[2].Text:=ExtractFileName(FileSaveAs1.Dialog.FileName);
+      IsOpened:=True;
+      FileOpen1.Dialog.FileName:=TFileSaveAs(Sender).Dialog.FileName;
+      StatusBar1.Panels[2].Text:=ExtractFileName(TFileSaveAs(Sender).Dialog.FileName);
     except
       on e:exception do ShowMessage(e.Message);
     end;
   end;
 end;
 
-procedure TForm1.FileSaveAs1BeforeExecute(Sender: TObject);
+procedure TFormPoEditor.FileSaveAs1BeforeExecute(Sender: TObject);
 begin
   POUpdateMsg;
   FileSaveAs1.Dialog.FileName:=ExtractFileName(FileOpen1.Dialog.FileName);
 end;
 
+procedure TFormPoEditor.FileSaveExecute(Sender: TObject);
+begin
+  POUpdateMsg;
+  FileSaveAs1.Dialog.FileName:=ExtractFileName(FileOpen1.Dialog.FileName);
+  if IsOpened then
+    FileSaveAs1Accept(FileSaveAs1)
+    else
+      FileSaveAs1.Execute;
+end;
 
 function ConvertHexCode(const str:string):string;
 var
@@ -1307,7 +1322,7 @@ begin
   end;
 end;
 
-procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TFormPoEditor.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   POUpdateMsg;
   CanClose:=True;
@@ -1315,11 +1330,12 @@ begin
     CanClose:=QueryContinue;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TFormPoEditor.FormCreate(Sender: TObject);
 var
   lng,lngf:string;
 begin
   mIsFind:=0;
+  IsOpened:=False;
   PoList:=TStringList.Create;
   // translate LCL resource strings
   GetLanguageIDs(lng,lngf);
@@ -1332,7 +1348,7 @@ begin
 end;
 
 
-procedure TForm1.FormDestroy(Sender: TObject);
+procedure TFormPoEditor.FormDestroy(Sender: TObject);
 begin
   ListBoxPO.Clear;
   PoList.Free;
@@ -1340,21 +1356,21 @@ begin
   SaveMainFormData;
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure TFormPoEditor.FormShow(Sender: TObject);
 begin
-  SetupBingApi;
+  SetupTranslatorApi;
   if Paramcount>0 then begin
-    FileOpen1.Dialog.FileName:=ParamStr(1);
+    FileOpen1.Dialog.FileName:=pchar(ParamStrUTF8(1));
     FileOpen1Accept(nil);
   end;
 end;
 
-procedure TForm1.FormWindowStateChange(Sender: TObject);
+procedure TFormPoEditor.FormWindowStateChange(Sender: TObject);
 begin
   MemoId.Height:=((Panel1.Height-Panel2.Height) shr 1)-CheckBoxFuzzy.Height;
 end;
 
-procedure TForm1.ImportPOExecute(Sender: TObject);
+procedure TFormPoEditor.ImportPOExecute(Sender: TObject);
 var
   mPOimport:TPoList;
   ListImp : TFPDataHashTable;
@@ -1448,7 +1464,7 @@ begin
   end;
 end;
 
-procedure TForm1.ListBoxPOClick(Sender: TObject);
+procedure TFormPoEditor.ListBoxPOClick(Sender: TObject);
 var
   itemp:TPoItem;
   stemp:string;
@@ -1493,12 +1509,12 @@ begin
   lastIndex:=ListBoxPO.ItemIndex;
 end;
 
-procedure TForm1.ListBoxPODblClick(Sender: TObject);
+procedure TFormPoEditor.ListBoxPODblClick(Sender: TObject);
 begin
   (NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo).SetFocus;
 end;
 
-procedure TForm1.ListBoxPODrawItem(Control: TWinControl; Index: Integer;
+procedure TFormPoEditor.ListBoxPODrawItem(Control: TWinControl; Index: Integer;
   ARect: TRect; State: TOwnerDrawState);
 var
   itemp:TPoItem;
@@ -1578,7 +1594,7 @@ begin
 end;
 
 
-procedure TForm1.ListBoxPOKeyPress(Sender: TObject; var Key: char);
+procedure TFormPoEditor.ListBoxPOKeyPress(Sender: TObject; var Key: char);
 begin
   if Key=#13 then
     begin
@@ -1587,7 +1603,7 @@ begin
     end;
 end;
 
-procedure TForm1.ListBoxPOMeasureItem(Control: TWinControl; Index: Integer;
+procedure TFormPoEditor.ListBoxPOMeasureItem(Control: TWinControl; Index: Integer;
   var AHeight: Integer);
 var
   itemp:TPoItem;
@@ -1605,30 +1621,30 @@ begin
   AHeight:=TListBox(Control).Canvas.TextHeight('Qj')*i+16;
 end;
 
-procedure TForm1.MemoMsgExit(Sender: TObject);
+procedure TFormPoEditor.MemoMsgExit(Sender: TObject);
 begin
   POUpdateMsg;
 end;
 
-procedure TForm1.MRUManager1Click(Sender: TObject; const RecentName,
+procedure TFormPoEditor.MRUManager1Click(Sender: TObject; const RecentName,
   ACaption: string; UserData: PtrInt);
 begin
   FileOpen1.Dialog.FileName:=RecentName;
   FileOpen1Accept(nil);
 end;
 
-procedure TForm1.NoteMsgChange(Sender: TObject);
+procedure TFormPoEditor.NoteMsgChange(Sender: TObject);
 begin
   //lastFindIndex.y:=NoteMsg.PageIndex;
 end;
 
-procedure TForm1.OptionSortCommentExecute(Sender: TObject);
+procedure TFormPoEditor.OptionSortCommentExecute(Sender: TObject);
 begin
   TAction(Sender).Checked:=not TAction(Sender).Checked;
   RefreshListBoxPO;
 end;
 
-procedure TForm1.OptionUseLinuxLineBreakExecute(Sender: TObject);
+procedure TFormPoEditor.OptionUseLinuxLineBreakExecute(Sender: TObject);
 begin
   TAction(Sender).Checked:=not TAction(Sender).Checked;
   if mPo=nil then
@@ -1640,7 +1656,7 @@ begin
   end;
 end;
 
-procedure TForm1.ReplaceDialog1Close(Sender: TObject);
+procedure TFormPoEditor.ReplaceDialog1Close(Sender: TObject);
 begin
   //lastFindIndex:=-1;
   OldFindStr:=ReplaceDialog1.FindText;
@@ -1649,7 +1665,7 @@ begin
   OldReplaceStr:=ReplaceDialog1.ReplaceText;
 end;
 
-procedure TForm1.ReplaceDialog1Find(Sender: TObject);
+procedure TFormPoEditor.ReplaceDialog1Find(Sender: TObject);
 var
   i,j,k,l,m:Integer;
   itemp:TPoItem;
@@ -1753,7 +1769,7 @@ begin
   OldFindStr:=ReplaceDialog1.FindText;
 end;
 
-procedure TForm1.ReplaceDialog1Replace(Sender: TObject);
+procedure TFormPoEditor.ReplaceDialog1Replace(Sender: TObject);
 var
   i,j,r,k,l:Integer;
   itemp:TPoItem;
@@ -1852,7 +1868,7 @@ begin
   OldReplaceStr:=ReplaceDialog1.ReplaceText;
 end;
 
-procedure TForm1.ReplaceDialog1Show(Sender: TObject);
+procedure TFormPoEditor.ReplaceDialog1Show(Sender: TObject);
 var
   i, bidx:Integer;
   aForm : TForm;

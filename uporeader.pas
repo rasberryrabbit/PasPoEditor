@@ -2,7 +2,7 @@ unit uPoReader;
 
 { Simple PO file reader/writer class
 
-  Copyright (c) 2013-2015 Do-wan Kim
+  Copyright (c) 2013-2018 rasberryrabbit
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -33,11 +33,12 @@ unit uPoReader;
 
 
 {$mode objfpc}{$H+}
+{$define USE_UTF8_FILESTREAM}
 
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils{$ifdef USE_UTF8_FILESTREAM}, LazUTF8Classes{$endif};
 
 type
 
@@ -81,7 +82,7 @@ type
 
   TPoList = class(TList)
     private
-      FStream:TFileStream;
+      FStream:{$ifdef USE_UTF8_FILESTREAM}TFileStreamUTF8{$else}TFileStream{$endif};
       FStrBuf:PChar;
       FLastRead,
       FBufIdx:Integer;
@@ -655,7 +656,7 @@ begin
     // for read buffer
     FLastRead:=_BufSize;
     FBufIdx:=_BufSize;
-    FStream:=TFileStream.Create(FileName,fmOpenRead or fmShareDenyWrite);
+    FStream:={$ifdef USE_UTF8_FILESTREAM}TFileStreamUTF8{$else}TFileStream{$endif}.Create(FileName,fmOpenRead or fmShareDenyWrite);
     try
       while not Eof do begin
         itemp:=AddItem;
@@ -703,7 +704,7 @@ var
   stemp,stemp1:string;
 begin
   Result:=False;
-  FStream:=TFileStream.Create(FileName,fmCreate or fmOpenWrite or fmShareDenyWrite);
+  FStream:={$ifdef USE_UTF8_FILESTREAM}TFileStreamUTF8{$else}TFileStream{$endif}.Create(FileName,fmCreate or fmOpenWrite or fmShareDenyWrite);
   try
     for i:=0 to Count-1 do
     begin

@@ -1,4 +1,4 @@
-object Form1: TForm1
+object FormPoEditor: TFormPoEditor
   Left = 263
   Height = 549
   Top = 145
@@ -236,6 +236,9 @@ object Form1: TForm1
       Caption = '&File'
       object MenuItem4: TMenuItem
         Action = FileOpen1
+      end
+      object MenuItem48: TMenuItem
+        Action = FileSave
       end
       object MenuItem5: TMenuItem
         Action = FileSaveAs1
@@ -621,6 +624,11 @@ object Form1: TForm1
     object OptionUseLinuxLineBreak: TAction
       Caption = 'Use Linux LineBreak'
       OnExecute = OptionUseLinuxLineBreakExecute
+    end
+    object FileSave: TAction
+      Caption = 'Save'
+      OnExecute = FileSaveExecute
+      ShortCut = 16467
     end
   end
   object ImageList1: TImageList
