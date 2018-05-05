@@ -1,10 +1,10 @@
 object FormPoEditor: TFormPoEditor
   Left = 263
-  Height = 549
+  Height = 576
   Top = 145
   Width = 711
   Caption = 'PO Editor'
-  ClientHeight = 529
+  ClientHeight = 556
   ClientWidth = 711
   Constraints.MinHeight = 400
   Constraints.MinWidth = 620
@@ -74,7 +74,7 @@ object FormPoEditor: TFormPoEditor
   end
   object ListBoxPO: TListBox
     Left = 0
-    Height = 211
+    Height = 196
     Top = 26
     Width = 711
     Align = alClient
@@ -90,11 +90,11 @@ object FormPoEditor: TFormPoEditor
   end
   object Panel1: TPanel
     Left = 0
-    Height = 287
-    Top = 242
+    Height = 329
+    Top = 227
     Width = 711
     Align = alBottom
-    ClientHeight = 287
+    ClientHeight = 329
     ClientWidth = 711
     TabOrder = 3
     object MemoId: TMemo
@@ -111,7 +111,7 @@ object FormPoEditor: TFormPoEditor
     end
     object NoteMsg: TExtendedNotebook
       Left = 1
-      Height = 75
+      Height = 117
       Top = 109
       Width = 709
       ActivePage = SheetMsg1
@@ -121,11 +121,11 @@ object FormPoEditor: TFormPoEditor
       OnChange = NoteMsgChange
       object SheetMsg1: TTabSheet
         Caption = '0'
-        ClientHeight = 47
+        ClientHeight = 89
         ClientWidth = 701
         object MemoMsg: TMemo
           Left = 0
-          Height = 47
+          Height = 89
           Top = 0
           Width = 701
           Align = alClient
@@ -148,7 +148,7 @@ object FormPoEditor: TFormPoEditor
     object Panel2: TPanel
       Left = 1
       Height = 102
-      Top = 184
+      Top = 226
       Width = 709
       Align = alBottom
       ClientHeight = 102
@@ -222,7 +222,7 @@ object FormPoEditor: TFormPoEditor
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 237
+    Top = 222
     Width = 711
     Align = alBottom
     OnMoved = Splitter1Moved
