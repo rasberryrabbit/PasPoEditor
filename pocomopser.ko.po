@@ -22,7 +22,6 @@ msgid "%d patched, %d added"
 msgstr "%d 패치되고 %d 추가 되었습니다"
 
 #: pocomposer_main.rsformcaption
-#, fuzzy
 msgctxt "pocomposer_main.rsformcaption"
 msgid "PO Editor"
 msgstr "PO 편집기"
@@ -44,25 +43,21 @@ msgid "Translator Error"
 msgstr "번역 오류"
 
 #: tformpoeditor.addpo.caption
-#, fuzzy
 msgctxt "tformpoeditor.addpo.caption"
 msgid "Add PO File"
 msgstr "PO File 더하기"
 
 #: tformpoeditor.addpo.hint
-#, fuzzy
 msgctxt "tformpoeditor.addpo.hint"
 msgid "Add translation and items from other PO file."
 msgstr "다른 PO 파일에서 번역 문자열과 아이템을 추가"
 
 #: tformpoeditor.buttonclr.caption
-#, fuzzy
 msgctxt "tformpoeditor.buttonclr.caption"
 msgid "clear"
 msgstr "지우기"
 
 #: tformpoeditor.caption
-#, fuzzy
 msgctxt "tformpoeditor.caption"
 msgid "PO Editor"
 msgstr "PO 편집기"
@@ -73,223 +68,186 @@ msgid "fuzzy"
 msgstr ""
 
 #: tformpoeditor.editcopy1.caption
-#, fuzzy
 msgctxt "tformpoeditor.editcopy1.caption"
 msgid "&Copy"
 msgstr "복사(&C)"
 
 #: tformpoeditor.editcopy1.hint
-#, fuzzy
 msgctxt "tformpoeditor.editcopy1.hint"
 msgid "Copy"
 msgstr "복사"
 
 #: tformpoeditor.editcut1.caption
-#, fuzzy
 msgctxt "tformpoeditor.editcut1.caption"
 msgid "Cu&t"
 msgstr "잘라내기(&t)"
 
 #: tformpoeditor.editcut1.hint
-#, fuzzy
 msgctxt "tformpoeditor.editcut1.hint"
 msgid "Cut"
 msgstr "잘라내기"
 
 #: tformpoeditor.editdelete1.caption
-#, fuzzy
 msgctxt "tformpoeditor.editdelete1.caption"
 msgid "&Delete"
 msgstr "삭제(&D)"
 
 #: tformpoeditor.editdelete1.hint
-#, fuzzy
 msgctxt "tformpoeditor.editdelete1.hint"
 msgid "Delete"
 msgstr "삭제"
 
 #: tformpoeditor.editdown.caption
-#, fuzzy
 msgctxt "tformpoeditor.editdown.caption"
 msgid "Item Down"
 msgstr "위 아이템"
 
 #: tformpoeditor.editexportsel.caption
-#, fuzzy
 msgctxt "tformpoeditor.editexportsel.caption"
 msgid "Export Selections"
 msgstr "선택한 것을 내보내기"
 
 #: tformpoeditor.editexportsel.hint
-#, fuzzy
 msgctxt "tformpoeditor.editexportsel.hint"
 msgid "Export selected items"
 msgstr "선택된 아이템을 내보내기"
 
 #: tformpoeditor.editgotonextfuzzy.caption
-#, fuzzy
 msgctxt "tformpoeditor.editgotonextfuzzy.caption"
 msgid "Goto Next Fuzzy"
 msgstr "다음 Fuzzy 로 이동"
 
 #: tformpoeditor.editgotonexttran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editgotonexttran.caption"
 msgid "Goto Next Translated"
 msgstr "번역된 다음 아이템으로"
 
 #: tformpoeditor.editgotonextuntran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editgotonextuntran.caption"
 msgid "Goto Next Untranslated"
 msgstr "번역없는 다음 아이템으로"
 
 #: tformpoeditor.editgotoprevfuzzy.caption
-#, fuzzy
 msgctxt "tformpoeditor.editgotoprevfuzzy.caption"
 msgid "Goto Previous Fuzzy"
 msgstr "이전 Fuzzy 로 이동"
 
 #: tformpoeditor.editgotoprevtran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editgotoprevtran.caption"
 msgid "Goto Previous Translated"
 msgstr "번역된 이전 아이템으로"
 
 #: tformpoeditor.editgotoprevuntran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editgotoprevuntran.caption"
 msgid "Goto Previous Untranslated"
 msgstr "번역없는 이전 아이템으로"
 
 #: tformpoeditor.editmemoleft.caption
-#, fuzzy
 msgctxt "tformpoeditor.editmemoleft.caption"
 msgid "Left Editor"
 msgstr "왼쪽 편집기"
 
 #: tformpoeditor.editmemoright.caption
-#, fuzzy
 msgctxt "tformpoeditor.editmemoright.caption"
 msgid "Right Editor"
 msgstr "오른쪽 편집기"
 
 #: tformpoeditor.editpaste1.caption
-#, fuzzy
 msgctxt "tformpoeditor.editpaste1.caption"
 msgid "&Paste"
 msgstr "붙여넣기(&P)"
 
 #: tformpoeditor.editpaste1.hint
-#, fuzzy
 msgctxt "tformpoeditor.editpaste1.hint"
 msgid "Paste"
 msgstr "붙여넣기"
 
 #: tformpoeditor.editpofileprop.caption
-#, fuzzy
 msgctxt "tformpoeditor.editpofileprop.caption"
 msgid "Edit PO File comment"
 msgstr "PO File 주석문 편집"
 
 #: tformpoeditor.editpofileprop.hint
-#, fuzzy
 msgctxt "tformpoeditor.editpofileprop.hint"
 msgid "Edit PO file property"
 msgstr "PO 파일 속성을 편집"
 
 #: tformpoeditor.editselalltran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editselalltran.caption"
 msgid "Select All Translated"
 msgstr "번역된 것 모두 선택"
 
 #: tformpoeditor.editselalluntran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editselalluntran.caption"
 msgid "Select All Untranslated"
 msgstr "번역 안된 것 모두 선택"
 
 #: tformpoeditor.editselectall1.caption
-#, fuzzy
 msgctxt "tformpoeditor.editselectall1.caption"
 msgid "Select &All"
 msgstr "모두 선택(&A)"
 
 #: tformpoeditor.editselectall1.hint
-#, fuzzy
 msgctxt "tformpoeditor.editselectall1.hint"
 msgid "Select All"
 msgstr "모두 선택"
 
 #: tformpoeditor.editshowrawitem.caption
-#, fuzzy
 msgctxt "tformpoeditor.editshowrawitem.caption"
 msgid "Show raw string"
 msgstr "내용 문자열 보기"
 
 #: tformpoeditor.editstripuntran.caption
-#, fuzzy
 msgctxt "tformpoeditor.editstripuntran.caption"
 msgid "Remove untranslated"
 msgstr "번역되지 않은 것을 제거"
 
 #: tformpoeditor.editstripuntran.hint
-#, fuzzy
 msgctxt "tformpoeditor.editstripuntran.hint"
 msgid "Remove untranslated items"
 msgstr "번역되지 않은 아이템 제거"
 
 #: tformpoeditor.editundo1.caption
-#, fuzzy
 msgctxt "tformpoeditor.editundo1.caption"
 msgid "&Undo"
 msgstr "되돌리기(&U)"
 
 #: tformpoeditor.editundo1.hint
-#, fuzzy
 msgctxt "tformpoeditor.editundo1.hint"
 msgid "Undo"
 msgstr "되돌리기"
 
 #: tformpoeditor.editup.caption
-#, fuzzy
 msgctxt "tformpoeditor.editup.caption"
 msgid "Item Up"
 msgstr "아래 아이템"
 
 #: tformpoeditor.exportpo.caption
-#, fuzzy
 msgctxt "tformpoeditor.exportpo.caption"
 msgid "Export PO File"
 msgstr "PO File 내보내기"
 
 #: tformpoeditor.exportpo.hint
-#, fuzzy
 msgctxt "tformpoeditor.exportpo.hint"
 msgid "Export Translated msgstr to PO file"
 msgstr "PO 파일로 번역된 문장들을 내보내기"
 
 #: tformpoeditor.fileexit1.caption
-#, fuzzy
 msgctxt "tformpoeditor.fileexit1.caption"
 msgid "E&xit"
 msgstr "종료(&x)"
 
 #: tformpoeditor.fileexit1.hint
-#, fuzzy
 msgctxt "tformpoeditor.fileexit1.hint"
 msgid "Exit"
 msgstr "종료"
 
 #: tformpoeditor.fileopen1.caption
-#, fuzzy
 msgctxt "tformpoeditor.fileopen1.caption"
 msgid "&Open ..."
 msgstr "열기(&O) ..."
 
 #: tformpoeditor.fileopen1.hint
-#, fuzzy
 msgctxt "tformpoeditor.fileopen1.hint"
 msgid "Open"
 msgstr "열기"
@@ -300,67 +258,56 @@ msgid "Save"
 msgstr ""
 
 #: tformpoeditor.filesaveas1.caption
-#, fuzzy
 msgctxt "tformpoeditor.filesaveas1.caption"
 msgid "Save &As ..."
 msgstr "저장 (&A) ..."
 
 #: tformpoeditor.filesaveas1.hint
-#, fuzzy
 msgctxt "tformpoeditor.filesaveas1.hint"
 msgid "Save As"
 msgstr "저장"
 
 #: tformpoeditor.importpo.caption
-#, fuzzy
 msgctxt "tformpoeditor.importpo.caption"
 msgid "Import PO File"
 msgstr "PO File 가져오기"
 
 #: tformpoeditor.importpo.hint
-#, fuzzy
 msgctxt "tformpoeditor.importpo.hint"
 msgid "Import Translation from other PO file"
 msgstr "다른 PO 파일에서 번역을 가져오기"
 
 #: tformpoeditor.menuitem1.caption
-#, fuzzy
 msgctxt "tformpoeditor.menuitem1.caption"
 msgid "&File"
 msgstr "파일(&F)"
 
 #: tformpoeditor.menuitem19.caption
-#, fuzzy
 msgctxt "tformpoeditor.menuitem19.caption"
 msgid "&Translate"
 msgstr "번역(&T)"
 
 #: tformpoeditor.menuitem3.caption
-#, fuzzy
 msgctxt "tformpoeditor.menuitem3.caption"
 msgid "&Search"
 msgstr "찾기(&S)"
 
 #: tformpoeditor.menuitem40.caption
-#, fuzzy
 msgctxt "tformpoeditor.menuitem40.caption"
 msgid "&View"
 msgstr "보기(&V)"
 
 #: tformpoeditor.menuitemedit.caption
-#, fuzzy
 msgctxt "tformpoeditor.menuitemedit.caption"
 msgid "&Edit"
 msgstr "편집(&E)"
 
 #: tformpoeditor.menuitemrecent.caption
-#, fuzzy
 msgctxt "tformpoeditor.menuitemrecent.caption"
 msgid "Recent Files"
 msgstr "최근 파일"
 
 #: tformpoeditor.optionsortcomment.caption
-#, fuzzy
 msgctxt "tformpoeditor.optionsortcomment.caption"
 msgid "Sort by comment"
 msgstr "주석문으로 정렬"
@@ -371,25 +318,21 @@ msgid "Use Linux LineBreak"
 msgstr ""
 
 #: tformpoeditor.searchfind.caption
-#, fuzzy
 msgctxt "tformpoeditor.searchfind.caption"
 msgid "Find"
 msgstr "찾기"
 
 #: tformpoeditor.searchfind.hint
-#, fuzzy
 msgctxt "tformpoeditor.searchfind.hint"
 msgid "Find & replace text. Regular Expression"
 msgstr "문자열 검색/치환. 정규식"
 
 #: tformpoeditor.searchnext.caption
-#, fuzzy
 msgctxt "tformpoeditor.searchnext.caption"
 msgid "Next"
 msgstr "다음찾기"
 
 #: tformpoeditor.searchnext.hint
-#, fuzzy
 msgctxt "tformpoeditor.searchnext.hint"
 msgid "Find next match text"
 msgstr "다음 검색"
@@ -425,25 +368,21 @@ msgid "ToolButton7"
 msgstr ""
 
 #: tformpoeditor.translatecopy.caption
-#, fuzzy
 msgctxt "tformpoeditor.translatecopy.caption"
 msgid "Copy Translated Text"
 msgstr "번역한 문장 붙이기"
 
 #: tformpoeditor.translatecopy.hint
-#, fuzzy
 msgctxt "tformpoeditor.translatecopy.hint"
 msgid "Copy Translated text from bottom window"
 msgstr "아래 창에서 번역된 문자열을 복사"
 
 #: tformpoeditor.translatemsg.caption
-#, fuzzy
 msgctxt "tformpoeditor.translatemsg.caption"
 msgid "Translate Msg"
 msgstr "메시지 번역"
 
 #: tformpoeditor.translatemsg.hint
-#, fuzzy
 msgctxt "tformpoeditor.translatemsg.hint"
 msgid "Translate directly"
 msgstr "바로 번역"
@@ -454,13 +393,11 @@ msgid "Set Bing API Info"
 msgstr ""
 
 #: tformpoeditor.translatetext1.caption
-#, fuzzy
 msgctxt "tformpoeditor.translatetext1.caption"
 msgid "Translate text"
 msgstr "문장 번역"
 
 #: tformpoeditor.translatetext1.hint
-#, fuzzy
 msgctxt "tformpoeditor.translatetext1.hint"
 msgid "Translate text to bottom window"
 msgstr "아래 창으로 내용을 번역"

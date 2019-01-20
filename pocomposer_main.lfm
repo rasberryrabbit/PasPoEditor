@@ -14,7 +14,7 @@ object FormPoEditor: TFormPoEditor
   OnDestroy = FormDestroy
   OnShow = FormShow
   OnWindowStateChange = FormWindowStateChange
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object ToolBar1: TToolBar
     Left = 0
     Height = 26
@@ -780,8 +780,6 @@ object FormPoEditor: TFormPoEditor
   object ReplaceDialog1: TReplaceDialog
     OnClose = ReplaceDialog1Close
     OnShow = ReplaceDialog1Show
-    Width = 480
-    Height = 184
     Options = [frDown, frHideWholeWord, frHideUpDown, frHideEntireScope, frPromptOnReplace]
     OnFind = ReplaceDialog1Find
     OnReplace = ReplaceDialog1Replace

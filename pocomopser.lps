@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="104">
+    <Units Count="105">
       <Unit0>
         <Filename Value="pocomopser.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -19,6 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
+        <TopLine Value="1878"/>
+        <CursorPos X="3" Y="1878"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -28,8 +30,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uPoReader"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="68"/>
-        <CursorPos X="51" Y="85"/>
+        <TopLine Value="70"/>
+        <CursorPos X="51" Y="92"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -45,7 +47,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="284"/>
         <CursorPos X="45" Y="305"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="181"/>
       </Unit4>
       <Unit5>
         <Filename Value="udlgprop.pas"/>
@@ -55,7 +57,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="157"/>
+        <UsageCount Value="160"/>
       </Unit5>
       <Unit6>
         <Filename Value="udlgshowraw.pas"/>
@@ -65,7 +67,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="98"/>
       </Unit6>
       <Unit7>
         <Filename Value="udlgbingapiinfo.pas"/>
@@ -76,7 +78,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
         <CursorPos Y="52"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="73"/>
       </Unit7>
       <Unit8>
         <Filename Value="ugoogletranapi.pas"/>
@@ -84,7 +86,7 @@
         <UnitName Value="uGoogleTranApi"/>
         <EditorIndex Value="2"/>
         <CursorPos X="21" Y="6"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -97,8 +99,8 @@
       <Unit10>
         <Filename Value="C:\development\fpc\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="264"/>
-        <CursorPos X="24" Y="282"/>
+        <TopLine Value="1883"/>
+        <CursorPos X="3" Y="1818"/>
         <UsageCount Value="10"/>
       </Unit10>
       <Unit11>
@@ -351,9 +353,10 @@
       </Unit50>
       <Unit51>
         <Filename Value="C:\development\lazarus\lcl\dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="431"/>
-        <CursorPos X="21" Y="443"/>
+        <TopLine Value="441"/>
+        <CursorPos X="45" Y="466"/>
         <UsageCount Value="10"/>
       </Unit51>
       <Unit52>
@@ -367,8 +370,8 @@
       <Unit53>
         <Filename Value="C:\development\lazarus\lcl\include\finddialog.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="18" Y="41"/>
+        <TopLine Value="536"/>
+        <CursorPos X="3" Y="540"/>
         <UsageCount Value="10"/>
       </Unit53>
       <Unit54>
@@ -407,10 +410,11 @@
       </Unit58>
       <Unit59>
         <Filename Value="C:\development\lazarus\lcl\defaulttranslator.pas"/>
+        <UnitName Value="DefaultTranslator"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="12"/>
-        <CursorPos X="10" Y="31"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="7"/>
+        <CursorPos X="35" Y="38"/>
+        <UsageCount Value="10"/>
       </Unit59>
       <Unit60>
         <Filename Value="C:\development\lazarus\components\rx\mrulist.pp"/>
@@ -432,9 +436,11 @@
       </Unit62>
       <Unit63>
         <Filename Value="C:\development\lazarus\lcl\lclclasses.pp"/>
+        <UnitName Value="LCLClasses"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
-        <CursorPos X="28" Y="42"/>
-        <UsageCount Value="7"/>
+        <CursorPos X="32" Y="42"/>
+        <UsageCount Value="10"/>
       </Unit63>
       <Unit64>
         <Filename Value="C:\development\lazarus\lcl\lclstrconsts.pas"/>
@@ -574,9 +580,10 @@
       </Unit84>
       <Unit85>
         <Filename Value="C:\development\lazarus\lcl\lcltranslator.pas"/>
+        <UnitName Value="LCLTranslator"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="524"/>
-        <CursorPos X="9" Y="550"/>
+        <TopLine Value="566"/>
+        <CursorPos Y="582"/>
         <UsageCount Value="10"/>
       </Unit85>
       <Unit86>
@@ -603,8 +610,8 @@
       <Unit89>
         <Filename Value="C:\development\lazarus\lcl\include\replacedialog.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="17"/>
-        <CursorPos X="3" Y="50"/>
+        <TopLine Value="586"/>
+        <CursorPos X="31" Y="592"/>
         <UsageCount Value="10"/>
       </Unit89>
       <Unit90>
@@ -703,27 +710,47 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit103>
+      <Unit104>
+        <Filename Value="C:\development\lazarus\lcl\include\commondialog.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="27"/>
+        <CursorPos X="3" Y="32"/>
+        <UsageCount Value="10"/>
+      </Unit104>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
-        <Filename Value="uporeader.pas"/>
-        <Caret Line="85" Column="76" TopLine="57"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1879" TopLine="1867"/>
       </Position1>
       <Position2>
-        <Filename Value="uporeader.pas"/>
-        <Caret Line="659" Column="75" TopLine="631"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="254" Column="35" TopLine="238"/>
       </Position2>
       <Position3>
-        <Filename Value="uporeader.pas"/>
-        <Caret Line="707" Column="73" TopLine="679"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1347" Column="17" TopLine="1330"/>
       </Position3>
       <Position4>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="770" Column="46" TopLine="761"/>
+        <Caret Line="254" Column="48" TopLine="234"/>
       </Position4>
       <Position5>
         <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1896" Column="23" TopLine="1867"/>
       </Position5>
+      <Position6>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1896" Column="21" TopLine="1867"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1878" Column="70" TopLine="1861"/>
+      </Position7>
+      <Position8>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1896" TopLine="1867"/>
+      </Position8>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

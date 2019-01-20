@@ -251,7 +251,7 @@ implementation
 {$R *.lfm}
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}uGoogleTranApi{$endif}, LazUTF8, udlgprop,
-  DefaultTranslator, gettext, Translations, udlgshowraw, udlgBingApiInfo;
+  gettext, Translations, DefaultTranslator, udlgshowraw, udlgBingApiInfo;
 
 var
   mPo:TPoList=nil;
@@ -1875,17 +1875,34 @@ var
   aBtn : TButton;
 begin
   bidx:=0;
-  aForm:=ReplaceDialog1.Components[0] as TForm;
-  for i:=0 to aForm.ComponentCount-1 do begin
-    if aForm.Components[i] is TButton then begin
-      aBtn:=aForm.Components[i] as TButton;
-      if aBtn.Visible then
-        aBtn.Default:=True;
-      if mIsFind = bidx then
-        break;
-      Inc(bidx);
+
+  (*
+  ===================================================================
+  --- lcl/dialogs.pp	(revision 60117)
+  +++ lcl/dialogs.pp	(working copy)
+  @@ -463,6 +463,7 @@
+       property Left: Integer read GetLeft write SetLeft;
+       property Position: TPoint read GetPosition write SetPosition;
+       property Top: Integer read GetTop write SetTop;
+  +    property FindForm: TForm read FFindForm;
+     published
+       property FindText: string read GetFindText write SetFindText;
+       property Options: TFindOptions read FOptions write SetOptions default [frDown];
+
+  *)
+
+  aForm:=ReplaceDialog1.FindForm;  // custom property
+  if aForm<>nil then
+    for i:=0 to aForm.ComponentCount-1 do begin
+      if aForm.Components[i] is TButton then begin
+        aBtn:=aForm.Components[i] as TButton;
+        if aBtn.Visible then
+          aBtn.Default:=True;
+        if mIsFind = bidx then
+          break;
+        Inc(bidx);
+      end;
     end;
-  end;
 end;
 
 
