@@ -397,7 +397,7 @@ object FormPoEditor: TFormPoEditor
     object FileOpen1: TFileOpen
       Category = 'File'
       Caption = '&Open ...'
-      Dialog.Filter = 'Po Files|*.po|All Files|*.*'
+      Dialog.Filter = 'Po Files|*.po|All Files|*.*|POT Files|*.pot'
       Hint = 'Open'
       ImageIndex = 0
       ShortCut = 16463
@@ -411,7 +411,7 @@ object FormPoEditor: TFormPoEditor
     object FileSaveAs1: TFileSaveAs
       Category = 'File'
       Caption = 'Save &As ...'
-      Dialog.Filter = 'PO files|*.po|All files|*.*'
+      Dialog.Filter = 'PO files|*.po|All files|*.*|POT Files|*.pot'
       Dialog.Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
       Hint = 'Save As'
       ImageIndex = 1
