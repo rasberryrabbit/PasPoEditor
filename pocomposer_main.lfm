@@ -767,12 +767,12 @@ object FormPoEditor: TFormPoEditor
     }
   end
   object OpenDialogImport: TOpenDialog
-    Filter = 'PO Files|*.po|All Files|*.*'
+    Filter = 'PO Files|*.po|All Files|*.*|POT Files|*.pot'
     Left = 128
     Top = 74
   end
   object SaveDialogExport: TSaveDialog
-    Filter = 'PO Files|*.po|All Files|*.*'
+    Filter = 'PO Files|*.po|All Files|*.*|POT Files|*.pot'
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     Left = 128
     Top = 128
