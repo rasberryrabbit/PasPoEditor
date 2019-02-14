@@ -397,7 +397,7 @@ object FormPoEditor: TFormPoEditor
     object FileOpen1: TFileOpen
       Category = 'File'
       Caption = '&Open ...'
-      Dialog.Filter = 'Po Files|*.po|All Files|*.*|POT Files|*.pot'
+      Dialog.Filter = 'PO POT Files|*.po;*.pot|All Files|*.*|POT Files|*.pot|PO Files|*.po'
       Hint = 'Open'
       ImageIndex = 0
       ShortCut = 16463
@@ -411,7 +411,7 @@ object FormPoEditor: TFormPoEditor
     object FileSaveAs1: TFileSaveAs
       Category = 'File'
       Caption = 'Save &As ...'
-      Dialog.Filter = 'PO files|*.po|All files|*.*|POT Files|*.pot'
+      Dialog.Filter = 'PO POT files|*.po;*.pot|All files|*.*|POT Files|*.pot|PO Files|*.po'
       Dialog.Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
       Hint = 'Save As'
       ImageIndex = 1
@@ -767,12 +767,12 @@ object FormPoEditor: TFormPoEditor
     }
   end
   object OpenDialogImport: TOpenDialog
-    Filter = 'PO Files|*.po|All Files|*.*|POT Files|*.pot'
+    Filter = 'PO POT Files|*.po;*.pot|All Files|*.*|POT Files|*.pot|PO Files|*.po'
     Left = 128
     Top = 74
   end
   object SaveDialogExport: TSaveDialog
-    Filter = 'PO Files|*.po|All Files|*.*|POT Files|*.pot'
+    Filter = 'PO POT Files|*.po;*.pot|All Files|*.*|POT Files|*.pot|PO Files|*.po'
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     Left = 128
     Top = 128
