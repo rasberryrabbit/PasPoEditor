@@ -1,0 +1,400 @@
+Index: components/lazutils/fileutil.inc
+===================================================================
+--- components/lazutils/fileutil.inc	(revision 60417)
++++ components/lazutils/fileutil.inc	(working copy)
+@@ -325,7 +325,11 @@
+ 
+     // Don't even try to copy to a subdirectory of SourceDir.
+     {$ifdef CaseInsensitiveFilenames}
++      {$if defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+       if AnsiStartsText(Searcher.FSourceDir, Searcher.FTargetDir) then Exit;
++      {$else ACP_RTL}
++      if Utf8StartsText(Searcher.FSourceDir, Searcher.FTargetDir) then Exit;
++      {$endif}
+     {$ELSE}
+       if AnsiStartsStr(Searcher.FSourceDir, Searcher.FTargetDir) then Exit;
+     {$ENDIF}
+Index: components/lazutils/lazutf8.pas
+===================================================================
+--- components/lazutils/lazutf8.pas	(revision 60417)
++++ components/lazutils/lazutf8.pas	(working copy)
+@@ -3389,7 +3389,7 @@
+ 
+ function UTF8CompareStrCollated(const S1, S2: string): PtrInt; {$IFnDEF ACP_RTL}inline;{$endif}
+ begin
+-  {$IFDEF ACP_RTL}
++  {$IF defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+     //Only with this define AnsiCompareStr does not point to Utf8CompareStr
+     Result := AnsiCompareStr(UTF8ToSys(S1), UTF8ToSys(S2));
+   {$ELSE}
+Index: components/lazutils/lazutils_defines.inc
+===================================================================
+--- components/lazutils/lazutils_defines.inc	(revision 60417)
++++ components/lazutils/lazutils_defines.inc	(working copy)
+@@ -4,6 +4,7 @@
+ {$undef UTF8_RTL}  // FPC >= 2.7.1 with codepages and default string = CP_UTF8
+ {$undef ACP_RTL}   // FPC >= 2.7.1 with codepages and default string = CP_ACP
+ {$undef NO_CP_RTL} // FPC < 2.7.1 before string codepages
++{$undef ACP_RTL_UTF8}
+ 
+ 
+ {$ifdef FPC_HAS_CPSTRING}
+@@ -11,6 +12,10 @@
+     {$define UTF8_RTL}
+   {$else DisableUTF8RTL}
+     {$define ACP_RTL}
++    // tweak
++    {$if defined(WINDOWS)}
++    {$define ACP_RTL_UTF8}
++    {$endif}
+   {$endif DisableUTF8RTL}
+ {$else FPC_HAS_CPSTRING}
+   {$define NO_CP_RTL}
+Index: components/lazutils/winlazfileutils.inc
+===================================================================
+--- components/lazutils/winlazfileutils.inc	(revision 60417)
++++ components/lazutils/winlazfileutils.inc	(working copy)
+@@ -264,10 +264,10 @@
+     in win32 it is the ansi structure with a utf-8 string
+     in wince it is a wide structure }
+   {$ifdef FindData_W}
+-  {$IFDEF ACP_RTL}
++  {$IF defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+   f.Name:=String(UnicodeString(F.FindData.cFileName));
+   {$ELSE}
+-  f.Name:=UTF8Encode(UnicodeString(F.FindData.cFileName));
++  f.Name:=pchar(UTF8Encode(UnicodeString(F.FindData.cFileName)));
+   {$ENDIF}
+   {$else}
+   f.Name:=F.FindData.cFileName;
+@@ -320,7 +320,7 @@
+   Rslt.ExcludeAttr:=(not Attr) and ($1e);
+                  { $1e = faHidden or faSysFile or faVolumeID or faDirectory }
+   { FindFirstFile is a Win32 Call }
+-  {$IFDEF ACP_RTL}
++  {$IF defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+   Rslt.FindHandle:=Windows.FindFirstFileW(PWideChar(WideString(Path)),find{%H-});
+   {$ELSE}
+   Rslt.FindHandle:=Windows.FindFirstFileW(PWideChar(UTF8Decode(Path)),find{%H-});
+Index: components/lazutils/winlazutf8.inc
+===================================================================
+--- components/lazutils/winlazutf8.inc	(revision 60417)
++++ components/lazutils/winlazutf8.inc	(working copy)
+@@ -212,10 +212,10 @@
+   else
+   begin
+     if (Param <= ArgsWCount) then
+-      {$IFDEF ACP_RTL}
++      {$IF defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+       Result := String(UnicodeString(ArgsW[Param]))
+       {$ELSE}
+-      Result := Utf8Encode(ArgsW[Param])
++      Result := pchar(Utf8Encode(ArgsW[Param]))
+       {$ENDIF ACP_RTL}
+     else
+       Result := '';
+Index: lcl/grids.pas
+===================================================================
+--- lcl/grids.pas	(revision 60417)
++++ lcl/grids.pas	(working copy)
+@@ -42,7 +42,7 @@
+   LazFileUtils, DynamicArray, Maps, LazUTF8, LazUtf8Classes, Laz2_XMLCfg,
+   LazLoggerBase, LazUtilities, LCSVUtils, IntegerList
+ {$ifdef WINDOWS}
+-  ,messages
++  ,messages, imm
+ {$endif}
+   ;
+ 
+@@ -9816,22 +9816,44 @@
+   SelectEditor;
+   EditorShow(True);
+   if Editor<>nil then
+-    Msg.Result:=SendMessage(Editor.Handle,Msg.msg,Msg.wParam,Msg.lParam);
++    SendMessage(Editor.Handle,Msg.msg,Msg.wParam,Msg.lParam);
++  Msg.Result:=-1;
+ end;
+ 
+ procedure TCustomGrid.IMEComposition(var Msg: TMessage);
+ var
+-  wc : pWideChar;
+-  s : string;
++  wc: pWideChar;
++  s: string;
++  ws: UnicodeString;
++  imc: HIMC;
++  isUnicode: Boolean;
+ begin
+-  wc := @Msg.wParamlo;
+-  s := Ansistring(WideCharLenToString(wc,1));
+-  // check valid mbcs
+-  if (Length(s)>0) and (s[1]<>'?') then
+-    Msg.wParamlo:=swap(pword(@s[1])^);
+-  // send first mbcs to editor
+-  if Editor<>nil then
+-    Msg.Result:=SendMessage(Editor.Handle,Msg.msg,Msg.wParam,Msg.lParam);
++  if ((Msg.lParam and (CS_INSERTCHAR or CS_NOMOVECARET))<>0) then begin
++    wc := @Msg.wParamlo;
++    ws := WideCharLenToString(wc,1);
++    s := Ansistring(ws);
++    // check valid mbcs
++    if (Length(s)>0) and (s[1]<>'?') then begin
++      isUnicode:=True;
++    end else begin
++      SetLength(s,2);
++      pword(@s[1])^ := swap(word(wc^));
++      isUnicode:=False;
++    end;
++    // to do : continue composition with first composotion string
++    if Editor<>nil then begin
++      imc:=ImmGetContext(Editor.Handle);
++      try
++        if isUnicode then
++          ImmSetCompositionStringW(imc,SCS_SETSTR,@ws[1],Length(ws)*SizeOf(WideChar),nil,0)
++          else
++            ImmSetCompositionString(imc,SCS_SETSTR,@s[1],Length(s),nil,0);
++      finally
++        ImmReleaseContext(Editor.Handle,imc);
++      end;
++    end;
++  end;
++  Msg.Result:=-1;
+ end;
+ {$endif}
+ 
+@@ -10134,6 +10156,19 @@
+ 	{$IfDef GridTraceMsg}
+ 	TransMsg('StrCellEditor: ', TheMessage);
+ 	{$Endif}
++  {$if defined(MSWINDOWS) and defined(GRID_EDITOR_IME_DEBUG) }
++  case TheMessage.msg of
++    WM_IME_STARTCOMPOSITION,
++    WM_IME_COMPOSITION,
++    WM_IME_CHAR,
++    WM_IME_COMPOSITIONFULL,
++    WM_IME_CONTROL,
++    WM_IME_ENDCOMPOSITION.MaxValue,
++    WM_IME_NOTIFY,
++    WM_IME_SETCONTEXT:
++      writeln(Format('- %x %x %x',[TheMessage.msg,TheMessage.wParam,TheMessage.lParam]));
++  end;
++  {$endif}
+   if FGrid<>nil then
+     case TheMessage.Msg of
+       LM_CLEAR,
+Index: lcl/include/sysenvapis_win.inc
+===================================================================
+--- lcl/include/sysenvapis_win.inc	(revision 60417)
++++ lcl/include/sysenvapis_win.inc	(working copy)
+@@ -153,8 +153,8 @@
+     if FindBrowserExecutable('rundll32', AnsiBrowser) then
+     begin
+       AParams := 'url.dll,FileProtocolHandler "%s"';
+-      {$IFnDEF ACP_RTL}
+-      ABrowser := Utf8ToUTF16(AnsiBrowser);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      ABrowser := pchar(Utf8ToUTF16(AnsiBrowser));
+       {$else}
+       ABrowser := WideString(AnsiBrowser);
+       {$ENDIF ACP_RTL}
+@@ -188,9 +188,9 @@
+     Result := FindPredefinedBrowser(AnsiBrowser, AnsiParams);
+     if Result then
+     begin
+-      {$IFnDEF ACP_RTL}
+-      ABrowser := Utf8ToUtf16(AnsiBrowser);
+-      AParams := Utf8ToUtf16(AnsiParams);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      ABrowser := pchar(Utf8ToUtf16(AnsiBrowser));
++      AParams := pchar(Utf8ToUtf16(AnsiParams));
+       {$else}
+       ABrowser := WideString(AnsiBrowser);
+       AParams := WideString(AnsiParams);
+@@ -205,8 +205,8 @@
+   WideBrowser, WideParams: WideString;
+ begin
+   Result := FindDefaultBrowserWide(WideBrowser, WideParams);
+-  ABrowser := Utf16ToUtf8(WideBrowser);
+-  AParams := Utf16ToUtf8(WideParams);
++  ABrowser := pchar(Utf16ToUtf8(WideBrowser));
++  AParams := pchar(Utf16ToUtf8(WideParams));
+ end;
+ 
+ function FindDefaultBrowser(out ABrowser, AParams: String): Boolean;
+@@ -264,14 +264,14 @@
+       //at least FireFox does not like -url -osint "%s" for local files, it wants "%s"
+       //if IsFileUri and IsLocalWithAnchor then
+       //  AParams := '"%s"';
+-      {$IFnDEF ACP_RTL}
+-      AParamsUtf8 := Utf16ToUtf8(AParams);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      AParamsUtf8 := pchar(Utf16ToUtf8(AParams));
+       {$ELSE}
+       AParamsUtf8 := AParams;
+       {$ENDIF ACP_RTL}
+       AParamsUtf8 := Format(AParamsUtf8,[AURL]);
+-      {$IFnDEF ACP_RTL}
+-      AParams := Utf8ToUtf16(AParamsUtf8);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      AParams := pchar(Utf8ToUtf16(AParamsUtf8));
+       {$ELSE}
+       AParams := WideString(AParamsUtf8);
+       {$ENDIF ACP_RTL}
+@@ -281,8 +281,8 @@
+       //file:// needs to be quoted if filename contains spaces
+       if IsFileURI and (Pos(#32, AURL) > 0) {and (not LaunchWinAppBrowserCanHandleParams(ABrowser))} then
+         AURL := '"' + AURL + '"';
+-      {$IFnDEF ACP_RTL}
+-      AParams := Utf8ToUtf16(AURL);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      AParams := pchar(Utf8ToUtf16(AURL));
+       {$ELSE}
+       AParams := WideString(AURL);
+       {$ENDIF ACP_RTL}
+@@ -295,8 +295,8 @@
+   end  //FindDefaultBrowserWide
+   else
+   begin
+-    {$IFnDEF ACP_RTL}
+-    AParams := Utf8ToUtf16(AURL);
++    {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++    AParams := pchar(Utf8ToUtf16(AURL));
+     {$ELSE}
+     AParams := WideString(AURL);
+     {$ENDIF ACP_RTL}
+Index: lcl/include/treeview.inc
+===================================================================
+--- lcl/include/treeview.inc	(revision 60417)
++++ lcl/include/treeview.inc	(working copy)
+@@ -3611,6 +3611,7 @@
+ begin
+   if (tvoAutoItemHeight in FOptions)
+   and HandleAllocated and Canvas.HandleAllocated then begin
++    Canvas.Font.Assign(Font); // fix FDefItemHeight variation
+     NewDefItemHeight:=Canvas.TextHeight(TVAutoHeightString)+FDefItemSpace;
+     if Assigned(FImages) then
+       ImageSize := Images.SizeForPPI[ImagesWidth, Font.PixelsPerInch];
+@@ -5360,13 +5361,19 @@
+     end;
+ 
+     // draw text
+-    if Node.Text <> '' then
++    { fix empty node text at NodeSelected }
++    CurTextRect := NodeRect;
++    CurTextRect.Left := x;
++    { fix for non-themed text }
++    if not (tvoThemedDraw in FOptions) then
+     begin
+-      CurTextRect := NodeRect;
+-      CurTextRect.Left := x;
++      DrawText(Canvas.Handle, PChar(Node.Text), -1, CurTextRect, DT_CENTER or DT_VCENTER or DT_SINGLELINE or DT_NOPREFIX or DT_CALCRECT);
++      CurTextRect.Top := NodeRect.Top;
++      CurTextRect.Bottom := NodeRect.Bottom;
++      CurTextRect.Right := CurTextRect.Right + RealIndent div 2;
++    end else
+       CurTextRect.Right := x + TextWidth(Node.Text) + (FDefItemSpace * 2);
+-      DrawNodeText(NodeSelected, CurTextRect, Node.Text);
+-    end;
++    DrawNodeText(NodeSelected, CurTextRect, Node.Text);
+ 
+     // draw separator
+     if (tvoShowSeparators in FOptions) then
+Index: lcl/interfaces/win32/interfaces.pp
+===================================================================
+--- lcl/interfaces/win32/interfaces.pp	(revision 60417)
++++ lcl/interfaces/win32/interfaces.pp	(working copy)
+@@ -20,10 +20,14 @@
+ 
+ {$mode objfpc}{$H+}
+ 
++{$if (FPC_FULLVERSION >= 30000) and defined(DisableUTF8RTL)}
++  {$define ACP_RTL_UTF8}
++{$endif}
++
+ interface 
+ 
+ uses
+-  {$IF (FPC_FULLVERSION >= 30000) AND NOT DEFINED(DisableUTF8RTL)}
++  {$IF (FPC_FULLVERSION >= 30000) AND NOT DEFINED(DisableUTF8RTL) or defined(ACP_RTL_UTF8)}
+   LazUTF8,
+   {$IFEND}
+   InterfaceBase;
+Index: lcl/interfaces/win32/win32callback.inc
+===================================================================
+--- lcl/interfaces/win32/win32callback.inc	(revision 60417)
++++ lcl/interfaces/win32/win32callback.inc	(working copy)
+@@ -1381,6 +1381,16 @@
+       Area := PDrawIS^.rcItem;
+       ItemState := TOwnerDrawState(PDrawIS^.itemState);
+       DC := PDrawIS^._hDC;
++      // odFocused on enter control didn't fired with ODA_DRAWENTIRE
++      if (PDrawItemStruct(LParam)^.itemAction and ODA_DRAWENTIRE)<>0 then 
++      begin
++        if lWinControl.Focused and not (odFocused in ItemState) then
++           if ((lWinControl is TCustomListBox)
++               and (TCustomListBox(lWinControl).ItemIndex=ItemID)) or
++              ((lWinControl is TCustomComboBox)
++               and (TCustomComboBox(lWinControl).ItemIndex=ItemID)) then
++                  Include(ItemState,odFocused);
++      end;
+     end;
+     if (aMsg = LM_DRAWLISTITEM) and (WindowInfo <> @DefaultWindowInfo) then
+     begin
+Index: lcl/interfaces/win32/win32memostrings.inc
+===================================================================
+--- lcl/interfaces/win32/win32memostrings.inc	(revision 60417)
++++ lcl/interfaces/win32/win32memostrings.inc	(working copy)
+@@ -141,7 +141,7 @@
+   begin
+     //insert with LineEnding
+     LineStart := GetLineStart(Index);
+-    NewLine := S+LineEnding;
++    NewLine := pchar(S)+LineEnding;
+     SendMessageW(FHandle, EM_SETSEL, LineStart, LineStart);
+     SendMessageW(FHandle, EM_REPLACESEL, 0, lparam(PWideChar(UTF8ToUTF16(NewLine))));
+   end
+@@ -152,9 +152,9 @@
+     SendMessageW(FHandle, EM_SETSEL, LineStart, LineStart);
+     //check if last line is empty
+     if Get(RealCount - 1) <> '' then
+-      NewLine := LineEnding+S+LineEnding
++      NewLine := LineEnding+pchar(S)+LineEnding
+     else
+-      NewLine := S+LineEnding;
++      NewLine := pchar(S)+LineEnding;
+     SendMessageW(FHandle, EM_REPLACESEL, 0, lparam(PWideChar(UTF8ToUTF16(NewLine))));
+   end;
+ end;
+Index: lcl/lcltranslator.pas
+===================================================================
+--- lcl/lcltranslator.pas	(revision 60417)
++++ lcl/lcltranslator.pas	(working copy)
+@@ -114,12 +114,12 @@
+   begin
+     DefaultLang := LangID;
+ 
+-    AppDir := ExtractFilePath(ParamStrUTF8(0));
+-    LCFileName := ChangeFileExt(GetLCFileName, LCExt);
++    AppDir := pchar(ExtractFilePath(ParamStrUTF8(0)));
++    LCFileName := pchar(ChangeFileExt(GetLCFileName, LCExt));
+ 
+     if LangID <> '' then
+     begin
+-      FullLCFileName := ChangeFileExt(GetLCFileName, '.' + LangID) + LCExt;
++      FullLCFileName := pchar(ChangeFileExt(GetLCFileName, '.' + LangID)) + LCExt;
+ 
+       if Dir<>'' then
+       begin
+Index: lcl/xmlpropstorage.pas
+===================================================================
+--- lcl/xmlpropstorage.pas	(revision 60417)
++++ lcl/xmlpropstorage.pas	(working copy)
+@@ -180,7 +180,7 @@
+   Res: UnicodeString;
+ begin
+   Res:=FXML.GetValue(Utf8Decode(FixPath(Section)+'/'+Ident), Utf8Decode(TheDefault));
+-  Result := Utf8Encode(Res);
++  Result := PChar(Utf8Encode(Res));
+   //debugln('TCustomXMLPropStorage.DoReadString Section="',Section,'" Ident="',Ident,'" Result=',Result);
+ end;
+ 
