@@ -14,10 +14,12 @@ msgid "Cannot be undo, are you sure?"
 msgstr "되돌릴 수 없어집니다. 정말 하시겠습니까?"
 
 #: pocomposer_main.rsdmessagesimp
+#, object-pascal-format
 msgid "%d messages imported."
 msgstr "%d 번역을 가져왔습니다."
 
 #: pocomposer_main.rsdpatcheddadd
+#, object-pascal-format
 msgid "%d patched, %d added"
 msgstr "%d 패치되고 %d 추가 되었습니다"
 
