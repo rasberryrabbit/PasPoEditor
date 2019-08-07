@@ -9,7 +9,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, lazcontrols, pocomposer_main, uPoReader, uMSTRanAPI, udlgprop,
-  udlgshowraw, udlgBingApiInfo, uGoogleTranApi;
+  udlgshowraw, udlgBingApiInfo, uGoogleTranApi, uFormTask;
 
 
 {$R *.res}
@@ -19,6 +19,7 @@ begin
   RequireDerivedFormResource := True;
   Application.Initialize;
   Application.CreateForm(TFormPoEditor, FormPoEditor);
+  Application.CreateForm(TFormTaskProg, FormTaskProg);
   Application.Run;
 end.
 

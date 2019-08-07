@@ -17,9 +17,9 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="2"/>
+      <MinorVersionNr Value="4"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="94"/>
+      <BuildNr Value="100"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes>
@@ -137,6 +137,14 @@
         <Filename Value="ugoogletranapi.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uGoogleTranApi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uformtask.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormTaskProg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFormTask"/>
       </Unit>
     </Units>
   </ProjectOptions>

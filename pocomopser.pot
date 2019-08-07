@@ -1,0 +1,343 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: pocomposer_main.rsalreadyhavetranslation
+msgid "Already have translation, Do you overwrite all?"
+msgstr ""
+
+#: pocomposer_main.rsauto
+msgid "Auto"
+msgstr ""
+
+#: pocomposer_main.rscannotbeundo
+msgid "Cannot be undo, are you sure?"
+msgstr ""
+
+#: pocomposer_main.rsdmessagesimp
+#, object-pascal-format
+msgid "%d messages imported."
+msgstr ""
+
+#: pocomposer_main.rsdpatcheddadd
+#, object-pascal-format
+msgid "%d patched, %d added"
+msgstr ""
+
+#: pocomposer_main.rsformcaption
+msgctxt "pocomposer_main.rsformcaption"
+msgid "PO Editor"
+msgstr ""
+
+#: pocomposer_main.rsitwilllostch
+msgid "It will lost changes. continue anyway?"
+msgstr ""
+
+#: pocomposer_main.rsnomatchesfound
+msgid "No Matches found."
+msgstr ""
+
+#: pocomposer_main.rsreplace
+msgid "Replace?"
+msgstr ""
+
+#: pocomposer_main.translateerror
+msgid "Translator Error"
+msgstr ""
+
+#: tformpoeditor.addpo.caption
+msgid "Add PO File"
+msgstr ""
+
+#: tformpoeditor.addpo.hint
+msgid "Add translation and items from other PO file."
+msgstr ""
+
+#: tformpoeditor.buttonclr.caption
+msgid "clear"
+msgstr ""
+
+#: tformpoeditor.caption
+msgctxt "tformpoeditor.caption"
+msgid "PO Editor"
+msgstr ""
+
+#: tformpoeditor.checkboxfuzzy.caption
+msgid "fuzzy"
+msgstr ""
+
+#: tformpoeditor.editcopy1.caption
+msgid "&Copy"
+msgstr ""
+
+#: tformpoeditor.editcopy1.hint
+msgid "Copy"
+msgstr ""
+
+#: tformpoeditor.editcut1.caption
+msgid "Cu&t"
+msgstr ""
+
+#: tformpoeditor.editcut1.hint
+msgid "Cut"
+msgstr ""
+
+#: tformpoeditor.editdelete1.caption
+msgid "&Delete"
+msgstr ""
+
+#: tformpoeditor.editdelete1.hint
+msgid "Delete"
+msgstr ""
+
+#: tformpoeditor.editdown.caption
+msgid "Item Down"
+msgstr ""
+
+#: tformpoeditor.editexportsel.caption
+msgid "Export Selections"
+msgstr ""
+
+#: tformpoeditor.editexportsel.hint
+msgid "Export selected items"
+msgstr ""
+
+#: tformpoeditor.editgotonextfuzzy.caption
+msgid "Goto Next Fuzzy"
+msgstr ""
+
+#: tformpoeditor.editgotonexttran.caption
+msgid "Goto Next Translated"
+msgstr ""
+
+#: tformpoeditor.editgotonextuntran.caption
+msgid "Goto Next Untranslated"
+msgstr ""
+
+#: tformpoeditor.editgotoprevfuzzy.caption
+msgid "Goto Previous Fuzzy"
+msgstr ""
+
+#: tformpoeditor.editgotoprevtran.caption
+msgid "Goto Previous Translated"
+msgstr ""
+
+#: tformpoeditor.editgotoprevuntran.caption
+msgid "Goto Previous Untranslated"
+msgstr ""
+
+#: tformpoeditor.editmemoleft.caption
+msgid "Left Editor"
+msgstr ""
+
+#: tformpoeditor.editmemoright.caption
+msgid "Right Editor"
+msgstr ""
+
+#: tformpoeditor.editpaste1.caption
+msgid "&Paste"
+msgstr ""
+
+#: tformpoeditor.editpaste1.hint
+msgid "Paste"
+msgstr ""
+
+#: tformpoeditor.editpofileprop.caption
+msgid "Edit PO File comment"
+msgstr ""
+
+#: tformpoeditor.editpofileprop.hint
+msgid "Edit PO file property"
+msgstr ""
+
+#: tformpoeditor.editselalltran.caption
+msgid "Select All Translated"
+msgstr ""
+
+#: tformpoeditor.editselalluntran.caption
+msgid "Select All Untranslated"
+msgstr ""
+
+#: tformpoeditor.editselectall1.caption
+msgid "Select &All"
+msgstr ""
+
+#: tformpoeditor.editselectall1.hint
+msgid "Select All"
+msgstr ""
+
+#: tformpoeditor.editshowrawitem.caption
+msgid "Show raw string"
+msgstr ""
+
+#: tformpoeditor.editstripuntran.caption
+msgid "Remove untranslated"
+msgstr ""
+
+#: tformpoeditor.editstripuntran.hint
+msgid "Remove untranslated items"
+msgstr ""
+
+#: tformpoeditor.editundo1.caption
+msgid "&Undo"
+msgstr ""
+
+#: tformpoeditor.editundo1.hint
+msgid "Undo"
+msgstr ""
+
+#: tformpoeditor.editup.caption
+msgid "Item Up"
+msgstr ""
+
+#: tformpoeditor.exportpo.caption
+msgid "Export PO File"
+msgstr ""
+
+#: tformpoeditor.exportpo.hint
+msgid "Export Translated msgstr to PO file"
+msgstr ""
+
+#: tformpoeditor.fileexit1.caption
+msgid "E&xit"
+msgstr ""
+
+#: tformpoeditor.fileexit1.hint
+msgid "Exit"
+msgstr ""
+
+#: tformpoeditor.fileopen1.caption
+msgid "&Open ..."
+msgstr ""
+
+#: tformpoeditor.fileopen1.hint
+msgid "Open"
+msgstr ""
+
+#: tformpoeditor.filesave.caption
+msgid "Save"
+msgstr ""
+
+#: tformpoeditor.filesaveas1.caption
+msgid "Save &As ..."
+msgstr ""
+
+#: tformpoeditor.filesaveas1.hint
+msgid "Save As"
+msgstr ""
+
+#: tformpoeditor.importpo.caption
+msgid "Import PO File"
+msgstr ""
+
+#: tformpoeditor.importpo.hint
+msgid "Import Translation from other PO file"
+msgstr ""
+
+#: tformpoeditor.menuitem1.caption
+msgid "&File"
+msgstr ""
+
+#: tformpoeditor.menuitem19.caption
+msgid "&Translate"
+msgstr ""
+
+#: tformpoeditor.menuitem3.caption
+msgid "&Search"
+msgstr ""
+
+#: tformpoeditor.menuitem40.caption
+msgid "&View"
+msgstr ""
+
+#: tformpoeditor.menuitemedit.caption
+msgid "&Edit"
+msgstr ""
+
+#: tformpoeditor.menuitemrecent.caption
+msgid "Recent Files"
+msgstr ""
+
+#: tformpoeditor.optionsortcomment.caption
+msgid "Sort by comment"
+msgstr ""
+
+#: tformpoeditor.optionuselinuxlinebreak.caption
+msgid "Use Linux LineBreak"
+msgstr ""
+
+#: tformpoeditor.searchfind.caption
+msgid "Find"
+msgstr ""
+
+#: tformpoeditor.searchfind.hint
+msgid "Find & replace text. Regular Expression"
+msgstr ""
+
+#: tformpoeditor.searchnext.caption
+msgid "Next"
+msgstr ""
+
+#: tformpoeditor.searchnext.hint
+msgid "Find next match text"
+msgstr ""
+
+#: tformpoeditor.sheetmsg1.caption
+msgid "0"
+msgstr ""
+
+#: tformpoeditor.toolbar1.caption
+msgid "ToolBar1"
+msgstr ""
+
+#: tformpoeditor.toolbutton1.caption
+msgid "ToolButton1"
+msgstr ""
+
+#: tformpoeditor.toolbutton3.caption
+msgid "ToolButton3"
+msgstr ""
+
+#: tformpoeditor.toolbutton5.caption
+msgid "ToolButton5"
+msgstr ""
+
+#: tformpoeditor.toolbutton7.caption
+msgid "ToolButton7"
+msgstr ""
+
+#: tformpoeditor.translatecopy.caption
+msgid "Copy Translated Text"
+msgstr ""
+
+#: tformpoeditor.translatecopy.hint
+msgid "Copy Translated text from bottom window"
+msgstr ""
+
+#: tformpoeditor.translatemsg.caption
+msgid "Translate Msg"
+msgstr ""
+
+#: tformpoeditor.translatemsg.hint
+msgid "Translate directly"
+msgstr ""
+
+#: tformpoeditor.translatesetup.caption
+msgid "Set Bing API Info"
+msgstr ""
+
+#: tformpoeditor.translatetext1.caption
+msgid "Translate text"
+msgstr ""
+
+#: tformpoeditor.translatetext1.hint
+msgid "Translate text to bottom window"
+msgstr ""
+
+#: tformtaskprog.buttoncancel.caption
+msgid "Cancel"
+msgstr ""
+
+#: tformtaskprog.caption
+msgid "Task"
+msgstr ""
+

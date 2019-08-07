@@ -238,6 +238,7 @@ type
     procedure SelectAllItems(untran:Boolean);
     procedure SetupTranslatorApi;
     { public declarations }
+    procedure PoListCallback(var Cancel:Boolean; PosInt:Integer);
   end;
 
 var
@@ -251,7 +252,8 @@ implementation
 {$R *.lfm}
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}uGoogleTranApi{$endif}, LazUTF8, udlgprop,
-  gettext, Translations, DefaultTranslator, udlgshowraw, udlgBingApiInfo;
+  gettext, Translations, DefaultTranslator, udlgshowraw, udlgBingApiInfo,
+  uFormTask;
 
 var
   mPo:TPoList=nil;
@@ -759,6 +761,13 @@ begin
   end;
 end;
 
+procedure TFormPoEditor.PoListCallback(var Cancel: Boolean; PosInt: Integer);
+begin
+  if FormTaskProg.IncPos then
+    Application.ProcessMessages;
+  Cancel:=FormTaskProg.CancelRes;
+end;
+
 procedure TFormPoEditor.FileOpen1Accept(Sender: TObject);
 var
   i:integer;
@@ -780,8 +789,11 @@ begin
   lastFindIndex:=Point(-1,0);
   if Assigned(mPo) then
      FreeAndNil(mPo);
+  FormTaskProg.Caption:='Loading';
+  FormTaskProg.Show;
   mPo:=TPoList.Create;
   try
+    mPo.Callback:=@PoListCallback;
     mPo.Load(FileOpen1.Dialog.FileName);
     OptionUseLinuxLineBreak.Checked:=mPo.FileLineBreak=#10;
     uLineBreak:=mPo.FileLineBreak;
@@ -803,6 +815,7 @@ begin
   except
     on e:Exception do ShowMessage(e.Message);
   end;
+  FormTaskProg.Hide;
   StatusBar1.Panels[1].Text:=IntToStr(ListBoxPO.Count);
 end;
 
@@ -844,6 +857,9 @@ begin
       // read po file
       mPOimport:=TPoList.Create;
       try
+        mPOimport.Callback:=@PoListCallback;
+        FormTaskProg.Show;
+        FormTaskProg.Caption:='Import(Add)';
         try
           mPOimport.Load(OpenDialogImport.FileName);
           mPOimport.FileLineBreak:=mPo.FileLineBreak;
@@ -855,6 +871,7 @@ begin
             ShowMessage(e.Message);
           end;
         end;
+        FormTaskProg.Hide;
         // add po item
         patched:=0;
         added:=0;
@@ -1004,11 +1021,15 @@ begin
               end;
           end;
           try
+            newPo.Callback:=@PoListCallback;
+            FormTaskProg.Show;
+            FormTaskProg.Caption:='Export Selection';
             newPo.Save(SaveDialogExport.FileName);
             MRUManager1.Add(SaveDialogExport.FileName,0);
           except
             on e:exception do ShowMessage(e.Message);
           end;
+          FormTaskProg.Hide;
         finally
           newPo.Free;
         end;
@@ -1256,11 +1277,15 @@ begin
             end;
           end;
           try
+            newPo.Callback:=@PoListCallback;
+            FormTaskProg.Show;
+            FormTaskProg.Caption:='Export';
             newPo.Save(SaveDialogExport.FileName);
             MRUManager1.Add(SaveDialogExport.FileName,0);
           except
             on e:exception do ShowMessage(e.Message);
           end;
+          FormTaskProg.Hide;
         finally
           newPo.Free;
         end;
@@ -1276,6 +1301,9 @@ begin
         mPo.LineBreak:=#10
         else
           mPo.LineBreak:=#13#10;
+      mPo.Callback:=@PoListCallback;
+      FormTaskProg.Show;
+      FormTaskProg.Caption:='Save';
       mPo.Save(TFileSaveAs(Sender).Dialog.FileName);
       MRUManager1.Add(TFileSaveAs(Sender).Dialog.FileName,0);
       modified:=False;
@@ -1285,6 +1313,7 @@ begin
     except
       on e:exception do ShowMessage(e.Message);
     end;
+    FormTaskProg.Hide;
   end;
 end;
 
@@ -1387,6 +1416,9 @@ begin
       Cursor:=crHourGlass;
       mPOimport:=TPoList.Create;
       try
+        mPOimport.Callback:=@PoListCallback;
+        FormTaskProg.Show;
+        FormTaskProg.Caption:='Import';
         try
           mPOimport.Load(OpenDialogImport.FileName);
           mPOimport.FileLineBreak:=mPo.FileLineBreak;
@@ -1398,6 +1430,7 @@ begin
             ShowMessage(e.Message);
           end;
         end;
+        FormTaskProg.Hide;
         // make table
         if mPOimport.Count>0 then
           for i:=0 to mPOimport.Count-1 do begin

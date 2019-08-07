@@ -404,3 +404,11 @@ msgctxt "tformpoeditor.translatetext1.hint"
 msgid "Translate text to bottom window"
 msgstr "아래 창으로 내용을 번역"
 
+#: tformtaskprog.buttoncancel.caption
+msgid "Cancel"
+msgstr ""
+
+#: tformtaskprog.caption
+msgid "Task"
+msgstr ""
+

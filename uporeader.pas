@@ -80,6 +80,8 @@ type
 
   { TPoList }
 
+  TPoListCallback = procedure (var Cancel:Boolean; PosInt:Integer) of object;
+
   TPoList = class(TList)
     private
       FStream:{$ifdef USE_UTF8_FILESTREAM}TFileStreamUTF8{$else}TFileStream{$endif};
@@ -89,6 +91,8 @@ type
       FLineBreak:string;
       FFileLineBreak:array[0..7] of char;
       FLineBreakCheck:Boolean;
+      FCancel:Boolean;
+      FPoListCallback:TPoListCallback;
 
       function GetFileLineBreak: string;
       function GetPoItem(Index: Integer): TPoItem;
@@ -114,6 +118,7 @@ type
       property LineBreak:string read FLineBreak write SetLineBreak;
       property FileLineBreak:string read GetFileLineBreak write SetFileLineBreak;
       property PoItem[Index:Integer]:TPoItem read GetPoItem;
+      property Callback:TPoListCallback read FPoListCallback write FPoListCallback;
   end;
 
   function StripQuote(const str: string; const strlinebrk:string=#13#10): string;
@@ -631,6 +636,7 @@ begin
   FLineBreak:=#13#10;
   FFileLineBreak:=#13#10;
   FLineBreakCheck:=False;
+  FPoListCallback:=nil;
 end;
 
 function TPoList.AddItem: TPoItem;
@@ -650,6 +656,7 @@ var
   itemp:TPoItem;
 begin
   Result:=False;
+  FCancel:=False;
   FLineBreakCheck:=True;
   Getmem(FStrBuf,_BufSize);
   try
@@ -687,6 +694,12 @@ begin
             itemp.Add(stemp);
           end;
         end;
+        // callback
+        if Assigned(FPoListCallback) then begin
+          FPoListCallback(FCancel,Self.Count);
+          if FCancel then
+            break;
+        end;
       end;
       Result:=True;
     finally
@@ -704,6 +717,7 @@ var
   stemp,stemp1:string;
 begin
   Result:=False;
+  FCancel:=False;
   FStream:={$ifdef USE_UTF8_FILESTREAM}TFileStreamUTF8{$else}TFileStream{$endif}.Create(FileName,fmCreate or fmOpenWrite or fmShareDenyWrite);
   try
     for i:=0 to Count-1 do
@@ -720,6 +734,12 @@ begin
           stemp:=StringReplace(stemp,FFileLineBreak,FLineBreak,[rfReplaceAll]);
         FStream.Write(stemp[1],Length(stemp));
         FStream.Write(FLineBreak[1],Length(FLineBreak));
+        // callback
+        if Assigned(FPoListCallback) then begin
+          FPoListCallback(FCancel,j);
+          if FCancel then
+            break;
+        end;
       end;
       if stemp<>'' then
         Fstream.Write(FLineBreak[1],Length(FLineBreak));
