@@ -18,8 +18,9 @@
         <ComponentName Value="FormPoEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="850"/>
-        <CursorPos X="56" Y="863"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="745"/>
+        <CursorPos X="23" Y="766"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -29,7 +30,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uPoReader"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="682"/>
+        <TopLine Value="681"/>
         <CursorPos X="3" Y="658"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -83,9 +84,8 @@
         <Filename Value="ugoogletranapi.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uGoogleTranApi"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="130"/>
+        <TopLine Value="129"/>
         <CursorPos X="34" Y="172"/>
         <UsageCount Value="38"/>
         <Loaded Value="True"/>
@@ -98,7 +98,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFormTask"/>
         <EditorIndex Value="1"/>
-        <CursorPos Y="87"/>
+        <TopLine Value="65"/>
+        <CursorPos X="10" Y="94"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -377,8 +378,8 @@
         <Filename Value="C:\development\lazarus\lcl\forms.pp"/>
         <UnitName Value="Forms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="552"/>
-        <CursorPos X="15" Y="567"/>
+        <TopLine Value="2266"/>
+        <CursorPos X="14" Y="2294"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -739,127 +740,57 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="13" HistoryIndex="12">
       <Position1>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="87" TopLine="65"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="794" Column="15" TopLine="776"/>
       </Position1>
       <Position2>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="88" TopLine="65"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="824" Column="59" TopLine="805"/>
       </Position2>
       <Position3>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="89" TopLine="65"/>
+        <Filename Value="pocomposer_main.pas"/>
       </Position3>
       <Position4>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="92" TopLine="65"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="259" Column="14" TopLine="231"/>
       </Position4>
       <Position5>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="93" TopLine="65"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="794" Column="15" TopLine="773"/>
       </Position5>
       <Position6>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="95" TopLine="65"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="833" Column="20" TopLine="817"/>
       </Position6>
       <Position7>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="767" TopLine="754"/>
+        <Caret Line="990" Column="18" TopLine="974"/>
       </Position7>
       <Position8>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="768" TopLine="754"/>
+        <Caret Line="997" Column="23" TopLine="983"/>
       </Position8>
       <Position9>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="60" TopLine="43"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1240" Column="18" TopLine="1236"/>
       </Position9>
       <Position10>
-        <Filename Value="uformtask.pas"/>
-        <Caret Line="61" TopLine="43"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1248" Column="23" TopLine="1246"/>
       </Position10>
       <Position11>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="769" TopLine="733"/>
+        <Filename Value="uformtask.pas"/>
+        <Caret Line="94" Column="10" TopLine="65"/>
       </Position11>
       <Position12>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="794" Column="15" TopLine="766"/>
+        <Caret Line="1433" Column="62" TopLine="1389"/>
       </Position12>
       <Position13>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="874" Column="26" TopLine="1120"/>
       </Position13>
-      <Position14>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="989" Column="18" TopLine="981"/>
-      </Position14>
-      <Position15>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="996" Column="23" TopLine="981"/>
-      </Position15>
-      <Position16>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1239" Column="18" TopLine="1265"/>
-      </Position16>
-      <Position17>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1247" Column="23" TopLine="1233"/>
-      </Position17>
-      <Position18>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1433" Column="26" TopLine="1559"/>
-      </Position18>
-      <Position19>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="6" Column="21" TopLine="97"/>
-      </Position19>
-      <Position20>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="106" TopLine="97"/>
-      </Position20>
-      <Position21>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="107" TopLine="97"/>
-      </Position21>
-      <Position22>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="108" TopLine="97"/>
-      </Position22>
-      <Position23>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="109" TopLine="97"/>
-      </Position23>
-      <Position24>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="110" TopLine="97"/>
-      </Position24>
-      <Position25>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="111" TopLine="97"/>
-      </Position25>
-      <Position26>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="112" TopLine="97"/>
-      </Position26>
-      <Position27>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="113" TopLine="97"/>
-      </Position27>
-      <Position28>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="114" TopLine="97"/>
-      </Position28>
-      <Position29>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="129" TopLine="102"/>
-      </Position29>
-      <Position30>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="106" TopLine="93"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -763,8 +763,7 @@ end;
 
 procedure TFormPoEditor.PoListCallback(var Cancel: Boolean; PosInt: Integer);
 begin
-  if FormTaskProg.IncPos then
-    Application.ProcessMessages;
+  FormTaskProg.IncPos;
   Cancel:=FormTaskProg.CancelRes;
 end;
 
@@ -871,7 +870,6 @@ begin
             ShowMessage(e.Message);
           end;
         end;
-        FormTaskProg.Hide;
         // add po item
         patched:=0;
         added:=0;
@@ -930,9 +928,11 @@ begin
 
               end;
             end;
+            FormTaskProg.IncPos;
           end;
       finally
         mPOimport.Free;
+        FormTaskProg.Hide;
       end;
       // refresh listbox
       if added<>0 then begin
@@ -1430,7 +1430,6 @@ begin
             ShowMessage(e.Message);
           end;
         end;
-        FormTaskProg.Hide;
         // make table
         if mPOimport.Count>0 then
           for i:=0 to mPOimport.Count-1 do begin
@@ -1482,9 +1481,11 @@ begin
                 Inc(j);
               end;
             end;
+            FormTaskProg.IncPos;
           end;
       finally
         mPOimport.Free;
+        FormTaskProg.Hide;
       end;
     finally
       ListImp.Free;
