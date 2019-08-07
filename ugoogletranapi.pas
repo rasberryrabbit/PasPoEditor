@@ -168,7 +168,8 @@ begin
           Result:=text;
         end;
         DataRoot.Free;
-      end;
+      end else
+        Result:=hget.ResultString;
     end;
   finally
     hget.Free;
