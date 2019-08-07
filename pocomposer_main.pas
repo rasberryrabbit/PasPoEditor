@@ -466,6 +466,9 @@ begin
           ret:=ComboBoxSrcLang.Text
           else
             ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
+        FormTaskProg.Show;
+        FormTaskProg.Caption:='Translate';
+        Application.ProcessMessages;
         ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
               GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
@@ -487,6 +490,7 @@ begin
         ret:=TranslateError;
         MemoTran.Append(ret);
       end;
+      FormTaskProg.Hide;
     end;
   //end;
 end;
@@ -520,20 +524,24 @@ begin
       else
         memo:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
     if memo.SelLength>0 then
-      msg:=memo.SelText
+      msg:=pchar(memo.SelText)
       else
-        msg:=memo.Text;
+        msg:=pchar(memo.Text);
     if msg<>'' then begin
       try
         if ComboBoxSrcLang.ItemIndex>0 then
           ret:=ComboBoxSrcLang.Text
           else
             ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
+        FormTaskProg.Show;
+        FormTaskProg.Caption:='Translate';
+        Application.ProcessMessages;
         ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-             GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
+             GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg){$endif};
       except
         ret:=TranslateError;
       end;
+      FormTaskProg.Hide;
       MemoTran.Append(pchar(ret));
     end;
   //end;
@@ -559,7 +567,7 @@ begin
     // update last modified
     if (NoteMsg.Pages[i].Controls[0] as TMemo).Modified then begin
       if itemp<>nil then
-        itemp.SetMsgstr(i,(NoteMsg.Pages[i].Controls[0] as TMemo).Text);
+        itemp.SetMsgstr(i,pchar((NoteMsg.Pages[i].Controls[0] as TMemo).Text));
       modified:=True;
     end;
     (NoteMsg.Pages[i].Controls[0] as TMemo).Modified:=False;
