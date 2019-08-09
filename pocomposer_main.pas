@@ -33,7 +33,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, MRUList, ExtendedNotebook, Forms, Controls,
   Graphics, Dialogs, Menus, ActnList, StdActns, ComCtrls, StdCtrls, ExtCtrls,
-  JSONPropStorage, types, contnrs;
+  JSONPropStorage, types, contnrs, uStringListPro;
 
 type
 
@@ -224,7 +224,7 @@ type
   private
     { private declarations }
   public
-    PoList:TStringList; // for measure item height
+    PoList:TStringListProgress; // for measure item height
     mIsFind:Integer;
     MRUManager1:TMRUManager;
     IsOpened:Boolean;
@@ -239,6 +239,7 @@ type
     procedure SetupTranslatorApi;
     { public declarations }
     procedure PoListCallback(var Cancel:Boolean; PosInt:Integer);
+    procedure PoStrListCallback;
   end;
 
 var
@@ -648,16 +649,24 @@ begin
   lastIndex:=-1;
   lastFindIndex:=Point(-1, 0);
 
-  for i:=0 to mPo.Count-1 do begin
-      stemp:=TPoItem(mPo.Items[i]).GetNameStr('msgid');
-      if stemp<>'' then begin
-        PoList.AddObject(stemp, TPoItem(mPo.Items[i]));
-      end;
+  FormTaskProg.Show;
+  FormTaskProg.Caption:='Sort';
+  try
+    for i:=0 to mPo.Count-1 do begin
+        stemp:=TPoItem(mPo.Items[i]).GetNameStr('msgid');
+        if stemp<>'' then begin
+          PoList.AddObject(stemp, TPoItem(mPo.Items[i]));
+        end;
+        FormTaskProg.IncPos;
+    end;
+    if sortcomm then begin
+      PoList.CustomSort(@CustomComment);
+      end else
+        PoList.Sort;
+
+  finally
+    FormTaskProg.Hide;
   end;
-  if sortcomm then begin
-    PoList.CustomSort(@CustomComment);
-    end else
-      PoList.Sort;
   ListBoxPO.Items.Assign(PoList);
 end;
 
@@ -775,6 +784,13 @@ begin
   Cancel:=FormTaskProg.CancelRes;
 end;
 
+procedure TFormPoEditor.PoStrListCallback;
+begin
+  // progress
+  if Assigned(FormTaskProg) and FormTaskProg.Visible then
+    FormTaskProg.IncPos;
+end;
+
 procedure TFormPoEditor.FileOpen1Accept(Sender: TObject);
 var
   i:integer;
@@ -811,6 +827,8 @@ begin
           if stemp<>'' then begin
             PoList.AddObject(stemp,TPoItem(mPo.Items[i]));
           end;
+          // progress
+          FormTaskProg.IncPos;
       end;
       if sortcomm then begin
         PoList.CustomSort(@CustomComment);
@@ -1187,40 +1205,46 @@ begin
         sortcomm:=OptionSortComment.Checked;
         ListBoxPO.Clear;
         PoList.Clear;
-        i:=0;
-        while i<mPo.Count do begin
-          itemp:=TPoItem(mPo[i]);
-          if itemp<>nil then begin
-            stemp1:=itemp.GetNameStr('msgid');
-            if stemp1<>'' then begin
-              IsUntran:=True;
-              k:=0;
-              l:=itemp.GetMsgstrCount;
-              while k<l do begin
-                stemp:=itemp.GetMsgstr(k);
-                if stemp<>'' then begin
-                  IsUntran:=False;
-                  break;
+        FormTaskProg.Show;
+        FormTaskProg.Caption:='Clear Untranslated';
+        try
+          i:=0;
+          while i<mPo.Count do begin
+            itemp:=TPoItem(mPo[i]);
+            if itemp<>nil then begin
+              stemp1:=itemp.GetNameStr('msgid');
+              if stemp1<>'' then begin
+                IsUntran:=True;
+                k:=0;
+                l:=itemp.GetMsgstrCount;
+                while k<l do begin
+                  stemp:=itemp.GetMsgstr(k);
+                  if stemp<>'' then begin
+                    IsUntran:=False;
+                    break;
+                  end;
+                  Inc(k);
                 end;
-                Inc(k);
-              end;
-              if IsUntran then begin
-                j:=mPo.IndexOf(Pointer(itemp));
-                if j<>-1 then begin
-                  mPo.Delete(j);
-                  Continue;
+                if IsUntran then begin
+                  j:=mPo.IndexOf(Pointer(itemp));
+                  if j<>-1 then begin
+                    mPo.Delete(j);
+                    Continue;
+                  end;
+                end else begin
+                  PoList.AddObject(stemp1,itemp);
                 end;
-              end else begin
-                PoList.AddObject(stemp1,itemp);
               end;
             end;
+            Inc(i);
           end;
-          Inc(i);
+          if sortcomm then begin
+            PoList.CustomSort(@CustomComment);
+            end else
+              PoList.Sort;
+        finally
+          FormTaskProg.Hide;
         end;
-        if sortcomm then begin
-          PoList.CustomSort(@CustomComment);
-          end else
-            PoList.Sort;
         ListBoxPO.Items.Assign(PoList);
       end;
   StatusBar1.Panels[1].Text:=IntToStr(ListBoxPO.Count);
@@ -1373,7 +1397,8 @@ var
 begin
   mIsFind:=0;
   IsOpened:=False;
-  PoList:=TStringList.Create;
+  PoList:=TStringListProgress.Create;
+  PoList.callback:=@PoStrListCallback;
   // translate LCL resource strings
   GetLanguageIDs(lng,lngf);
   Translations.TranslateUnitResourceStrings('LCLStrConsts', 'lclstrconsts.%s.po', lng, lngf);
@@ -1449,6 +1474,7 @@ begin
             if stemp<>'' then
               if ListImp.Find(stemp)=nil then
                 ListImp.Add(stemp,mPOimport.Items[i]);
+            FormTaskProg.IncPos;
           end;
         // patch strings
         patched:=0;
