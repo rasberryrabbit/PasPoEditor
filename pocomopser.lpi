@@ -19,7 +19,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
       <RevisionNr Value="5"/>
-      <BuildNr Value="108"/>
+      <BuildNr Value="111"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes>
@@ -145,6 +145,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFormTask"/>
+      </Unit>
+      <Unit>
+        <Filename Value="ustringlistpro.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uStringListPro"/>
       </Unit>
     </Units>
   </ProjectOptions>
