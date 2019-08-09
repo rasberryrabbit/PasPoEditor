@@ -55,7 +55,8 @@ const
   return json array
 *)
 
-  GoogleTranAPI_tranpost_url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=%s&tl=%s&dt=t&q=%s';
+  GoogleTranAPI_Base_url = 'https://translate.googleapis.com/translate_a/single?client=gtx';
+  GoogleTranAPI_tranpost_url = 'sl=%s&tl=%s&dt=t&q=%s';
 
   // languages for nmt model support
   Google_Lang_array : array[0..30] of string =
@@ -222,7 +223,9 @@ begin
     if slang='' then
       slang:='auto';
     surl:=Format(GoogleTranAPI_tranpost_url,[slang,tolang,EncodeURLElement(text)]);
-    if hget.HTTPMethod('GET',surl) then begin
+    hget.Document.Write(surl[1],Length(surl));
+    hget.MimeType := 'application/x-www-form-urlencoded';
+    if hget.HTTPMethod('POST',GoogleTranAPI_Base_url) then begin
       stemp:=TStringStream.Create('');
       stemp.CopyFrom(hget.Document,0);
       s:=stemp.DataString;
