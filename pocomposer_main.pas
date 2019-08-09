@@ -33,7 +33,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, MRUList, ExtendedNotebook, Forms, Controls,
   Graphics, Dialogs, Menus, ActnList, StdActns, ComCtrls, StdCtrls, ExtCtrls,
-  JSONPropStorage, AsyncProcess, types, contnrs;
+  JSONPropStorage, types, contnrs;
 
 type
 

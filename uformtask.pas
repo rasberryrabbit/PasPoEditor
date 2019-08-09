@@ -48,7 +48,7 @@ implementation
 {$R *.lfm}
 
 uses
-  LCLMessageGlue;
+  DefaultTranslator, LCLMessageGlue;
 
 
 { TFormTaskProg }
