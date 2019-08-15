@@ -1018,7 +1018,7 @@ var
 begin
   if Assigned(mPo) then begin
     stemp:=FileOpen1.Dialog.FileName;
-    stemp:=ExtractFilePath(stemp)+ExtractFileNameWithoutExt(stemp)+'_'+DateTimeToStr(Now)+'_export'+ExtractFileExt(stemp);
+    stemp:=ExtractFilePath(stemp)+ExtractFileNameWithoutExt(stemp)+'_'+FormatDateTime('YYYYMMDD_hhnnss',Now)+'_export'+ExtractFileExt(stemp);
     SaveDialogExport.FileName:=stemp;
     if SaveDialogExport.Execute then
       if ListBoxPO.Count>0 then begin
@@ -1278,7 +1278,7 @@ var
 begin
   if Assigned(mPo) then begin
     stemp:=FileOpen1.Dialog.FileName;
-    stemp:=ExtractFilePath(stemp)+ExtractFileNameWithoutExt(stemp)+'_'+DateTimeToStr(Now)+'_export'+ExtractFileExt(stemp);
+    stemp:=ExtractFilePath(stemp)+ExtractFileNameWithoutExt(stemp)+'_'+FormatDateTime('YYYYMMDD_hhnnss',Now)+'_export'+ExtractFileExt(stemp);
     SaveDialogExport.FileName:=stemp;
     if SaveDialogExport.Execute then
       if ListBoxPO.Count>0 then begin
