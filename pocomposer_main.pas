@@ -1012,11 +1012,14 @@ end;
 procedure TFormPoEditor.EditExportSelExecute(Sender: TObject);
 var
   i,j: Integer;
-  newPo : TPoList;
-  itemp,etemp:TPoItem;
+  newPo: TPoList;
+  itemp,etemp: TPoItem;
+  stemp: string;
 begin
   if Assigned(mPo) then begin
-    //SaveDialogExport.FileName:=ExtractFileName(FileSaveAs1.Dialog.FileName);
+    stemp:=FileOpen1.Dialog.FileName;
+    stemp:=ExtractFilePath(stemp)+ExtractFileNameWithoutExt(stemp)+'_'+DateTimeToStr(Now)+'_export'+ExtractFileExt(stemp);
+    SaveDialogExport.FileName:=stemp;
     if SaveDialogExport.Execute then
       if ListBoxPO.Count>0 then begin
         newPo:=TPoList.Create;
@@ -1268,12 +1271,15 @@ end;
 procedure TFormPoEditor.ExportPOExecute(Sender: TObject);
 var
   i,j,l: Integer;
-  newPo : TPoList;
-  itemp,etemp:TPoItem;
-  IsUntran:Boolean;
+  newPo: TPoList;
+  itemp,etemp: TPoItem;
+  IsUntran: Boolean;
+  stemp: string;
 begin
   if Assigned(mPo) then begin
-    SaveDialogExport.FileName:=ExtractFileName(FileSaveAs1.Dialog.FileName);
+    stemp:=FileOpen1.Dialog.FileName;
+    stemp:=ExtractFilePath(stemp)+ExtractFileNameWithoutExt(stemp)+'_'+DateTimeToStr(Now)+'_export'+ExtractFileExt(stemp);
+    SaveDialogExport.FileName:=stemp;
     if SaveDialogExport.Execute then
       if ListBoxPO.Count>0 then begin
         newPo:=TPoList.Create;
@@ -1352,13 +1358,13 @@ end;
 procedure TFormPoEditor.FileSaveAs1BeforeExecute(Sender: TObject);
 begin
   POUpdateMsg;
-  FileSaveAs1.Dialog.FileName:=ExtractFileName(FileOpen1.Dialog.FileName);
+  FileSaveAs1.Dialog.FileName:=FileOpen1.Dialog.FileName;
 end;
 
 procedure TFormPoEditor.FileSaveExecute(Sender: TObject);
 begin
   POUpdateMsg;
-  FileSaveAs1.Dialog.FileName:=ExtractFileName(FileOpen1.Dialog.FileName);
+  FileSaveAs1.Dialog.FileName:=FileOpen1.Dialog.FileName;
   if IsOpened then
     FileSaveAs1Accept(FileSaveAs1)
     else
