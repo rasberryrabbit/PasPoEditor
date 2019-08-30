@@ -1332,9 +1332,17 @@ begin
 end;
 
 procedure TFormPoEditor.FileSaveAs1Accept(Sender: TObject);
+var
+  s: string;
 begin
   if Assigned(mPo) then begin
     try
+      // make backup
+      repeat
+        s:=pchar(TFileSaveAs(Sender).Dialog.FileName)+'.bak';
+      until not FileExists(UTF8Decode(s));
+      RenameFile(UTF8Decode(TFileSaveAs(Sender).Dialog.FileName),UTF8Decode(s));
+
       if OptionUseLinuxLineBreak.Checked then
         mPo.LineBreak:=#10
         else
@@ -1362,6 +1370,8 @@ begin
 end;
 
 procedure TFormPoEditor.FileSaveExecute(Sender: TObject);
+var
+  s:string;
 begin
   POUpdateMsg;
   FileSaveAs1.Dialog.FileName:=FileOpen1.Dialog.FileName;
