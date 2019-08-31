@@ -1338,8 +1338,9 @@ begin
   if Assigned(mPo) then begin
     try
       // make backup
+      s:=pchar(TFileSaveAs(Sender).Dialog.FileName);
       repeat
-        s:=pchar(TFileSaveAs(Sender).Dialog.FileName)+'.bak';
+        s:=s+'.bak';
       until not FileExists(UTF8Decode(s));
       RenameFile(UTF8Decode(TFileSaveAs(Sender).Dialog.FileName),UTF8Decode(s));
 
@@ -1370,8 +1371,6 @@ begin
 end;
 
 procedure TFormPoEditor.FileSaveExecute(Sender: TObject);
-var
-  s:string;
 begin
   POUpdateMsg;
   FileSaveAs1.Dialog.FileName:=FileOpen1.Dialog.FileName;
