@@ -19,7 +19,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
       <RevisionNr Value="8"/>
-      <BuildNr Value="145"/>
+      <BuildNr Value="153"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes>
@@ -64,13 +64,13 @@
         <WorkingDirectory Value="F:\delphiprj-new\lr_proj\pocompo"/>
       </local>
       <FormatVersion Value="2"/>
-      <Modes Count="1">
-        <Mode0 Name="default">
+      <Modes>
+        <Mode Name="default">
           <local>
             <CommandLineParams Value="strings.po"/>
             <WorkingDirectory Value="F:\delphiprj-new\lr_proj\pocompo"/>
           </local>
-        </Mode0>
+        </Mode>
       </Modes>
     </RunParams>
     <RequiredPackages Count="4">
@@ -179,16 +179,16 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="3">
-      <Item1>
+    <Exceptions>
+      <Item>
         <Name Value="EAbort"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Name Value="ECodetoolError"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Name Value="EFOpenError"/>
-      </Item3>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>
