@@ -19,7 +19,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
       <RevisionNr Value="8"/>
-      <BuildNr Value="153"/>
+      <BuildNr Value="157"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes>
@@ -73,19 +73,19 @@
         </Mode>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="4">
-      <Item1>
+    <RequiredPackages>
+      <Item>
         <PackageName Value="LazControls"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <PackageName Value="IDEIntf"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <PackageName Value="SynEdit"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <PackageName Value="LCL"/>
-      </Item4>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>
