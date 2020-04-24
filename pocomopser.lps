@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1357"/>
-        <CursorPos Y="1374"/>
+        <TopLine Value="1424"/>
+        <CursorPos X="66" Y="1440"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -716,7 +716,8 @@
         <Filename Value="C:\development\lazarus\components\lazutils\lazutf8.pas"/>
         <UnitName Value="LazUTF8"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="118"/>
+        <TopLine Value="508"/>
+        <CursorPos X="10" Y="63"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -773,43 +774,15 @@
         <CursorPos X="4" Y="35"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="C:\development\lazarus\components\lazutils\winlazutf8.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="554"/>
+        <CursorPos X="19" Y="570"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="975" Column="23" TopLine="948"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1021" Column="101" TopLine="993"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1281" Column="78" TopLine="1253"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1537" Column="23" TopLine="1510"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1620" Column="22" TopLine="1593"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="975" Column="23" TopLine="959"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1021" Column="112" TopLine="993"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1052" Column="66" TopLine="1047"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-      </Position>
+    <JumpHistory HistoryIndex="22">
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="43" Column="13" TopLine="15"/>
@@ -893,6 +866,14 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="190" Column="15" TopLine="174"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1440" Column="43" TopLine="1424"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1440" Column="43" TopLine="1424"/>
       </Position>
     </JumpHistory>
     <RunParams>
