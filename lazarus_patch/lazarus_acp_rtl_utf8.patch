@@ -1,0 +1,375 @@
+Index: components/lazutils/fileutil.inc
+===================================================================
+--- components/lazutils/fileutil.inc	(revision 63052)
++++ components/lazutils/fileutil.inc	(working copy)
+@@ -325,7 +325,11 @@
+ 
+     // Don't even try to copy to a subdirectory of SourceDir.
+     {$ifdef CaseInsensitiveFilenames}
++      {$if defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+       if AnsiStartsText(Searcher.FSourceDir, Searcher.FTargetDir) then Exit;
++      {$else ACP_RTL}
++      if Utf8StartsText(Searcher.FSourceDir, Searcher.FTargetDir) then Exit;
++      {$endif}
+     {$ELSE}
+       if AnsiStartsStr(Searcher.FSourceDir, Searcher.FTargetDir) then Exit;
+     {$ENDIF}
+Index: components/lazutils/lazutf8.pas
+===================================================================
+--- components/lazutils/lazutf8.pas	(revision 63052)
++++ components/lazutils/lazutf8.pas	(working copy)
+@@ -211,6 +211,9 @@
+ procedure ReplaceSubstring(var s: string; StartPos, Count: SizeInt;
+                            const Insertion: string);
+ 
++// For ACP_RTL_UTF8 string codepage conversion
++function _CodeUTF8(const s:RawByteString):RawByteString;
++
+ implementation
+ 
+ uses
+@@ -232,6 +235,14 @@
+   Result:=true;
+ end;
+ 
++function _CodeUTF8(const s:RawByteString):RawByteString;
++begin
++  Result:=s;
++  {$ifdef ACP_RTL_UTF8}
++  SetCodePage(Result,CP_UTF8,False);
++  {$endif}
++end;
++
+ {$IFDEF windows}
+   {$i winlazutf8.inc}
+ {$ELSE}
+@@ -3405,7 +3416,7 @@
+ 
+ function UTF8CompareStrCollated(const S1, S2: string): PtrInt; {$IFnDEF ACP_RTL}inline;{$endif}
+ begin
+-  {$IFDEF ACP_RTL}
++  {$IF defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+     //Only with this define AnsiCompareStr does not point to Utf8CompareStr
+     Result := AnsiCompareStr(UTF8ToSys(S1), UTF8ToSys(S2));
+   {$ELSE}
+Index: components/lazutils/lazutf8classes.pas
+===================================================================
+--- components/lazutils/lazutf8classes.pas	(revision 63052)
++++ components/lazutils/lazutf8classes.pas	(working copy)
+@@ -19,7 +19,12 @@
+ 
+   { TFileStreamUTF8 }
+ 
+-  TFileStreamUTF8 = TFileStream;
++  TFileStreamUTF8 = class(TFileStream)
++  public
++    // For ACP_RTL_UTF8
++    constructor Create(const AFileName: string; Mode: Word);
++    constructor Create(const AFileName: string; Mode: Word; Rights: Cardinal);
++  end;
+ 
+   { TStringListUTF8 }
+ 
+@@ -91,6 +96,19 @@
+   Result:=CompareStr(UTF8LowerCase(List[Index1]),UTF8LowerCase(List[Index2]));
+ end;
+ 
++{ TFileStreamUTF8 }
++
++constructor TFileStreamUTF8.Create(const AFileName: string; Mode: Word);
++begin
++  inherited Create(_CodeUTF8(AFileName), Mode, 438);
++end;
++
++constructor TFileStreamUTF8.Create(const AFileName: string; Mode: Word;
++  Rights: Cardinal);
++begin
++  inherited Create(_CodeUTF8(AFileName), Mode, Rights);
++end;
++
+ { TMemoryStreamUTF8 }
+ 
+ procedure TMemoryStreamUTF8.LoadFromFile(const FileName: string);
+Index: components/lazutils/lazutils_defines.inc
+===================================================================
+--- components/lazutils/lazutils_defines.inc	(revision 63052)
++++ components/lazutils/lazutils_defines.inc	(working copy)
+@@ -4,6 +4,7 @@
+ {$undef UTF8_RTL}  // FPC >= 2.7.1 with codepages and default string = CP_UTF8
+ {$undef ACP_RTL}   // FPC >= 2.7.1 with codepages and default string = CP_ACP
+ {$undef NO_CP_RTL} // FPC < 2.7.1 before string codepages
++{$undef ACP_RTL_UTF8}
+ 
+ 
+ {$ifdef FPC_HAS_CPSTRING}
+@@ -11,6 +12,10 @@
+     {$define UTF8_RTL}
+   {$else DisableUTF8RTL}
+     {$define ACP_RTL}
++    // tweak
++    {$if defined(WINDOWS)}
++    {$define ACP_RTL_UTF8}
++    {$endif}
+   {$endif DisableUTF8RTL}
+ {$else FPC_HAS_CPSTRING}
+   {$define NO_CP_RTL}
+Index: components/lazutils/winlazfileutils.inc
+===================================================================
+--- components/lazutils/winlazfileutils.inc	(revision 63052)
++++ components/lazutils/winlazfileutils.inc	(working copy)
+@@ -1,6 +1,5 @@
+ {%MainUnit lazfileutils.pas}
+ 
+-
+ function ReadAllLinks(const Filename: string;
+                       ExceptionOnError: boolean): string;
+ begin
+@@ -43,42 +42,42 @@
+ 
+ function FileOpenUtf8(Const FileName : string; Mode : Integer) : THandle;
+ begin
+-  Result := SysUtils.FileOpen(FileName, Mode);
++  Result := SysUtils.FileOpen(_CodeUTF8(Filename), Mode);
+ end;
+ 
+ function FileCreateUTF8(Const FileName : string) : THandle;
+ begin
+-  Result := FileCreateUtf8(FileName, fmShareExclusive, 0);
++  Result := FileCreateUtf8(_CodeUTF8(Filename), fmShareExclusive, 0);
+ end;
+ 
+ function FileCreateUTF8(Const FileName : string; Rights: Cardinal) : THandle;
+ begin
+-  Result := FileCreateUtf8(FileName, fmShareExclusive, Rights);
++  Result := FileCreateUtf8(_CodeUTF8(Filename), fmShareExclusive, Rights);
+ end;
+ 
+ function FileCreateUtf8(Const FileName : string;  ShareMode: Integer; Rights: Cardinal) : THandle;
+ begin
+-  Result := SysUtils.FileCreate(FileName, ShareMode, Rights);
++  Result := SysUtils.FileCreate(_CodeUTF8(Filename), ShareMode, Rights);
+ end;
+ 
+ function FileGetAttrUtf8(const FileName: String): Longint;
+ begin
+-  Result := SysUtils.FileGetAttr(FileName);
++  Result := SysUtils.FileGetAttr(_CodeUTF8(Filename));
+ end;
+ 
+ function FileSetAttrUtf8(const Filename: String; Attr: longint): Longint;
+ begin
+-  Result := SysUtils.FileSetAttr(FileName, Attr);
++  Result := SysUtils.FileSetAttr(_CodeUTF8(Filename), Attr);
+ end;
+ 
+ function FileAgeUtf8(const FileName: String): Longint;
+ begin
+-  Result := SysUtils.FileAge(FileName);
++  Result := SysUtils.FileAge(_CodeUTF8(Filename));
+ end;
+ 
+ function FileSetDateUtf8(const FileName: String; Age: Longint): Longint;
+ begin
+-  Result := SysUtils.FileSetDate(FileName, Age);
++  Result := SysUtils.FileSetDate(_CodeUTF8(Filename), Age);
+ end;
+ 
+ function FileSizeUtf8(const Filename: string): int64;
+@@ -85,7 +84,7 @@
+ var
+   R: TSearchRec;
+ begin
+-  if SysUtils.FindFirst(FileName, faAnyFile, R) = 0 then
++  if SysUtils.FindFirst(_CodeUTF8(Filename), faAnyFile, R) = 0 then
+   begin
+     Result := R.Size;
+     SysUtils.FindClose(R);
+@@ -96,22 +95,22 @@
+ 
+ function CreateDirUtf8(const NewDir: String): Boolean;
+ begin
+-  Result := SysUtils.CreateDir(NewDir);
++  Result := SysUtils.CreateDir(_CodeUTF8(NewDir));
+ end;
+ 
+ function RemoveDirUtf8(const Dir: String): Boolean;
+ begin
+-  Result := SysUtils.RemoveDir(Dir);
++  Result := SysUtils.RemoveDir(_CodeUTF8(Dir));
+ end;
+ 
+ function DeleteFileUtf8(const FileName: String): Boolean;
+ begin
+-  Result := SysUtils.DeleteFile(FileName);
++  Result := SysUtils.DeleteFile(_CodeUTF8(Filename));
+ end;
+ 
+ function RenameFileUtf8(const OldName, NewName: String): Boolean;
+ begin
+-  Result := SysUtils.RenameFile(OldName, NewName);
++  Result := SysUtils.RenameFile(_CodeUTF8(OldName), _CodeUTF8(NewName));
+ end;
+ 
+ function SetCurrentDirUtf8(const NewDir: String): Boolean;
+@@ -125,7 +124,7 @@
+ 
+ function FindFirstUtf8(const Path: string; Attr: Longint; out Rslt: TSearchRec): Longint;
+ begin
+-  Result := SysUtils.FindFirst(Path, Attr, Rslt);
++  Result := SysUtils.FindFirst(_CodeUTF8(Path), Attr, Rslt);
+ end;
+ 
+ function FindNextUtf8(var Rslt: TSearchRec): Longint;
+@@ -413,17 +412,17 @@
+ 
+ function FileExistsUTF8(const Filename: string): boolean;
+ begin
+-  Result := SysUtils.FileExists(Filename);
++  Result := SysUtils.FileExists(_CodeUTF8(Filename));
+ end;
+ 
+ function DirectoryExistsUTF8(const Directory: string): boolean;
+ begin
+-  Result := SysUtils.DirectoryExists(Directory);
++  Result := SysUtils.DirectoryExists(_CodeUTF8(Directory));
+ end;
+ 
+ function FileIsExecutable(const AFilename: string): boolean;
+ begin
+-  Result:=FileExistsUTF8(AFilename);
++  Result:=FileExistsUTF8(_CodeUTF8(AFilename));
+ end;
+ 
+ procedure CheckIfFileIsExecutable(const AFilename: string);
+Index: components/lazutils/winlazutf8.inc
+===================================================================
+--- components/lazutils/winlazutf8.inc	(revision 63052)
++++ components/lazutils/winlazutf8.inc	(working copy)
+@@ -212,10 +212,10 @@
+   else
+   begin
+     if (Param <= ArgsWCount) then
+-      {$IFDEF ACP_RTL}
++      {$IF defined(ACP_RTL) and not defined(ACP_RTL_UTF8)}
+       Result := String(UnicodeString(ArgsW[Param]))
+       {$ELSE}
+-      Result := Utf8Encode(ArgsW[Param])
++      Result := pchar(Utf8Encode(ArgsW[Param]))
+       {$ENDIF ACP_RTL}
+     else
+       Result := '';
+Index: lcl/include/sysenvapis_win.inc
+===================================================================
+--- lcl/include/sysenvapis_win.inc	(revision 63052)
++++ lcl/include/sysenvapis_win.inc	(working copy)
+@@ -153,8 +153,8 @@
+     if FindBrowserExecutable('rundll32', AnsiBrowser) then
+     begin
+       AParams := 'url.dll,FileProtocolHandler "%s"';
+-      {$IFnDEF ACP_RTL}
+-      ABrowser := Utf8ToUTF16(AnsiBrowser);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      ABrowser := pchar(Utf8ToUTF16(AnsiBrowser));
+       {$else}
+       ABrowser := WideString(AnsiBrowser);
+       {$ENDIF ACP_RTL}
+@@ -188,9 +188,9 @@
+     Result := FindPredefinedBrowser(AnsiBrowser, AnsiParams);
+     if Result then
+     begin
+-      {$IFnDEF ACP_RTL}
+-      ABrowser := Utf8ToUtf16(AnsiBrowser);
+-      AParams := Utf8ToUtf16(AnsiParams);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      ABrowser := pchar(Utf8ToUtf16(AnsiBrowser));
++      AParams := pchar(Utf8ToUtf16(AnsiParams));
+       {$else}
+       ABrowser := WideString(AnsiBrowser);
+       AParams := WideString(AnsiParams);
+@@ -205,8 +205,8 @@
+   WideBrowser, WideParams: WideString;
+ begin
+   Result := FindDefaultBrowserWide(WideBrowser, WideParams);
+-  ABrowser := Utf16ToUtf8(WideBrowser);
+-  AParams := Utf16ToUtf8(WideParams);
++  ABrowser := pchar(Utf16ToUtf8(WideBrowser));
++  AParams := pchar(Utf16ToUtf8(WideParams));
+ end;
+ 
+ function FindDefaultBrowser(out ABrowser, AParams: String): Boolean;
+@@ -264,14 +264,14 @@
+       //at least FireFox does not like -url -osint "%s" for local files, it wants "%s"
+       //if IsFileUri and IsLocalWithAnchor then
+       //  AParams := '"%s"';
+-      {$IFnDEF ACP_RTL}
+-      AParamsUtf8 := Utf16ToUtf8(AParams);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      AParamsUtf8 := pchar(Utf16ToUtf8(AParams));
+       {$ELSE}
+       AParamsUtf8 := AParams;
+       {$ENDIF ACP_RTL}
+       AParamsUtf8 := Format(AParamsUtf8,[AURL]);
+-      {$IFnDEF ACP_RTL}
+-      AParams := Utf8ToUtf16(AParamsUtf8);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      AParams := pchar(Utf8ToUtf16(AParamsUtf8));
+       {$ELSE}
+       AParams := WideString(AParamsUtf8);
+       {$ENDIF ACP_RTL}
+@@ -281,8 +281,8 @@
+       //file:// needs to be quoted if filename contains spaces
+       if IsFileURI and (Pos(#32, AURL) > 0) {and (not LaunchWinAppBrowserCanHandleParams(ABrowser))} then
+         AURL := '"' + AURL + '"';
+-      {$IFnDEF ACP_RTL}
+-      AParams := Utf8ToUtf16(AURL);
++      {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++      AParams := pchar(Utf8ToUtf16(AURL));
+       {$ELSE}
+       AParams := WideString(AURL);
+       {$ENDIF ACP_RTL}
+@@ -295,8 +295,8 @@
+   end  //FindDefaultBrowserWide
+   else
+   begin
+-    {$IFnDEF ACP_RTL}
+-    AParams := Utf8ToUtf16(AURL);
++    {$IF not defined(ACP_RTL) or defined(ACP_RTL_UTF8)}
++    AParams := pchar(Utf8ToUtf16(AURL));
+     {$ELSE}
+     AParams := WideString(AURL);
+     {$ENDIF ACP_RTL}
+Index: lcl/lcltranslator.pas
+===================================================================
+--- lcl/lcltranslator.pas	(revision 63052)
++++ lcl/lcltranslator.pas	(working copy)
+@@ -129,7 +129,7 @@
+   function GetLCFileName: string;
+   begin
+     if LocaleFileName = '' then
+-      Result := ExtractFileName(ParamStrUTF8(0))
++      Result := pchar(ExtractFileName(ParamStrUTF8(0)))
+     else
+       Result := LocaleFileName;
+   end;
+@@ -140,7 +140,7 @@
+ 
+   FoundLang := LangID;
+ 
+-  AppDir := ExtractFilePath(ParamStrUTF8(0));
++  AppDir := pchar(ExtractFilePath(ParamStrUTF8(0)));
+   LCFileName := ChangeFileExt(GetLCFileName, LCExt);
+ 
+   if Dir<>'' then
+Index: lcl/xmlpropstorage.pas
+===================================================================
+--- lcl/xmlpropstorage.pas	(revision 63052)
++++ lcl/xmlpropstorage.pas	(working copy)
+@@ -180,7 +180,7 @@
+   Res: UnicodeString;
+ begin
+   Res:=FXML.GetValue(Utf8Decode(FixPath(Section)+'/'+Ident), Utf8Decode(TheDefault));
+-  Result := Utf8Encode(Res);
++  Result := PChar(Utf8Encode(Res));
+   //debugln('TCustomXMLPropStorage.DoReadString Section="',Section,'" Ident="',Ident,'" Result=',Result);
+ end;
+ 
