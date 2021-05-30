@@ -254,7 +254,7 @@ implementation
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}uGoogleTranApi{$endif}, LazUTF8, udlgprop,
   gettext, Translations, DefaultTranslator, udlgshowraw, udlgBingApiInfo,
-  uFormTask;
+  uFormTask, ulibretranslate;
 
 var
   mPo:TPoList=nil;
@@ -471,7 +471,7 @@ begin
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
         ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-              GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
+              LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
@@ -538,7 +538,7 @@ begin
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
         ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-             GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg){$endif};
+             LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg){$endif};
       except
         ret:=TranslateError;
       end;
@@ -751,7 +751,8 @@ begin
       {$else}
       Langs:=TStringList.Create;
       try
-        GoogleTranAPI_GetLangs(Langs);
+        //GoogleTranAPI_GetLangs(Langs);
+        LibreTranAPI_GetLangs(Langs);
       except
       end;
       {$endif}

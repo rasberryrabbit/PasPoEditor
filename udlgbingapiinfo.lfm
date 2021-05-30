@@ -9,7 +9,7 @@ object FormBingInfo: TFormBingInfo
   ClientHeight = 140
   ClientWidth = 436
   Position = poOwnerFormCenter
-  LCLVersion = '1.5'
+  LCLVersion = '2.1.0.0'
   object EditBingAppName: TEdit
     Left = 80
     Height = 23
