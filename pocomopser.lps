@@ -65,7 +65,7 @@
         <UnitName Value="uGoogleTranApi"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="227"/>
+        <TopLine Value="210"/>
         <CursorPos X="9" Y="251"/>
         <UsageCount Value="57"/>
         <Loaded Value="True"/>
@@ -778,7 +778,7 @@
       <Unit>
         <Filename Value="ulibretranslate.pas"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="210"/>
+        <TopLine Value="209"/>
         <CursorPos X="47" Y="175"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
