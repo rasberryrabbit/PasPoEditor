@@ -313,6 +313,10 @@ msgstr ""
 msgid "Copy Translated text from bottom window"
 msgstr ""
 
+#: tformpoeditor.translatedogoogle.caption
+msgid "TranslateDoGoogle"
+msgstr ""
+
 #: tformpoeditor.translatemsg.caption
 msgid "Translate Msg"
 msgstr ""

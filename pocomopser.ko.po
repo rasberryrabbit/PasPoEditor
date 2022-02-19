@@ -379,6 +379,10 @@ msgctxt "tformpoeditor.translatecopy.hint"
 msgid "Copy Translated text from bottom window"
 msgstr "아래 창에서 번역된 문자열을 복사"
 
+#: tformpoeditor.translatedogoogle.caption
+msgid "TranslateDoGoogle"
+msgstr ""
+
 #: tformpoeditor.translatemsg.caption
 msgctxt "tformpoeditor.translatemsg.caption"
 msgid "Translate Msg"

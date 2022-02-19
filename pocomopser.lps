@@ -18,7 +18,9 @@
         <ComponentName Value="FormPoEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="58"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="437"/>
+        <CursorPos X="59" Y="454"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -28,7 +30,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uPoReader"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="710"/>
+        <TopLine Value="716"/>
         <CursorPos X="34" Y="734"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -47,7 +49,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="183"/>
+        <UsageCount Value="184"/>
       </Unit>
       <Unit>
         <Filename Value="udlgshowraw.pas"/>
@@ -57,17 +59,16 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="121"/>
+        <UsageCount Value="122"/>
       </Unit>
       <Unit>
         <Filename Value="ugoogletranapi.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uGoogleTranApi"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="210"/>
+        <TopLine Value="219"/>
         <CursorPos X="9" Y="251"/>
-        <UsageCount Value="57"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -80,7 +81,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="79"/>
         <CursorPos X="21" Y="51"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="43"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -90,7 +91,7 @@
         <UnitName Value="uStringListPro"/>
         <EditorIndex Value="1"/>
         <CursorPos X="15" Y="51"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -378,8 +379,8 @@
         <Filename Value="C:\development\lazarus\lcl\dialogs.pp"/>
         <UnitName Value="Dialogs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="622"/>
-        <CursorPos X="14" Y="639"/>
+        <TopLine Value="450"/>
+        <CursorPos X="15" Y="455"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -393,8 +394,8 @@
       <Unit>
         <Filename Value="C:\development\lazarus\lcl\include\finddialog.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="536"/>
-        <CursorPos X="3" Y="540"/>
+        <TopLine Value="561"/>
+        <CursorPos X="3" Y="565"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -778,7 +779,7 @@
       <Unit>
         <Filename Value="ulibretranslate.pas"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="209"/>
+        <TopLine Value="216"/>
         <CursorPos X="47" Y="175"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
@@ -791,7 +792,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="4">
+    <JumpHistory HistoryIndex="15">
       <Position>
         <Filename Value="ulibretranslate.pas"/>
         <Caret Line="223" Column="12" TopLine="206"/>
@@ -811,6 +812,50 @@
       <Position>
         <Filename Value="ulibretranslate.pas"/>
         <Caret Line="219" Column="68" TopLine="202"/>
+      </Position>
+      <Position>
+        <Filename Value="ugoogletranapi.pas"/>
+        <Caret Line="251" Column="9" TopLine="210"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1978" Column="17" TopLine="1962"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="180" Column="30" TopLine="158"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1163" Column="3" TopLine="1160"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="222" Column="23" TopLine="197"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="541" Column="30" TopLine="546"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="542" Column="30" TopLine="542"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="547" Column="75" TopLine="522"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1449" Column="12" TopLine="1431"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="241" Column="15" TopLine="225"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="773" Column="13" TopLine="741"/>
       </Position>
     </JumpHistory>
     <RunParams>

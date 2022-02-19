@@ -19,7 +19,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="5"/>
       <RevisionNr Value="10"/>
-      <BuildNr Value="161"/>
+      <BuildNr Value="164"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes>
@@ -151,6 +151,9 @@
     </SearchPaths>
     <CodeGeneration>
       <SmartLinkUnit Value="True"/>
+      <Optimizations>
+        <OptimizationLevel Value="2"/>
+      </Optimizations>
     </CodeGeneration>
     <Linking>
       <Debugging>
