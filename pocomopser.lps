@@ -18,8 +18,9 @@
         <ComponentName Value="FormPoEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="437"/>
-        <CursorPos X="59" Y="454"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="449"/>
+        <CursorPos X="15" Y="455"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -777,9 +778,8 @@
       </Unit>
       <Unit>
         <Filename Value="ulibretranslate.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="61"/>
+        <TopLine Value="142"/>
         <CursorPos Y="58"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
