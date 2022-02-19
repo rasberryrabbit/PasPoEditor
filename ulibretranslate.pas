@@ -55,7 +55,7 @@ const
   return json array
 *)
 
-  LibreTranAPI_Base = 'https://libretranslate.com/';
+  LibreTranAPI_Base = 'https://translate.argosopentech.com/'; // 'https://libretranslate.com/';
   LibreTranAPI_Detect = LibreTranAPI_Base+'detect';
   LibreTranAPI_Languages = LibreTranAPI_Base+'languages';
   LibreTranAPI_Tran = LibreTranAPI_Base+'translate';
