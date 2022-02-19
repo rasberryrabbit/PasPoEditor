@@ -40,6 +40,8 @@ type
   { TFormPoEditor }
 
   TFormPoEditor = class(TForm)
+    MenuItem49: TMenuItem;
+    TranslateDoGoogle: TAction;
     FileSave: TAction;
     MenuItem46: TMenuItem;
     MenuItem47: TMenuItem;
@@ -217,6 +219,7 @@ type
     procedure SearchNextExecute(Sender: TObject);
     procedure Splitter1Moved(Sender: TObject);
     procedure TranslateCopyExecute(Sender: TObject);
+    procedure TranslateDoGoogleExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
     procedure TranslateSetupExecute(Sender: TObject);
     procedure TranslateText1Execute(Sender: TObject);
@@ -446,6 +449,12 @@ begin
   end;
 end;
 
+procedure TFormPoEditor.TranslateDoGoogleExecute(Sender: TObject);
+begin
+  TranslateDoGoogle.Checked:=not TranslateDoGoogle.Checked;
+  SetupTranslatorApi;
+end;
+
 procedure TFormPoEditor.TranslateMsgExecute(Sender: TObject);
 var
   msg,ret:string;
@@ -470,8 +479,12 @@ begin
         FormTaskProg.Show;
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
-        ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-              LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
+        //ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
+        //      LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
+        if TranslateDoGoogle.Checked then
+          ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg))
+          else
+            ret:=LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
@@ -537,8 +550,12 @@ begin
         FormTaskProg.Show;
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
-        ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-             LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg){$endif};
+        //ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
+        //     LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg){$endif};
+        if TranslateDoGoogle.Checked then
+          ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg)
+          else
+            ret:=LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
       except
         ret:=TranslateError;
       end;
@@ -751,8 +768,10 @@ begin
       {$else}
       Langs:=TStringList.Create;
       try
-        //GoogleTranAPI_GetLangs(Langs);
-        LibreTranAPI_GetLangs(Langs);
+        if TranslateDoGoogle.Checked then
+          GoogleTranAPI_GetLangs(Langs)
+          else
+            LibreTranAPI_GetLangs(Langs);
       except
       end;
       {$endif}
