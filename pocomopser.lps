@@ -18,7 +18,6 @@
         <ComponentName Value="FormPoEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="437"/>
         <CursorPos X="59" Y="454"/>
         <UsageCount Value="201"/>
@@ -778,9 +777,10 @@
       </Unit>
       <Unit>
         <Filename Value="ulibretranslate.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="216"/>
-        <CursorPos X="47" Y="175"/>
+        <TopLine Value="61"/>
+        <CursorPos Y="58"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit>
@@ -792,7 +792,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="15">
+    <JumpHistory HistoryIndex="14">
       <Position>
         <Filename Value="ulibretranslate.pas"/>
         <Caret Line="223" Column="12" TopLine="206"/>
@@ -832,10 +832,6 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="222" Column="23" TopLine="197"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="541" Column="30" TopLine="546"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
