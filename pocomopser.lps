@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="449"/>
-        <CursorPos X="15" Y="455"/>
+        <TopLine Value="1623"/>
+        <CursorPos X="19" Y="1645"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -49,7 +49,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="184"/>
+        <UsageCount Value="185"/>
       </Unit>
       <Unit>
         <Filename Value="udlgshowraw.pas"/>
@@ -59,7 +59,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="122"/>
+        <UsageCount Value="123"/>
       </Unit>
       <Unit>
         <Filename Value="ugoogletranapi.pas"/>
@@ -68,7 +68,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="219"/>
         <CursorPos X="9" Y="251"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -81,7 +81,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="79"/>
         <CursorPos X="21" Y="51"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="44"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -91,7 +91,7 @@
         <UnitName Value="uStringListPro"/>
         <EditorIndex Value="1"/>
         <CursorPos X="15" Y="51"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -792,7 +792,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="14">
+    <JumpHistory HistoryIndex="16">
       <Position>
         <Filename Value="ulibretranslate.pas"/>
         <Caret Line="223" Column="12" TopLine="206"/>
@@ -852,6 +852,14 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="773" Column="13" TopLine="741"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="203" Column="25" TopLine="188"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1647" Column="24" TopLine="1619"/>
       </Position>
     </JumpHistory>
     <RunParams>
