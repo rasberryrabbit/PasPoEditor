@@ -1621,7 +1621,7 @@ procedure TFormPoEditor.ListBoxPODrawItem(Control: TWinControl; Index: Integer;
   ARect: TRect; State: TOwnerDrawState);
 var
   itemp:TPoItem;
-  scmt, sid, smsg, sdisp : string;
+  scmt, sid, smsg, sdisp, sctxt: string;
   nHeight,iHeight,i,j:Integer;
   iCanvas:TCanvas;
   HasValue:Boolean;
@@ -1631,22 +1631,24 @@ begin
   itemp := TPoItem(TListBox(Control).Items.Objects[Index]);
   // disp text
   if itemp<>nil then begin
-    sdisp:=itemp.GetNameStr('msgctxt');
+    sdisp:=itemp.GetNameStr('#.');
     if sdisp<>'' then
-      scmt:='msgctxt '+sdisp
+      scmt:='#. '+sdisp
       else begin
-        sdisp:=itemp.GetNameStr('#.');
+        sdisp:=itemp.GetNameStr('#:');
         if sdisp<>'' then
-          scmt:='#. '+sdisp
-          else begin
-            sdisp:=itemp.GetNameStr('#:');
-            if sdisp<>'' then
-              scmt:='#: '+sdisp
-              else
-                scmt:=itemp.StrItem[0];
-          end;
+          scmt:='#: '+sdisp
+          else
+            scmt:=itemp.StrItem[0];
       end;
-    scmt:=scmt+Format(' (%d)',[Index]);
+    sctxt:=itemp.GetNameStr('msgctxt');
+    if (sctxt<>'') and (sctxt<>sdisp) then begin
+      if scmt<>'' then
+        scmt:=scmt+NextLine;
+      scmt:=scmt+'msgctxt "'+sctxt+'"';
+    end;
+
+    scmt:=Format('(%d) %s',[Index,scmt]);
     sid:=itemp.GetNameStr('msgid');
     sid:=StringReplace(sid,uLineBreak,NextLine,[rfReplaceAll]);
     i:=itemp.GetMsgstrCount;
