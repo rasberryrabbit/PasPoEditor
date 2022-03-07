@@ -338,29 +338,6 @@ begin
   end;
 end;
 
-function CheckConfigFile:Boolean;
-var
-  f:TStringList;
-  fname,vstr:string;
-  i:integer;
-begin
-  try
-    fname:=ChangeFileExt(ParamStr(0),'.ini');
-    Result:=FileExists(fname);
-    if Result then begin
-      f:=TStringList.Create;
-      try
-        f.LoadFromFile(fname);
-        DisableTranslator:=StrToIntDef(f.Values['skiptran'],0)<>0;
-        uLibreBaseURL:=f.Values['librebaseurl'];
-      finally
-        f.Free;
-      end;
-    end;
-  except
-    Result:=False;
-  end;
-end;
 
 function CustomComment(List: TStringList; Index1, Index2: Integer): Integer;
 var
@@ -666,6 +643,9 @@ begin
     Panel1.Height:=FormDataJson.ReadInteger('Panel1Height', Panel1.Height);
     MemoId.Height:=FormDataJson.ReadInteger('MemoOldHeight', MemoId.Height);
     OptionSortComment.Checked:=FormDataJson.ReadBoolean('CommentSort', OptionSortComment.Checked);
+
+    uLibreBaseURL:=FormDataJson.ReadString('librebaseurl','');
+    DisableTranslator:=FormDataJson.ReadBoolean('skiptran',False);
   except
   end;
 end;
@@ -678,6 +658,8 @@ begin
   FormDataJson.WriteInteger('Panel1Height', Panel1.Height);
   FormDataJson.WriteInteger('MemoOldHeight', MemoId.Height);
   FormDataJson.WriteBoolean('CommentSort', OptionSortComment.Checked);
+  FormDataJson.WriteString('librebaseurl',uLibreBaseURL);
+  FormDataJson.WriteBoolean('skiptran',DisableTranslator);
   try
     FormDataJson.Save;
   except
@@ -1395,7 +1377,6 @@ begin
   // translate LCL resource strings
   GetLanguageIDs(lng,lngf);
   Translations.TranslateUnitResourceStrings('LCLStrConsts', 'lclstrconsts.%s.po', lng, lngf);
-  CheckConfigFile;
   LoadMainFormData;
   MRUManager1:=TMRUManager.Create(self);
   MRUManager1.RecentMenu:=MenuItemRecent;
