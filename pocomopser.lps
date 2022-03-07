@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="335"/>
-        <CursorPos Y="348"/>
+        <TopLine Value="1363"/>
+        <CursorPos Y="1380"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -792,38 +792,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="237" Column="16" TopLine="220"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="687" Column="3" TopLine="684"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="250" Column="8" TopLine="220"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="361" TopLine="344"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="257" Column="76" TopLine="229"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="269" TopLine="241"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="506" Column="7" TopLine="492"/>
-      </Position>
+    <JumpHistory HistoryIndex="24">
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="505" Column="7" TopLine="491"/>
@@ -911,14 +880,26 @@
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="341" Column="25" TopLine="313"/>
       </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="234" Column="28" TopLine="222"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="685" Column="39" TopLine="674"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="341" TopLine="337"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>
     </RunParams>
     <HistoryLists>
-      <List Name="WorkingDirectory" Type="File" Count="2">
-        <Item2 Value="F:\delphiprj-new\lr_proj\pocompo"/>
+      <List Name="WorkingDirectory" Type="File" Count="1">
+        <Item1 Value="F:\delphiprj-new\lr_proj\pocompo"/>
       </List>
       <List Name="LaunchingApplication" Type="File" Count="1">
         <Item1 Value="C:\Windows\system32\cmd.exe /C ${TargetCmdLine}"/>
