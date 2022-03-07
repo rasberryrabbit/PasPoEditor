@@ -314,7 +314,7 @@ msgid "Copy Translated text from bottom window"
 msgstr ""
 
 #: tformpoeditor.translatedogoogle.caption
-msgid "TranslateDoGoogle"
+msgid "Use Google"
 msgstr ""
 
 #: tformpoeditor.translatemsg.caption
@@ -323,10 +323,6 @@ msgstr ""
 
 #: tformpoeditor.translatemsg.hint
 msgid "Translate directly"
-msgstr ""
-
-#: tformpoeditor.translatesetup.caption
-msgid "Set Bing API Info"
 msgstr ""
 
 #: tformpoeditor.translatetext1.caption

@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1623"/>
-        <CursorPos X="19" Y="1645"/>
+        <TopLine Value="335"/>
+        <CursorPos Y="348"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -49,7 +49,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="185"/>
+        <UsageCount Value="186"/>
       </Unit>
       <Unit>
         <Filename Value="udlgshowraw.pas"/>
@@ -59,7 +59,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="123"/>
+        <UsageCount Value="124"/>
       </Unit>
       <Unit>
         <Filename Value="ugoogletranapi.pas"/>
@@ -68,7 +68,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="219"/>
         <CursorPos X="9" Y="251"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -81,7 +81,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="79"/>
         <CursorPos X="21" Y="51"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -91,7 +91,7 @@
         <UnitName Value="uStringListPro"/>
         <EditorIndex Value="1"/>
         <CursorPos X="15" Y="51"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -779,8 +779,8 @@
       <Unit>
         <Filename Value="ulibretranslate.pas"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="142"/>
-        <CursorPos Y="58"/>
+        <TopLine Value="243"/>
+        <CursorPos Y="271"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit>
@@ -792,79 +792,140 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="16">
+    <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="ulibretranslate.pas"/>
-        <Caret Line="223" Column="12" TopLine="206"/>
-      </Position>
-      <Position>
-        <Filename Value="ulibretranslate.pas"/>
-        <Caret Line="232" Column="24" TopLine="206"/>
-      </Position>
-      <Position>
-        <Filename Value="ulibretranslate.pas"/>
-        <Caret Line="219" Column="22" TopLine="202"/>
-      </Position>
-      <Position>
-        <Filename Value="ulibretranslate.pas"/>
-        <Caret Line="220" Column="27" TopLine="202"/>
-      </Position>
-      <Position>
-        <Filename Value="ulibretranslate.pas"/>
-        <Caret Line="219" Column="68" TopLine="202"/>
-      </Position>
-      <Position>
-        <Filename Value="ugoogletranapi.pas"/>
-        <Caret Line="251" Column="9" TopLine="210"/>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="237" Column="16" TopLine="220"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1978" Column="17" TopLine="1962"/>
+        <Caret Line="687" Column="3" TopLine="684"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="180" Column="30" TopLine="158"/>
+        <Caret Line="250" Column="8" TopLine="220"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1163" Column="3" TopLine="1160"/>
+        <Caret Line="361" TopLine="344"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="222" Column="23" TopLine="197"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="542" Column="30" TopLine="542"/>
+        <Caret Line="257" Column="76" TopLine="229"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="547" Column="75" TopLine="522"/>
+        <Caret Line="269" TopLine="241"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1449" Column="12" TopLine="1431"/>
+        <Caret Line="506" Column="7" TopLine="492"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="241" Column="15" TopLine="225"/>
+        <Caret Line="505" Column="7" TopLine="491"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="773" Column="13" TopLine="741"/>
+        <Caret Line="502" TopLine="487"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="203" Column="25" TopLine="188"/>
+        <Caret Line="214" Column="71" TopLine="204"/>
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1647" Column="24" TopLine="1619"/>
+        <Caret Line="254" Column="67" TopLine="226"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="4" Column="37"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="254" Column="67" TopLine="226"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="191" Column="24" TopLine="170"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1381" Column="3" TopLine="1378"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="193" Column="15" TopLine="175"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1398" Column="10" TopLine="1384"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="192" Column="15" TopLine="176"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1398" Column="8" TopLine="1386"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="354" Column="20" TopLine="339"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="724" Column="29" TopLine="696"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="265" Column="20" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="247" Column="8" TopLine="233"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="341" Column="25" TopLine="313"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="348" Column="51" TopLine="320"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1398" Column="18" TopLine="1370"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="247" Column="13" TopLine="230"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="341" Column="25" TopLine="313"/>
       </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>
     </RunParams>
+    <HistoryLists>
+      <List Name="WorkingDirectory" Type="File" Count="2">
+        <Item2 Value="F:\delphiprj-new\lr_proj\pocompo"/>
+      </List>
+      <List Name="LaunchingApplication" Type="File" Count="1">
+        <Item1 Value="C:\Windows\system32\cmd.exe /C ${TargetCmdLine}"/>
+      </List>
+      <List Name="CommandLineParameters" Count="1">
+        <Item1 Value="strings.po"/>
+      </List>
+    </HistoryLists>
   </ProjectSession>
 </CONFIG>

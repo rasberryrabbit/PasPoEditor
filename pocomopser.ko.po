@@ -380,7 +380,7 @@ msgid "Copy Translated text from bottom window"
 msgstr "아래 창에서 번역된 문자열을 복사"
 
 #: tformpoeditor.translatedogoogle.caption
-msgid "TranslateDoGoogle"
+msgid "Use Google"
 msgstr ""
 
 #: tformpoeditor.translatemsg.caption
@@ -392,11 +392,6 @@ msgstr "메시지 번역"
 msgctxt "tformpoeditor.translatemsg.hint"
 msgid "Translate directly"
 msgstr "바로 번역"
-
-#: tformpoeditor.translatesetup.caption
-msgctxt "tformpoeditor.translatesetup.caption"
-msgid "Set Bing API Info"
-msgstr ""
 
 #: tformpoeditor.translatetext1.caption
 msgctxt "tformpoeditor.translatetext1.caption"

@@ -17,9 +17,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="5"/>
-      <RevisionNr Value="12"/>
-      <BuildNr Value="167"/>
+      <MinorVersionNr Value="6"/>
+      <BuildNr Value="169"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
     <BuildModes>
@@ -64,7 +63,6 @@
         <Mode Name="default">
           <local>
             <CommandLineParams Value="strings.po"/>
-            <WorkingDirectory Value="F:\delphiprj-new\lr_proj\pocompo"/>
           </local>
         </Mode>
       </Modes>
