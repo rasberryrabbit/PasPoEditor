@@ -35,6 +35,7 @@ uses
 
 function LibreTranAPI_GetLangs(const langs:TStrings):Boolean;
 function LibreTranAPI_Translate(const fromlang,tolang,text:string):string;
+procedure LibreTranAPI_SetBaseURL(const Url:string);
 
 
 var
@@ -55,14 +56,16 @@ const
   return json array
 *)
 
-  LibreTranAPI_Base = 'https://translate.argosopentech.com/'; // 'https://libretranslate.com/';
-  LibreTranAPI_Detect = LibreTranAPI_Base+'detect';
-  LibreTranAPI_Languages = LibreTranAPI_Base+'languages';
-  LibreTranAPI_Tran = LibreTranAPI_Base+'translate';
+  //LibreTranAPI_Base = 'https://translate.argosopentech.com/'; // 'https://libretranslate.com/';
 
 var
   uInternetConn : Boolean = False;
   badHit : Integer = 0;
+
+  LibreTranAPI_Base: string;
+  LibreTranAPI_Detect: string;
+  LibreTranAPI_Languages: string;
+  LibreTranAPI_Tran: string;
 
 
 procedure GetProxyServer;
@@ -252,8 +255,20 @@ begin
   end;
 end;
 
+procedure LibreTranAPI_SetBaseURL(const Url: string);
+begin
+  if Url='' then
+    LibreTranAPI_Base:= 'https://translate.argosopentech.com/'
+    else
+     LibreTranAPI_Base:= Url;
+  LibreTranAPI_Detect:= LibreTranAPI_Base+'detect';
+  LibreTranAPI_Languages:= LibreTranAPI_Base+'languages';
+  LibreTranAPI_Tran:= LibreTranAPI_Base+'translate';
+end;
+
 
 initialization
+  LibreTranAPI_SetBaseURL('');
   uInternetConn:=CheckInternetConn;
 
 

@@ -377,10 +377,6 @@ object FormPoEditor: TFormPoEditor
       object MenuItem42: TMenuItem
         Caption = '-'
       end
-      object MenuItem43: TMenuItem
-        Action = TranslateSetup
-        Visible = False
-      end
       object MenuItem49: TMenuItem
         Action = TranslateDoGoogle
       end
@@ -607,11 +603,6 @@ object FormPoEditor: TFormPoEditor
       Caption = 'Sort by comment'
       OnExecute = OptionSortCommentExecute
     end
-    object TranslateSetup: TAction
-      Category = 'Translator'
-      Caption = 'Set Bing API Info'
-      OnExecute = TranslateSetupExecute
-    end
     object EditGotoNextFuzzy: TAction
       Category = 'Edit'
       Caption = 'Goto Next Fuzzy'
@@ -635,7 +626,7 @@ object FormPoEditor: TFormPoEditor
     end
     object TranslateDoGoogle: TAction
       Category = 'Translator'
-      Caption = 'TranslateDoGoogle'
+      Caption = 'Use Google'
       Checked = True
       OnExecute = TranslateDoGoogleExecute
     end

@@ -25,8 +25,6 @@ unit pocomposer_main;
   IN THE SOFTWARE.
 }
 
-{$define USE_TRANSLTR}
-
 
 interface
 
@@ -52,13 +50,11 @@ type
     EditGotoNextFuzzy: TAction;
     FormDataJson: TJSONPropStorage;
     MenuItem42: TMenuItem;
-    MenuItem43: TMenuItem;
     MenuItem44: TMenuItem;
     MenuItem45: TMenuItem;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     StatusBar1: TStatusBar;
-    TranslateSetup: TAction;
     MenuItem40: TMenuItem;
     MenuItem41: TMenuItem;
     OptionSortComment: TAction;
@@ -221,7 +217,6 @@ type
     procedure TranslateCopyExecute(Sender: TObject);
     procedure TranslateDoGoogleExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
-    procedure TranslateSetupExecute(Sender: TObject);
     procedure TranslateText1Execute(Sender: TObject);
     procedure TranslateText1Update(Sender: TObject);
   private
@@ -255,8 +250,8 @@ implementation
 
 {$R *.lfm}
 
-uses uPoReader, LCLType, {RegExpr,} BRRE, {$ifndef USE_TRANSLTR}uMSTRanAPI{$else}uGoogleTranApi{$endif}, LazUTF8, udlgprop,
-  gettext, Translations, DefaultTranslator, udlgshowraw, udlgBingApiInfo,
+uses uPoReader, LCLType, {RegExpr,} BRRE, uGoogleTranApi, LazUTF8, udlgprop,
+  gettext, Translations, DefaultTranslator, udlgshowraw, {udlgBingApiInfo,}
   uFormTask, ulibretranslate;
 
 var
@@ -268,10 +263,8 @@ var
   FindCase:Boolean=False;
   modified:Boolean=False;
   DisableTranslator:Boolean=False;
-  bingapiid:string='';
-  bingclient_id:string='';
-  bingclient_secret:string='';
   uLineBreak:string=#13#10;
+  uLibreBaseURL:string='';
 
 
 resourcestring
@@ -352,16 +345,14 @@ var
   i:integer;
 begin
   try
-    fname:=ExtractFilePath(ParamStr(0))+ConfigFile;
+    fname:=ChangeFileExt(ParamStr(0),'.ini');
     Result:=FileExists(fname);
     if Result then begin
       f:=TStringList.Create;
       try
         f.LoadFromFile(fname);
         DisableTranslator:=StrToIntDef(f.Values['skiptran'],0)<>0;
-        bingapiid:=f.Values['bingid'];
-        bingclient_id:=f.Values['bingclientid'];
-        bingclient_secret:=f.Values['bingclientsecret'];
+        uLibreBaseURL:=f.Values['librebaseurl'];
       finally
         f.Free;
       end;
@@ -475,12 +466,10 @@ begin
         if ComboBoxSrcLang.ItemIndex>0 then
           ret:=ComboBoxSrcLang.Text
           else
-            ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
+            ret:='';
         FormTaskProg.Show;
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
-        //ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-        //      LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg)){$endif};
         if TranslateDoGoogle.Checked then
           ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg))
           else
@@ -509,23 +498,6 @@ begin
   //end;
 end;
 
-procedure TFormPoEditor.TranslateSetupExecute(Sender: TObject);
-var
-  bingdlg : TFormBingInfo;
-begin
-  bingdlg := TFormBingInfo.Create(self);
-  try
-    bingdlg.EditBingAppName.Text:=bingclient_id;
-    bingdlg.EditBingAppSecret.Text:=bingclient_secret;
-    if bingdlg.ShowModal = mrOK then begin
-      bingclient_id:=bingdlg.EditBingAppName.Text;
-      bingclient_secret:=bingdlg.EditBingAppSecret.Text;
-      SetupTranslatorApi;
-    end;
-  finally
-    bingdlg.Free;
-  end;
-end;
 
 procedure TFormPoEditor.TranslateText1Execute(Sender: TObject);
 var
@@ -546,12 +518,10 @@ begin
         if ComboBoxSrcLang.ItemIndex>0 then
           ret:=ComboBoxSrcLang.Text
           else
-            ret:={$ifndef USE_TRANSLTR}DetectLanguage(pchar(msg)){$else}''{$endif};
+            ret:='';
         FormTaskProg.Show;
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
-        //ret:={$ifndef USE_TRANSLTR}TranslateText(pchar(msg),ret,pchar(ComboBoxLang.Text)){$else}
-        //     LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg){$endif};
         if TranslateDoGoogle.Checked then
           ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg)
           else
@@ -752,29 +722,17 @@ begin
   try
     Langs:=nil;
     if not DisableTranslator then begin
-      (*
-      if bingapiid<>'' then
-        uMSTRanAPI.BingAppId:=bingapiid;
-      *)
-      {$ifndef USE_TRANSLTR}
-      if bingclient_id<>'' then
-        uMSTRanAPI.BingClientID:=bingclient_id;
-      if bingclient_secret<>'' then
-        uMSTRanAPI.BingClientSecret:=bingclient_secret;
-      try
-        Langs:=GetLanguagesForTranslate;
-      except
-      end;
-      {$else}
       Langs:=TStringList.Create;
       try
         if TranslateDoGoogle.Checked then
           GoogleTranAPI_GetLangs(Langs)
           else
-            LibreTranAPI_GetLangs(Langs);
+            begin
+              LibreTranAPI_SetBaseURL(uLibreBaseURL);
+              LibreTranAPI_GetLangs(Langs);
+            end;
       except
       end;
-      {$endif}
       ComboBoxLang.Items.Assign(Langs);
       ComboBoxSrcLang.Items.Assign(Langs);
       ComboBoxSrcLang.Items.Insert(0, rsAuto);
