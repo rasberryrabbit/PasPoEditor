@@ -20,7 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="706"/>
-        <CursorPos X="3" Y="713"/>
+        <CursorPos X="37" Y="719"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -66,8 +66,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uGoogleTranApi"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="219"/>
-        <CursorPos X="9" Y="251"/>
+        <TopLine Value="239"/>
+        <CursorPos X="16" Y="262"/>
         <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit>
@@ -779,8 +779,7 @@
       <Unit>
         <Filename Value="ulibretranslate.pas"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="243"/>
-        <CursorPos Y="271"/>
+        <CursorPos X="53" Y="38"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit>
@@ -793,14 +792,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="502" TopLine="487"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="214" Column="71" TopLine="204"/>
-      </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="254" Column="67" TopLine="226"/>
@@ -911,6 +902,14 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="240" Column="15" TopLine="224"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="722" Column="30" TopLine="706"/>
+      </Position>
+      <Position>
+        <Filename Value="ugoogletranapi.pas"/>
+        <Caret Line="38" Column="24" TopLine="28"/>
       </Position>
     </JumpHistory>
     <RunParams>

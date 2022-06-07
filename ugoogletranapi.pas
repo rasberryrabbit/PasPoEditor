@@ -35,6 +35,7 @@ uses
 
 function GoogleTranAPI_GetLangs(const langs:TStrings):Boolean;
 function GoogleTranAPI_Translate(const fromlang,tolang,text:string):string;
+procedure GoogleTranAPI_SetBaseURL(const Url:string);
 
 
 var
@@ -254,6 +255,11 @@ begin
   finally
     hget.Free;
   end;
+end;
+
+procedure GoogleTranAPI_SetBaseURL(const Url: string);
+begin
+  // Do Nothing
 end;
 
 

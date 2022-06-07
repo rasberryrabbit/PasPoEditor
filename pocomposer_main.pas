@@ -715,13 +715,14 @@ begin
     if not DisableTranslator then begin
       Langs:=TStringList.Create;
       try
-        if TranslateDoGoogle.Checked then
+        if TranslateDoGoogle.Checked then begin
+          LibreTranAPI_SetBaseURL('');
           GoogleTranAPI_GetLangs(Langs)
-          else
-            begin
-              LibreTranAPI_SetBaseURL(uLibreBaseURL);
-              LibreTranAPI_GetLangs(Langs);
-            end;
+        end else
+        begin
+          LibreTranAPI_SetBaseURL(uLibreBaseURL);
+          LibreTranAPI_GetLangs(Langs);
+        end;
       except
       end;
       ComboBoxLang.Items.Assign(Langs);
