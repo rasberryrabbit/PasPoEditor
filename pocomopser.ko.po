@@ -383,6 +383,10 @@ msgstr "아래 창에서 번역된 문자열을 복사"
 msgid "Use Google"
 msgstr ""
 
+#: tformpoeditor.translatedolibre.caption
+msgid "Use LibreTran"
+msgstr ""
+
 #: tformpoeditor.translatemsg.caption
 msgctxt "tformpoeditor.translatemsg.caption"
 msgid "Translate Msg"

@@ -317,6 +317,10 @@ msgstr ""
 msgid "Use Google"
 msgstr ""
 
+#: tformpoeditor.translatedolibre.caption
+msgid "Use LibreTran"
+msgstr ""
+
 #: tformpoeditor.translatemsg.caption
 msgid "Translate Msg"
 msgstr ""

@@ -38,6 +38,8 @@ type
   { TFormPoEditor }
 
   TFormPoEditor = class(TForm)
+    MenuItem43: TMenuItem;
+    TranslateDoLibre: TAction;
     MenuItem49: TMenuItem;
     TranslateDoGoogle: TAction;
     FileSave: TAction;
@@ -216,6 +218,7 @@ type
     procedure Splitter1Moved(Sender: TObject);
     procedure TranslateCopyExecute(Sender: TObject);
     procedure TranslateDoGoogleExecute(Sender: TObject);
+    procedure TranslateDoLibreExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
     procedure TranslateText1Execute(Sender: TObject);
     procedure TranslateText1Update(Sender: TObject);
@@ -419,7 +422,13 @@ end;
 
 procedure TFormPoEditor.TranslateDoGoogleExecute(Sender: TObject);
 begin
-  TranslateDoGoogle.Checked:=not TranslateDoGoogle.Checked;
+  TranslateDoGoogle.Checked:=True;
+  SetupTranslatorApi;
+end;
+
+procedure TFormPoEditor.TranslateDoLibreExecute(Sender: TObject);
+begin
+  TranslateDoLibre.Checked:=True;
   SetupTranslatorApi;
 end;
 

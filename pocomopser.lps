@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1363"/>
-        <CursorPos Y="1380"/>
+        <TopLine Value="706"/>
+        <CursorPos X="3" Y="713"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -49,7 +49,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="4"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="186"/>
+        <UsageCount Value="187"/>
       </Unit>
       <Unit>
         <Filename Value="udlgshowraw.pas"/>
@@ -59,7 +59,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="124"/>
+        <UsageCount Value="125"/>
       </Unit>
       <Unit>
         <Filename Value="ugoogletranapi.pas"/>
@@ -68,7 +68,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="219"/>
         <CursorPos X="9" Y="251"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -81,7 +81,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="79"/>
         <CursorPos X="21" Y="51"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -91,7 +91,7 @@
         <UnitName Value="uStringListPro"/>
         <EditorIndex Value="1"/>
         <CursorPos X="15" Y="51"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -792,11 +792,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="24">
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="505" Column="7" TopLine="491"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="502" TopLine="487"/>
@@ -891,6 +887,30 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="341" TopLine="337"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1380" TopLine="1210"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="422" Column="3" TopLine="405"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="423" Column="3" TopLine="406"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="353" Column="77" TopLine="353"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="426" Column="12" TopLine="405"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="240" Column="15" TopLine="224"/>
       </Position>
     </JumpHistory>
     <RunParams>
