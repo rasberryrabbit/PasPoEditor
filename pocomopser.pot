@@ -337,11 +337,3 @@ msgstr ""
 msgid "Translate text to bottom window"
 msgstr ""
 
-#: tformtaskprog.buttoncancel.caption
-msgid "Cancel"
-msgstr ""
-
-#: tformtaskprog.caption
-msgid "Task"
-msgstr ""
-

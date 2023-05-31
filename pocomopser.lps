@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="706"/>
-        <CursorPos X="37" Y="719"/>
+        <TopLine Value="1379"/>
+        <CursorPos X="61" Y="1384"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -794,13 +794,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="254" Column="67" TopLine="226"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
         <Caret Line="4" Column="37"/>
       </Position>
       <Position>
@@ -910,6 +903,14 @@
       <Position>
         <Filename Value="ugoogletranapi.pas"/>
         <Caret Line="38" Column="24" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="194" Column="23" TopLine="176"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1383" Column="3" TopLine="1378"/>
       </Position>
     </JumpHistory>
     <RunParams>

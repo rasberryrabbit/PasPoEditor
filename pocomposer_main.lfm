@@ -4,7 +4,7 @@ object FormPoEditor: TFormPoEditor
   Top = 145
   Width = 711
   Caption = 'PO Editor'
-  ClientHeight = 556
+  ClientHeight = 576
   ClientWidth = 711
   Constraints.MinHeight = 400
   Constraints.MinWidth = 620
@@ -74,7 +74,7 @@ object FormPoEditor: TFormPoEditor
   end
   object ListBoxPO: TListBox
     Left = 0
-    Height = 196
+    Height = 216
     Top = 26
     Width = 711
     Align = alClient
@@ -91,7 +91,7 @@ object FormPoEditor: TFormPoEditor
   object Panel1: TPanel
     Left = 0
     Height = 329
-    Top = 227
+    Top = 247
     Width = 711
     Align = alBottom
     ClientHeight = 329
@@ -222,7 +222,7 @@ object FormPoEditor: TFormPoEditor
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 222
+    Top = 242
     Width = 711
     Align = alBottom
     OnMoved = Splitter1Moved
@@ -685,5 +685,10 @@ object FormPoEditor: TFormPoEditor
     Formatted = False
     Left = 552
     Top = 16
+  end
+  object ExceptionLogger1: TExceptionLogger
+    MaxCallStackDepth = 20
+    Left = 256
+    Top = 74
   end
 end

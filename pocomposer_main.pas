@@ -31,13 +31,14 @@ interface
 uses
   Classes, SysUtils, FileUtil, MRUList, ExtendedNotebook, Forms, Controls,
   Graphics, Dialogs, Menus, ActnList, StdActns, ComCtrls, StdCtrls, ExtCtrls,
-  JSONPropStorage, types, contnrs, uStringListPro;
+  JSONPropStorage, types, contnrs, uStringListPro, UExceptionLogger;
 
 type
 
   { TFormPoEditor }
 
   TFormPoEditor = class(TForm)
+    ExceptionLogger1: TExceptionLogger;
     MenuItem43: TMenuItem;
     TranslateDoLibre: TAction;
     MenuItem49: TMenuItem;
@@ -1380,6 +1381,7 @@ procedure TFormPoEditor.FormCreate(Sender: TObject);
 var
   lng,lngf:string;
 begin
+  Application.OnException:=@ExceptionLogger1.HandleException;
   mIsFind:=0;
   IsOpened:=False;
   PoList:=TStringListProgress.Create;
