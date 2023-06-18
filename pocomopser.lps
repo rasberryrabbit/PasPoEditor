@@ -9,7 +9,7 @@
         <Filename Value="pocomopser.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="16" Y="12"/>
+        <CursorPos Y="24"/>
         <UsageCount Value="201"/>
       </Unit>
       <Unit>
@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1379"/>
-        <CursorPos X="61" Y="1384"/>
+        <TopLine Value="241"/>
+        <CursorPos X="43" Y="259"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -30,8 +30,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uPoReader"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="716"/>
-        <CursorPos X="34" Y="734"/>
+        <TopLine Value="58"/>
+        <CursorPos X="3" Y="36"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>
@@ -79,7 +79,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFormTask"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="79"/>
+        <TopLine Value="82"/>
         <CursorPos X="21" Y="51"/>
         <UsageCount Value="46"/>
         <Loaded Value="True"/>
@@ -790,28 +790,15 @@
         <CursorPos X="25" Y="22"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="C:\development\fpc\rtl\objpas\sysutils\finah.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="10" Y="23"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="4" Column="37"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="254" Column="67" TopLine="226"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="191" Column="24" TopLine="170"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1381" Column="3" TopLine="1378"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="193" Column="15" TopLine="175"/>
-      </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="1398" Column="10" TopLine="1384"/>
@@ -911,6 +898,26 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="1383" Column="3" TopLine="1378"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1384" Column="61" TopLine="1379"/>
+      </Position>
+      <Position>
+        <Filename Value="ustringlistpro.pas"/>
+        <Caret Line="51" Column="15"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1384" Column="61" TopLine="1379"/>
+      </Position>
+      <Position>
+        <Filename Value="uporeader.pas"/>
+        <Caret Line="36" Column="3" TopLine="19"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="992" Column="43" TopLine="519"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -256,7 +256,7 @@ implementation
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, uGoogleTranApi, LazUTF8, udlgprop,
   gettext, Translations, DefaultTranslator, udlgshowraw, {udlgBingApiInfo,}
-  uFormTask, ulibretranslate;
+  uFormTask, ulibretranslate, LazFileUtils;
 
 var
   mPo:TPoList=nil;

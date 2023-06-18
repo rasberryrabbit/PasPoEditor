@@ -33,7 +33,7 @@ unit uPoReader;
 
 
 {$mode objfpc}{$H+}
-{$define USE_UTF8_FILESTREAM}
+{.$define USE_UTF8_FILESTREAM}
 
 interface
 
