@@ -686,9 +686,4 @@ object FormPoEditor: TFormPoEditor
     Left = 552
     Top = 16
   end
-  object ExceptionLogger1: TExceptionLogger
-    MaxCallStackDepth = 20
-    Left = 256
-    Top = 74
-  end
 end

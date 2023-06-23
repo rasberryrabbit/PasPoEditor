@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="241"/>
-        <CursorPos X="43" Y="259"/>
+        <TopLine Value="1378"/>
+        <CursorPos Y="1390"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -801,22 +801,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1398" Column="10" TopLine="1384"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="192" Column="15" TopLine="176"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="1398" Column="8" TopLine="1386"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="354" Column="20" TopLine="339"/>
-      </Position>
-      <Position>
-        <Filename Value="pocomposer_main.pas"/>
         <Caret Line="724" Column="29" TopLine="696"/>
       </Position>
       <Position>
@@ -918,6 +902,22 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="992" Column="43" TopLine="519"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="195" Column="21" TopLine="182"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1384"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="1383" TopLine="1350"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="194" Column="22" TopLine="176"/>
       </Position>
     </JumpHistory>
     <RunParams>

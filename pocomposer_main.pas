@@ -38,7 +38,6 @@ type
   { TFormPoEditor }
 
   TFormPoEditor = class(TForm)
-    ExceptionLogger1: TExceptionLogger;
     MenuItem43: TMenuItem;
     TranslateDoLibre: TAction;
     MenuItem49: TMenuItem;
@@ -1381,7 +1380,6 @@ procedure TFormPoEditor.FormCreate(Sender: TObject);
 var
   lng,lngf:string;
 begin
-  Application.OnException:=@ExceptionLogger1.HandleException;
   mIsFind:=0;
   IsOpened:=False;
   PoList:=TStringListProgress.Create;
@@ -1389,6 +1387,7 @@ begin
   // translate LCL resource strings
   GetLanguageIDs(lng,lngf);
   Translations.TranslateUnitResourceStrings('LCLStrConsts', 'lclstrconsts.%s.po', lng, lngf);
+  exceptionLogger.LogFileName:='bugreport.txt';
   LoadMainFormData;
   MRUManager1:=TMRUManager.Create(self);
   MRUManager1.RecentMenu:=MenuItemRecent;
