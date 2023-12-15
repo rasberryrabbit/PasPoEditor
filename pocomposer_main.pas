@@ -253,9 +253,9 @@ implementation
 
 {$R *.lfm}
 
-uses uPoReader, LCLType, {RegExpr,} BRRE, uGoogleTranApi, LazUTF8, udlgprop,
+uses uPoReader, LCLType, {RegExpr,} BRRE, LazUTF8, udlgprop,
   gettext, Translations, DefaultTranslator, udlgshowraw, {udlgBingApiInfo,}
-  uFormTask, ulibretranslate, LazFileUtils;
+  uFormTask, ulibretranslate, uGoogleTranApi, LazFileUtils;
 
 var
   mPo:TPoList=nil;

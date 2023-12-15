@@ -30,7 +30,7 @@ unit ulibretranslate;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, Forms;
 
 
 function LibreTranAPI_GetLangs(const langs:TStrings):Boolean;
@@ -41,6 +41,7 @@ procedure LibreTranAPI_SetBaseURL(const Url:string);
 var
   TranProxyHost:string='';
   TranProxyPort:string='';
+  LibreAPIKey:string='';
 
 
 implementation
@@ -59,13 +60,26 @@ const
   //LibreTranAPI_Base = 'https://translate.argosopentech.com/'; // 'https://libretranslate.com/';
 
 var
-  uInternetConn : Boolean = False;
   badHit : Integer = 0;
 
   LibreTranAPI_Base: string;
   LibreTranAPI_Detect: string;
   LibreTranAPI_Languages: string;
   LibreTranAPI_Tran: string;
+
+var
+  uInternetConn : Boolean = False;
+
+type
+
+  { TConnThread }
+
+  TConnThread=class(TThread)
+    procedure Execute; override;
+  end;
+
+var
+  ConThread: TConnThread;
 
 
 procedure GetProxyServer;
@@ -142,6 +156,7 @@ begin
   iplist:=TStringList.Create;
   try
     ResolveNameToIP('libretranslate.com',AF_INET,IPPROTO_TCP,SOCK_STREAM,iplist);
+    //ResolveNameToIP('translate.argosopentech.com',AF_INET,IPPROTO_TCP,SOCK_STREAM,iplist);
     for i:=0 to iplist.Count-1 do begin
       s:=iplist[i];
       if (s<>cAnyHost) and (s<>'10.0.0.1') then begin
@@ -219,7 +234,7 @@ begin
     slang:=fromlang;
     if slang='' then
       slang:='auto';
-    DataRoot:=CreateJSONObject(['q',text,'source',slang,'target',tolang]);
+    DataRoot:=CreateJSONObject(['q',text,'source',slang,'target',tolang,'format','text','api_key',LibreAPIKey]);
     surl:=DataRoot.AsJSON;
     DataRoot.Free;
     //surl:=Format('{ "q": "%s", "source": "%s", "target": "%s" }',[text,slang,tolang]);
@@ -258,7 +273,7 @@ end;
 procedure LibreTranAPI_SetBaseURL(const Url: string);
 begin
   if Url='' then
-    LibreTranAPI_Base:= 'https://translate.argosopentech.com/'
+    LibreTranAPI_Base:= 'https://libretranslate.com/'
     else
      LibreTranAPI_Base:= Url;
   LibreTranAPI_Detect:= LibreTranAPI_Base+'detect';
@@ -266,10 +281,18 @@ begin
   LibreTranAPI_Tran:= LibreTranAPI_Base+'translate';
 end;
 
+{ TConnThread }
+
+procedure TConnThread.Execute;
+begin
+  FreeOnTerminate:=True;
+  uInternetConn:=CheckInternetConn;
+end;
+
 
 initialization
   LibreTranAPI_SetBaseURL('');
-  uInternetConn:=CheckInternetConn;
+  ConThread:=TConnThread.Create(False);
 
 
 end.

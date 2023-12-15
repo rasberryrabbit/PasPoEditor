@@ -9,12 +9,12 @@ object FormPoEditor: TFormPoEditor
   Constraints.MinHeight = 400
   Constraints.MinWidth = 620
   Menu = MainMenu1
+  LCLVersion = '3.99.0.0'
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   OnWindowStateChange = FormWindowStateChange
-  LCLVersion = '2.3.0.0'
   object ToolBar1: TToolBar
     Left = 0
     Height = 26
@@ -80,13 +80,13 @@ object FormPoEditor: TFormPoEditor
     Align = alClient
     ItemHeight = 0
     MultiSelect = True
+    Style = lbOwnerDrawVariable
+    TabOrder = 1
     OnClick = ListBoxPOClick
     OnDblClick = ListBoxPODblClick
     OnDrawItem = ListBoxPODrawItem
     OnKeyPress = ListBoxPOKeyPress
     OnMeasureItem = ListBoxPOMeasureItem
-    Style = lbOwnerDrawVariable
-    TabOrder = 1
   end
   object Panel1: TPanel
     Left = 0
@@ -103,11 +103,11 @@ object FormPoEditor: TFormPoEditor
       Top = 1
       Width = 709
       Align = alTop
-      OnKeyPress = ListBoxPOKeyPress
       ReadOnly = True
       ScrollBars = ssAutoBoth
       TabOrder = 0
       WordWrap = False
+      OnKeyPress = ListBoxPOKeyPress
     end
     object NoteMsg: TExtendedNotebook
       Left = 1
@@ -129,10 +129,10 @@ object FormPoEditor: TFormPoEditor
           Top = 0
           Width = 701
           Align = alClient
-          OnExit = MemoMsgExit
           ScrollBars = ssAutoBoth
           TabOrder = 0
           WordWrap = False
+          OnExit = MemoMsgExit
         end
       end
     end
@@ -178,8 +178,8 @@ object FormPoEditor: TFormPoEditor
         Top = 38
         Width = 54
         Caption = 'clear'
-        OnClick = ButtonclrClick
         TabOrder = 2
+        OnClick = ButtonclrClick
       end
       object ComboBoxSrcLang: TComboBox
         Left = 8
@@ -225,8 +225,8 @@ object FormPoEditor: TFormPoEditor
     Top = 242
     Width = 711
     Align = alBottom
-    OnMoved = Splitter1Moved
     ResizeAnchor = akBottom
+    OnMoved = Splitter1Moved
   end
   object MainMenu1: TMainMenu
     Images = ImageList1
@@ -429,95 +429,95 @@ object FormPoEditor: TFormPoEditor
       Category = 'Edit'
       Caption = 'Cu&t'
       Hint = 'Cut'
-      OnExecute = EditCut1Execute
       ShortCut = 16472
+      OnExecute = EditCut1Execute
     end
     object EditCopy1: TEditCopy
       Category = 'Edit'
       Caption = '&Copy'
       Hint = 'Copy'
-      OnExecute = EditCopy1Execute
       ShortCut = 16451
+      OnExecute = EditCopy1Execute
     end
     object EditPaste1: TEditPaste
       Category = 'Edit'
       Caption = '&Paste'
       Hint = 'Paste'
-      OnExecute = EditPaste1Execute
       ShortCut = 16470
+      OnExecute = EditPaste1Execute
     end
     object EditSelectAll1: TEditSelectAll
       Category = 'Edit'
       Caption = 'Select &All'
       Hint = 'Select All'
-      OnExecute = EditSelectAll1Execute
       ShortCut = 16449
+      OnExecute = EditSelectAll1Execute
     end
     object EditUndo1: TEditUndo
       Category = 'Edit'
       Caption = '&Undo'
       Hint = 'Undo'
-      OnExecute = EditUndo1Execute
       ShortCut = 16474
+      OnExecute = EditUndo1Execute
     end
     object EditDelete1: TEditDelete
       Category = 'Edit'
       Caption = '&Delete'
       Hint = 'Delete'
-      OnExecute = EditDelete1Execute
       ShortCut = 46
+      OnExecute = EditDelete1Execute
     end
     object EditDown: TAction
       Category = 'Edit'
       Caption = 'Item Down'
-      OnExecute = EditDownExecute
       ShortCut = 16424
+      OnExecute = EditDownExecute
     end
     object EditUp: TAction
       Category = 'Edit'
       Caption = 'Item Up'
-      OnExecute = EditUpExecute
       ShortCut = 16422
+      OnExecute = EditUpExecute
     end
     object SearchFind: TAction
       Category = 'Search'
       Caption = 'Find'
       Hint = 'Find & replace text. Regular Expression'
       ImageIndex = 2
-      OnExecute = SearchFindExecute
       ShortCut = 16454
+      OnExecute = SearchFindExecute
     end
     object SearchNext: TAction
       Category = 'Search'
       Caption = 'Next'
       Hint = 'Find next match text'
       ImageIndex = 3
-      OnExecute = SearchNextExecute
       ShortCut = 114
+      OnExecute = SearchNextExecute
     end
     object TranslateText1: TAction
       Category = 'Translator'
       Caption = 'Translate text'
       Hint = 'Translate text to bottom window'
+      ShortCut = 116
       OnExecute = TranslateText1Execute
       OnUpdate = TranslateText1Update
-      ShortCut = 116
     end
     object TranslateCopy: TAction
       Category = 'Translator'
       Caption = 'Copy Translated Text'
       Hint = 'Copy Translated text from bottom window'
+      ShortCut = 16429
       OnExecute = TranslateCopyExecute
       OnUpdate = TranslateText1Update
-      ShortCut = 16429
     end
     object TranslateMsg: TAction
       Category = 'Translator'
       Caption = 'Translate Msg'
       Hint = 'Translate directly'
+      ShortCut = 16500
       OnExecute = TranslateMsgExecute
       OnUpdate = TranslateText1Update
-      ShortCut = 16500
     end
     object ImportPO: TAction
       Category = 'File'
@@ -558,44 +558,44 @@ object FormPoEditor: TFormPoEditor
     object EditMemoLeft: TAction
       Category = 'Edit'
       Caption = 'Left Editor'
-      OnExecute = EditMemoLeftExecute
       ShortCut = 49189
+      OnExecute = EditMemoLeftExecute
     end
     object EditMemoRight: TAction
       Category = 'Edit'
       Caption = 'Right Editor'
-      OnExecute = EditMemoRightExecute
       ShortCut = 49191
+      OnExecute = EditMemoRightExecute
     end
     object EditShowRawItem: TAction
       Category = 'Edit'
       Caption = 'Show raw string'
-      OnExecute = EditShowRawItemExecute
       ShortCut = 16397
+      OnExecute = EditShowRawItemExecute
     end
     object EditGotoNextUnTran: TAction
       Category = 'Edit'
       Caption = 'Goto Next Untranslated'
-      OnExecute = EditGotoNextUnTranExecute
       ShortCut = 16418
+      OnExecute = EditGotoNextUnTranExecute
     end
     object EditGotoPrevUntran: TAction
       Category = 'Edit'
       Caption = 'Goto Previous Untranslated'
-      OnExecute = EditGotoPrevUntranExecute
       ShortCut = 16417
+      OnExecute = EditGotoPrevUntranExecute
     end
     object EditGotoNextTran: TAction
       Category = 'Edit'
       Caption = 'Goto Next Translated'
-      OnExecute = EditGotoNextTranExecute
       ShortCut = 24610
+      OnExecute = EditGotoNextTranExecute
     end
     object EditGotoPrevTran: TAction
       Category = 'Edit'
       Caption = 'Goto Previous Translated'
-      OnExecute = EditGotoPrevTranExecute
       ShortCut = 24609
+      OnExecute = EditGotoPrevTranExecute
     end
     object EditSelAllTran: TAction
       Category = 'Edit'
@@ -614,14 +614,14 @@ object FormPoEditor: TFormPoEditor
     object EditGotoNextFuzzy: TAction
       Category = 'Edit'
       Caption = 'Goto Next Fuzzy'
-      OnExecute = EditGotoNextFuzzyExecute
       ShortCut = 24611
+      OnExecute = EditGotoNextFuzzyExecute
     end
     object EditGotoPrevFuzzy: TAction
       Category = 'Edit'
       Caption = 'Goto Previous Fuzzy'
-      OnExecute = EditGotoPrevFuzzyExecute
       ShortCut = 24612
+      OnExecute = EditGotoPrevFuzzyExecute
     end
     object OptionUseLinuxLineBreak: TAction
       Caption = 'Use Linux LineBreak'
@@ -629,8 +629,8 @@ object FormPoEditor: TFormPoEditor
     end
     object FileSave: TAction
       Caption = 'Save'
-      OnExecute = FileSaveExecute
       ShortCut = 16467
+      OnExecute = FileSaveExecute
     end
     object TranslateDoGoogle: TAction
       Category = 'Translator'

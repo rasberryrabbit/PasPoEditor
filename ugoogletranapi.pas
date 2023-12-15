@@ -69,6 +69,17 @@ var
   uInternetConn : Boolean = False;
   badHit : Integer = 0;
 
+type
+
+  { TConnThread }
+
+  TConnThread=class(TThread)
+    procedure Execute; override;
+  end;
+
+var
+  ConThread: TConnThread;
+
 
 procedure GetProxyServer;
 const
@@ -262,9 +273,15 @@ begin
   // Do Nothing
 end;
 
+procedure TConnThread.Execute;
+begin
+  FreeOnTerminate:=True;
+  uInternetConn:=CheckInternetConn;
+end;
+
 
 initialization
-  uInternetConn:=CheckInternetConn;
+  ConThread:=TConnThread.Create(False);
 
 
 
