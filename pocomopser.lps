@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="40"/>
-        <CursorPos X="69" Y="34"/>
+        <TopLine Value="487"/>
+        <CursorPos X="23" Y="511"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -801,10 +801,6 @@
     <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="ulibretranslate.pas"/>
-        <Caret Line="70" Column="22" TopLine="49"/>
-      </Position>
-      <Position>
-        <Filename Value="ulibretranslate.pas"/>
         <Caret Line="75" Column="33" TopLine="53"/>
       </Position>
       <Position>
@@ -917,7 +913,7 @@
       </Position>
       <Position>
         <Filename Value="pocomposer_main.pas"/>
-        <Caret Line="463" Column="18" TopLine="447"/>
+        <Caret Line="223" Column="26" TopLine="200"/>
       </Position>
     </JumpHistory>
     <RunParams>
