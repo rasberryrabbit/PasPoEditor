@@ -96,6 +96,20 @@ begin
   end;
 end;
 
+function CheckGZip(const st:TStringList):Boolean;
+var
+  i: Integer;
+  s: string;
+begin
+  Result:=False;
+  for i:=0 to st.Count-1 do begin
+    s:=st[i];
+    if (Pos('Content-Encoding:',s)>0) and (Pos('gzip',s)>0) then begin
+      Result:=True;
+      break;
+    end;
+  end;
+end;
 
 function LectoTranAPI_GetLangs(const langs:TStrings):Boolean;
 var
@@ -103,6 +117,9 @@ var
   retData: TJSONArray;
   i: Integer;
   hget : THTTPSend;
+  stemp: TStringStream;
+  gzsend: TGZipCompressionStream;
+  gzrecv: TGZipDecompressionStream;
 begin
   Result:=False;
   if not uInternetConn then
@@ -117,11 +134,18 @@ begin
       hget.Headers.Add('X-API-Key: '+ LectoAPIKey);
       hget.Headers.Add('Content-Type: application/json');
       hget.Headers.Add('Accept: application/json');
+      hget.Headers.Add('Accept-Encoding: gzip');
       if hget.HTTPMethod('GET',LectoTran_Base+'/translate/languages') then begin
         if hget.ResultCode=200 then begin
           hget.Document.Position:=0;
           try
-            DataRoot:=GetJSON(hget.Document);
+            if CheckGZip(hget.Headers) then begin
+              gzrecv:=TGZipDecompressionStream.Create(hget.Document);
+              stemp.CopyFrom(gzrecv,0);
+              gzrecv.Free;
+              DataRoot:=GetJSON(stemp.DataString);
+            end else
+              DataRoot:=GetJSON(hget.Document);
             try
               retData:=TJSONArray(DataRoot.FindPath('languages'));
               for i:=0 to retData.Count-1 do begin
@@ -155,6 +179,8 @@ var
   retData, txtData: TJSONArray;
   hget : THTTPSend;
   surl: string;
+  gzsend: TGZipCompressionStream;
+  gzrecv: TGZipDecompressionStream;
 begin
   Result:='';
   if not uInternetConn then
@@ -175,7 +201,12 @@ begin
     hget.Headers.Add('X-API-Key: '+ LectoAPIKey);
     hget.Headers.Add('Content-Type: application/json');
     hget.Headers.Add('Accept: application/json');
-    hget.Document.Write(surl[1],Length(surl));
+    // gzip
+    hget.Headers.Add('Accept-Encoding: gzip');
+    gzsend:=TGZipCompressionStream.Create(hget.Document);
+    gzsend.Write(surl[1],Length(surl));
+    gzsend.Free;
+    //hget.Document.Write(surl[1],Length(surl));
     if hget.HTTPMethod('POST',LectoTran_Base+'/detect/text') then begin
       if hget.ResultCode=200 then begin
         hget.Document.Position:=0;
@@ -209,6 +240,9 @@ var
   hget : THTTPSend;
   s, surl: string;
   stemp: TStringStream;
+  gzsend: TGZipCompressionStream;
+  gzrecv: TGZipDecompressionStream;
+  i: Integer;
 begin
   Result:='';
   if not uInternetConn then
@@ -231,16 +265,27 @@ begin
     hget.Headers.Add('X-API-Key: '+ LectoAPIKey);
     hget.Headers.Add('Content-Type: application/json');
     hget.Headers.Add('Accept: application/json');
-    hget.Document.Write(surl[1],Length(surl));
+    // gzip
+    hget.Headers.Add('Accept-Encoding: gzip');
+    gzsend:=TGZipCompressionStream.Create(hget.Document);
+    gzsend.Write(surl[1],Length(surl));
+    gzsend.Free;
+    //hget.Document.Write(surl[1],Length(surl));
     if hget.HTTPMethod('POST',LectoTran_Base+'/translate/text') then begin
+      for i:=0 to hget.Headers.Count-1 do ;
       stemp:=TStringStream.Create('');
-      stemp.CopyFrom(hget.Document,0);
+      if CheckGZip(hget.Headers) then begin
+        gzrecv:=TGZipDecompressionStream.Create(hget.Document);
+        stemp.CopyFrom(gzrecv,0);
+        gzrecv.Free;
+      end else
+        stemp.CopyFrom(hget.Document,0);
       s:=stemp.DataString;
       stemp.Free;
       if hget.ResultCode=200 then begin
         hget.Document.Position:=0;
         try
-          DataRoot:=GetJSON(hget.Document);
+          DataRoot:=GetJSON(s);
           try
             retData:=TJSONArray(DataRoot.FindPath('translations'));
             DataItem:=TJSONArray(retData[0].FindPath('translated'))[0];
