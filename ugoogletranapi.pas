@@ -30,7 +30,7 @@ unit uGoogleTranApi;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, Forms;
 
 
 function GoogleTranAPI_GetLangs(const langs:TStrings):Boolean;
@@ -79,6 +79,7 @@ type
 
 var
   ConThread: TConnThread;
+  ConnEnd: Boolean;
 
 
 procedure GetProxyServer;
@@ -276,13 +277,21 @@ end;
 procedure TConnThread.Execute;
 begin
   FreeOnTerminate:=True;
-  uInternetConn:=CheckInternetConn;
+  ConnEnd:=False;
+  try
+    uInternetConn:=CheckInternetConn;
+  finally
+    ConnEnd:=True;
+  end;
 end;
 
 
 initialization
   ConThread:=TConnThread.Create(False);
 
+finalization
+  while not ConnEnd do
+    Application.ProcessMessages;
 
 
 end.

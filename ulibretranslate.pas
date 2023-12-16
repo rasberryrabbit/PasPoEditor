@@ -80,6 +80,7 @@ type
 
 var
   ConThread: TConnThread;
+  ConnEnd: Boolean;
 
 
 procedure GetProxyServer;
@@ -286,13 +287,22 @@ end;
 procedure TConnThread.Execute;
 begin
   FreeOnTerminate:=True;
-  uInternetConn:=CheckInternetConn;
+  ConnEnd:=False;
+  try
+    uInternetConn:=CheckInternetConn;
+  finally
+    ConnEnd:=True;
+  end;
 end;
 
 
 initialization
   LibreTranAPI_SetBaseURL('');
   ConThread:=TConnThread.Create(False);
+
+finalization
+  while not ConnEnd do
+    Application.ProcessMessages;
 
 
 end.
