@@ -383,9 +383,15 @@ object FormPoEditor: TFormPoEditor
         RadioItem = True
       end
       object MenuItem43: TMenuItem
-        Action = TranslateDoLibre
+        Action = TranslateDoLecto
         GroupIndex = 1
         RadioItem = True
+      end
+      object Separator1: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem50: TMenuItem
+        Action = TranslateLectoKey
       end
     end
     object MenuItem40: TMenuItem
@@ -638,11 +644,16 @@ object FormPoEditor: TFormPoEditor
       GroupIndex = 1
       OnExecute = TranslateDoGoogleExecute
     end
-    object TranslateDoLibre: TAction
+    object TranslateDoLecto: TAction
       Category = 'Translator'
-      Caption = 'Use LibreTran'
+      Caption = 'Use Lecto'
       GroupIndex = 1
-      OnExecute = TranslateDoLibreExecute
+      OnExecute = TranslateDoLectoExecute
+    end
+    object TranslateLectoKey: TAction
+      Category = 'Translator'
+      Caption = 'Set Lecto API Key'
+      OnExecute = TranslateLectoKeyExecute
     end
   end
   object ImageList1: TImageList

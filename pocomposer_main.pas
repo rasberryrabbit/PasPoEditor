@@ -38,8 +38,11 @@ type
   { TFormPoEditor }
 
   TFormPoEditor = class(TForm)
+    TranslateLectoKey: TAction;
     MenuItem43: TMenuItem;
-    TranslateDoLibre: TAction;
+    MenuItem50: TMenuItem;
+    Separator1: TMenuItem;
+    TranslateDoLecto: TAction;
     MenuItem49: TMenuItem;
     TranslateDoGoogle: TAction;
     FileSave: TAction;
@@ -218,8 +221,9 @@ type
     procedure Splitter1Moved(Sender: TObject);
     procedure TranslateCopyExecute(Sender: TObject);
     procedure TranslateDoGoogleExecute(Sender: TObject);
-    procedure TranslateDoLibreExecute(Sender: TObject);
+    procedure TranslateDoLectoExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
+    procedure TranslateLectoKeyExecute(Sender: TObject);
     procedure TranslateText1Execute(Sender: TObject);
     procedure TranslateText1Update(Sender: TObject);
   private
@@ -254,8 +258,8 @@ implementation
 {$R *.lfm}
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, LazUTF8, udlgprop,
-  gettext, Translations, DefaultTranslator, udlgshowraw, {udlgBingApiInfo,}
-  uFormTask, ulibretranslate, uGoogleTranApi, LazFileUtils;
+  gettext, Translations, DefaultTranslator, udlgshowraw, uFormTask,
+  uGoogleTranApi, LazFileUtils, ulectotranslate;
 
 var
   mPo:TPoList=nil;
@@ -267,7 +271,6 @@ var
   modified:Boolean=False;
   DisableTranslator:Boolean=False;
   uLineBreak:string=#13#10;
-  uLibreBaseURL:string='';
 
 
 resourcestring
@@ -281,6 +284,7 @@ resourcestring
   rsReplace = 'Replace?';
   rsCannotBeUndo = 'Cannot be undo, are you sure?';
   rsFormCaption = 'PO Editor';
+  rsInputLectoAPIKey = 'Input API Key';
 
 const
   strfuzzy = 'fuzzy';
@@ -426,9 +430,9 @@ begin
   SetupTranslatorApi;
 end;
 
-procedure TFormPoEditor.TranslateDoLibreExecute(Sender: TObject);
+procedure TFormPoEditor.TranslateDoLectoExecute(Sender: TObject);
 begin
-  TranslateDoLibre.Checked:=True;
+  TranslateDoLecto.Checked:=True;
   SetupTranslatorApi;
 end;
 
@@ -459,7 +463,7 @@ begin
         if TranslateDoGoogle.Checked then
           ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg))
           else
-            ret:=LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
+            ret:=LectoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
@@ -482,6 +486,15 @@ begin
       FormTaskProg.Hide;
     end;
   //end;
+end;
+
+procedure TFormPoEditor.TranslateLectoKeyExecute(Sender: TObject);
+var
+  s: string;
+begin
+   s:=InputBox('Lecto', rsInputLectoAPIKey, LectoAPIKey);
+   if s<>'' then
+     LectoAPIKey:=s;
 end;
 
 
@@ -511,7 +524,7 @@ begin
         if TranslateDoGoogle.Checked then
           ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg)
           else
-            ret:=LibreTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
+            ret:=LectoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
       except
         ret:=TranslateError;
       end;
@@ -653,8 +666,8 @@ begin
     MemoId.Height:=FormDataJson.ReadInteger('MemoOldHeight', MemoId.Height);
     OptionSortComment.Checked:=FormDataJson.ReadBoolean('CommentSort', OptionSortComment.Checked);
 
-    uLibreBaseURL:=FormDataJson.ReadString('librebaseurl','');
     DisableTranslator:=FormDataJson.ReadBoolean('skiptran',False);
+    LectoAPIKey:=FormDataJson.ReadString('LectoAPIKey','');
   except
   end;
 end;
@@ -667,8 +680,8 @@ begin
   FormDataJson.WriteInteger('Panel1Height', Panel1.Height);
   FormDataJson.WriteInteger('MemoOldHeight', MemoId.Height);
   FormDataJson.WriteBoolean('CommentSort', OptionSortComment.Checked);
-  FormDataJson.WriteString('librebaseurl',uLibreBaseURL);
   FormDataJson.WriteBoolean('skiptran',DisableTranslator);
+  FormDataJson.WriteString('LectoAPIKey',LectoAPIKey);
   try
     FormDataJson.Save;
   except
@@ -716,12 +729,10 @@ begin
       Langs:=TStringList.Create;
       try
         if TranslateDoGoogle.Checked then begin
-          LibreTranAPI_SetBaseURL('');
           GoogleTranAPI_GetLangs(Langs)
         end else
         begin
-          LibreTranAPI_SetBaseURL(uLibreBaseURL);
-          LibreTranAPI_GetLangs(Langs);
+          LectoTranAPI_GetLangs(Langs);
         end;
       except
       end;

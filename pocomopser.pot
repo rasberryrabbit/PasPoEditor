@@ -28,6 +28,11 @@ msgctxt "pocomposer_main.rsformcaption"
 msgid "PO Editor"
 msgstr ""
 
+#: pocomposer_main.rsinputlectoapikey
+msgctxt "pocomposer_main.rsinputlectoapikey"
+msgid "Input API Key"
+msgstr ""
+
 #: pocomposer_main.rsitwilllostch
 msgid "It will lost changes. continue anyway?"
 msgstr ""
@@ -317,8 +322,12 @@ msgstr ""
 msgid "Use Google"
 msgstr ""
 
-#: tformpoeditor.translatedolibre.caption
-msgid "Use LibreTran"
+#: tformpoeditor.translatedolecto.caption
+msgid "Use Lecto"
+msgstr ""
+
+#: tformpoeditor.translatelectokey.caption
+msgid "Set Lecto API Key"
 msgstr ""
 
 #: tformpoeditor.translatemsg.caption
