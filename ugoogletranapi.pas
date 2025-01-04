@@ -174,8 +174,6 @@ var
   i : integer;
 begin
   Result:=False;
-  if not uInternetConn then
-    exit;
   langs.Clear;
   for i:=low(Google_Lang_array) to High(Google_Lang_array) do
     langs.Add(Google_Lang_array[i]);

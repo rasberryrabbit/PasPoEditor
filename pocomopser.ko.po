@@ -33,6 +33,14 @@ msgctxt "pocomposer_main.rsinputlectoapikey"
 msgid "Input API Key"
 msgstr ""
 
+#: pocomposer_main.rsinputpapagoid
+msgid "Input Papago Client ID"
+msgstr ""
+
+#: pocomposer_main.rsinputpapagosecret
+msgid "Input Papago Client Secret"
+msgstr ""
+
 #: pocomposer_main.rsitwilllostch
 msgid "It will lost changes. continue anyway?"
 msgstr "변경한 내용을 잃습니다. 계속하시겠습니까?"
@@ -327,6 +335,10 @@ msgstr ""
 msgid "Use Lecto"
 msgstr ""
 
+#: tformpoeditor.translatedopapago.caption
+msgid "Use Papago"
+msgstr ""
+
 #: tformpoeditor.translatelectokey.caption
 msgid "Set Lecto API Key"
 msgstr ""
@@ -337,6 +349,10 @@ msgstr ""
 
 #: tformpoeditor.translatemsg.hint
 msgid "Translate directly"
+msgstr ""
+
+#: tformpoeditor.translatepapagokey.caption
+msgid "Set Papago ClientID/Secret"
 msgstr ""
 
 #: tformpoeditor.translatetext1.caption

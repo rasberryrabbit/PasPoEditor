@@ -9,7 +9,7 @@ object FormPoEditor: TFormPoEditor
   Constraints.MinHeight = 400
   Constraints.MinWidth = 620
   Menu = MainMenu1
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -382,6 +382,11 @@ object FormPoEditor: TFormPoEditor
         GroupIndex = 1
         RadioItem = True
       end
+      object MenuItem51: TMenuItem
+        Action = TranslateDoPapago
+        GroupIndex = 1
+        RadioItem = True
+      end
       object MenuItem43: TMenuItem
         Action = TranslateDoLecto
         GroupIndex = 1
@@ -389,6 +394,9 @@ object FormPoEditor: TFormPoEditor
       end
       object Separator1: TMenuItem
         Caption = '-'
+      end
+      object MenuItem52: TMenuItem
+        Action = TranslatePapagoKey
       end
       object MenuItem50: TMenuItem
         Action = TranslateLectoKey
@@ -641,19 +649,31 @@ object FormPoEditor: TFormPoEditor
       Category = 'Translator'
       Caption = 'Use Google'
       Checked = True
-      GroupIndex = 1
+      GroupIndex = 3
       OnExecute = TranslateDoGoogleExecute
     end
     object TranslateDoLecto: TAction
       Category = 'Translator'
       Caption = 'Use Lecto'
-      GroupIndex = 1
+      GroupIndex = 3
       OnExecute = TranslateDoLectoExecute
     end
     object TranslateLectoKey: TAction
       Category = 'Translator'
       Caption = 'Set Lecto API Key'
       OnExecute = TranslateLectoKeyExecute
+    end
+    object TranslateDoPapago: TAction
+      Category = 'Translator'
+      Caption = 'Use Papago'
+      Enabled = False
+      GroupIndex = 3
+      OnExecute = TranslateDoPapagoExecute
+    end
+    object TranslatePapagoKey: TAction
+      Category = 'Translator'
+      Caption = 'Set Papago ClientID/Secret'
+      OnExecute = TranslatePapagoKeyExecute
     end
   end
   object ImageList1: TImageList

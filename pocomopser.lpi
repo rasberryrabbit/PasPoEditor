@@ -61,14 +61,16 @@
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes>
-        <Mode Name="default">
-          <local>
-            <CommandLineParams Value="strings.po"/>
-          </local>
-        </Mode>
+        <Mode Name="default"/>
       </Modes>
     </RunParams>
     <RequiredPackages>
+      <Item>
+        <PackageName Value="dcpcrypt_laz"/>
+      </Item>
+      <Item>
+        <PackageName Value="dcpcrypt"/>
+      </Item>
       <Item>
         <PackageName Value="ExceptionLogger"/>
       </Item>
@@ -138,6 +140,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uStringListPro"/>
       </Unit>
+      <Unit>
+        <Filename Value="uporeplacedialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="upoReplaceDialog"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -148,7 +155,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="synapse;C:\development\extras\rx\rx_laz\"/>
+      <OtherUnitFiles Value="synapse;C:\fpcupdeluxe\extras\rx\rx_laz\;wolfgang"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

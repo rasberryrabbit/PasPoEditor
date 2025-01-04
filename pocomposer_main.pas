@@ -31,13 +31,18 @@ interface
 uses
   Classes, SysUtils, FileUtil, MRUList, ExtendedNotebook, Forms, Controls,
   Graphics, Dialogs, Menus, ActnList, StdActns, ComCtrls, StdCtrls, ExtCtrls,
-  JSONPropStorage, types, contnrs, uStringListPro, UExceptionLogger;
+  JSONPropStorage, types, contnrs, uStringListPro, UExceptionLogger,
+  upoReplaceDialog;
 
 type
 
   { TFormPoEditor }
 
   TFormPoEditor = class(TForm)
+    MenuItem51: TMenuItem;
+    MenuItem52: TMenuItem;
+    TranslatePapagoKey: TAction;
+    TranslateDoPapago: TAction;
     TranslateLectoKey: TAction;
     MenuItem43: TMenuItem;
     MenuItem50: TMenuItem;
@@ -222,8 +227,10 @@ type
     procedure TranslateCopyExecute(Sender: TObject);
     procedure TranslateDoGoogleExecute(Sender: TObject);
     procedure TranslateDoLectoExecute(Sender: TObject);
+    procedure TranslateDoPapagoExecute(Sender: TObject);
     procedure TranslateMsgExecute(Sender: TObject);
     procedure TranslateLectoKeyExecute(Sender: TObject);
+    procedure TranslatePapagoKeyExecute(Sender: TObject);
     procedure TranslateText1Execute(Sender: TObject);
     procedure TranslateText1Update(Sender: TObject);
   private
@@ -259,7 +266,7 @@ implementation
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, LazUTF8, udlgprop,
   gettext, Translations, DefaultTranslator, udlgshowraw, uFormTask,
-  uGoogleTranApi, LazFileUtils, ulectotranslate;
+  uGoogleTranApi, LazFileUtils, ulectotranslate, upapagotranslate;
 
 var
   mPo:TPoList=nil;
@@ -271,6 +278,7 @@ var
   modified:Boolean=False;
   DisableTranslator:Boolean=False;
   uLineBreak:string=#13#10;
+  idTranslator:Integer=0;
 
 
 resourcestring
@@ -285,6 +293,8 @@ resourcestring
   rsCannotBeUndo = 'Cannot be undo, are you sure?';
   rsFormCaption = 'PO Editor';
   rsInputLectoAPIKey = 'Input API Key';
+  rsInputPapagoID = 'Input Papago Client ID';
+  rsInputPapagoSecret = 'Input Papago Client Secret';
 
 const
   strfuzzy = 'fuzzy';
@@ -427,12 +437,21 @@ end;
 procedure TFormPoEditor.TranslateDoGoogleExecute(Sender: TObject);
 begin
   TranslateDoGoogle.Checked:=True;
+  idTranslator:=0;
   SetupTranslatorApi;
 end;
 
 procedure TFormPoEditor.TranslateDoLectoExecute(Sender: TObject);
 begin
   TranslateDoLecto.Checked:=True;
+  idTranslator:=2;
+  SetupTranslatorApi;
+end;
+
+procedure TFormPoEditor.TranslateDoPapagoExecute(Sender: TObject);
+begin
+  TranslateDoPapago.Checked:=True;
+  idTranslator:=1;
   SetupTranslatorApi;
 end;
 
@@ -460,10 +479,11 @@ begin
         FormTaskProg.Show;
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
-        if TranslateDoGoogle.Checked then
-          ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg))
-          else
-            ret:=LectoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
+        case idTranslator of
+        0: ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
+        1: ret:=PapagoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
+        2: ret:=LectoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
+        end;
         memoout:=NoteMsg.Pages[NoteMsg.PageIndex].Controls[0] as TMemo;
         if memoout.SelLength>0 then
           memoout.SelText:=pchar(ret)
@@ -497,6 +517,19 @@ begin
      LectoAPIKey:=s;
 end;
 
+procedure TFormPoEditor.TranslatePapagoKeyExecute(Sender: TObject);
+var
+  s1, s2: string;
+begin
+  s1:=InputBox('Papago', rsInputPapagoID, PapagoClientID);
+  s2:=InputBox('Papago', rsInputPapagoSecret, PapagoClientSecret);
+  if (s1<>'') and (s2<>'') then
+    begin
+      PapagoClientID:=s1;
+      PapagoClientSecret:=s2;
+    end;
+end;
+
 
 procedure TFormPoEditor.TranslateText1Execute(Sender: TObject);
 var
@@ -521,10 +554,11 @@ begin
         FormTaskProg.Show;
         FormTaskProg.Caption:='Translate';
         Application.ProcessMessages;
-        if TranslateDoGoogle.Checked then
-          ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg)
-          else
-            ret:=LectoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
+        case idTranslator of
+        0: ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
+        1: ret:=PapagoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
+        2: ret:=LectoTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
+        end;
       except
         ret:=TranslateError;
       end;
@@ -668,6 +702,11 @@ begin
 
     DisableTranslator:=FormDataJson.ReadBoolean('skiptran',False);
     LectoAPIKey:=FormDataJson.ReadString('LectoAPIKey','');
+
+    PapagoClientID:=FormDataJson.ReadString('PapagoClient',PapagoClientID);
+    PapagoClientSecret:=FormDataJson.ReadString('PapagoSecret',PapagoClientSecret);
+
+    idTranslator:=FormDataJson.ReadInteger('TranAPI',0);
   except
   end;
 end;
@@ -682,6 +721,9 @@ begin
   FormDataJson.WriteBoolean('CommentSort', OptionSortComment.Checked);
   FormDataJson.WriteBoolean('skiptran',DisableTranslator);
   FormDataJson.WriteString('LectoAPIKey',LectoAPIKey);
+  FormDataJson.WriteString('PapagoClient',PapagoClientID);
+  FormDataJson.WriteString('PapagoSecret',PapagoClientSecret);
+  FormDataJson.WriteInteger('TranAPI',idTranslator);
   try
     FormDataJson.Save;
   except
@@ -728,11 +770,10 @@ begin
     if not DisableTranslator then begin
       Langs:=TStringList.Create;
       try
-        if TranslateDoGoogle.Checked then begin
-          GoogleTranAPI_GetLangs(Langs)
-        end else
-        begin
-          LectoTranAPI_GetLangs(Langs);
+        case idTranslator of
+        0: GoogleTranAPI_GetLangs(Langs);
+        1: PapagoTranAPI_GetLangs(Langs);
+        2: LectoTranAPI_GetLangs(Langs);
         end;
       except
       end;
@@ -1416,6 +1457,11 @@ end;
 
 procedure TFormPoEditor.FormShow(Sender: TObject);
 begin
+  case idTranslator of
+  0: TranslateDoGoogle.Checked:=True;
+  1: TranslateDoPapago.Checked:=True;
+  2: TranslateDoLecto.Checked:=True;
+  end;
   SetupTranslatorApi;
   if Paramcount>0 then begin
     FileOpen1.Dialog.FileName:=pchar(ParamStrUTF8(1));
@@ -1941,22 +1987,6 @@ var
   aBtn : TButton;
 begin
   bidx:=0;
-
-  (*
-  ===================================================================
-  --- lcl/dialogs.pp	(revision 60117)
-  +++ lcl/dialogs.pp	(working copy)
-  @@ -463,6 +463,7 @@
-       property Left: Integer read GetLeft write SetLeft;
-       property Position: TPoint read GetPosition write SetPosition;
-       property Top: Integer read GetTop write SetTop;
-  +    property FindForm: TForm read FFindForm;
-     published
-       property FindText: string read GetFindText write SetFindText;
-       property Options: TFindOptions read FOptions write SetOptions default [frDown];
-
-  *)
-
   aForm:=ReplaceDialog1.FindForm;  // custom property
   if aForm<>nil then
     for i:=0 to aForm.ComponentCount-1 do begin
