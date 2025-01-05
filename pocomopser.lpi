@@ -155,7 +155,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="synapse;C:\fpcupdeluxe\extras\rx\rx_laz\;wolfgang"/>
+      <OtherUnitFiles Value="synapse;C:\fpcupdeluxe\extras\rx\rx_laz\"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

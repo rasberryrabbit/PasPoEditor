@@ -44,21 +44,24 @@ var
   TranProxyPort:string='';
   PapagoClientID:string='';
   PapagoClientSecret:string='';
+  debugtxt:string='';
 
 
 implementation
 
 uses
   fpjson, jsonparser, httpsend, synsock, synacode, ssl_openssl,
-  RegExpr, ZStream, HMAC_MD5, HMAC, MD5, Hash, DateUtils;
+  RegExpr, ZStream, DateUtils, HMAC, base64;
 
 const
  user_agent_browser = 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36';
  Papago_Base = 'https://papago.naver.com';
  Papago_n2mt = '/apis/n2mt/translate';
- Papago_url = Papago_Base+Papago_n2mt;
+ Papago_nsmt = '/apis/nsmt/translate';
+ Papago_url = Papago_Base+Papago_nsmt;
  Papago_dtLang = 'https://openapi.naver.com/v1/papago/detectLangs';
  Papago_params = 'deviceId=%s&locale=en&dict=false&honorific=false&instant=true&source=%s&target=%s&text=%s';
+ Papago_json = '{ ''source'':''%s'', ''target'':''%s'', ''text'':''%s'' }';
  pattern_src = '/vendors~main[^"]+';
  pattern_version = 'v\d\.\d\.\d_[^"]+';
 
@@ -181,32 +184,23 @@ end;
 procedure Add_Header(Headers:TStrings);
 begin
   Headers.Clear;
-  Headers.Add('device-type: pc');
-  Headers.Add('Origin: https://papago.naver.com');
-  Headers.Add('Accept-Encoding: gzip, deflate, br');
-  Headers.Add('Accept-Language: ko');
-  Headers.Add('User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0');
-  Headers.Add('Content-Type: application/x-www-form-urlencoded; charset=UTF-8');
   Headers.Add('Accept: application/json');
-  Headers.Add('Authority: papago.naver.com');
-  Headers.Add('Connection: keep-alive');
-  Headers.Add('Referer: https://papago.naver.com/');
-  Headers.Add('x-apigw-partnerid: papago');
+  Headers.Add('User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0');
+  Headers.Add('Content-Type: application/x-www-form-urlencoded; charset=UTF-8');
+  Headers.Add('Accept-Encoding: gzip, deflate, br, zstd');
 end;
 
 function GetHMACMD5(const key, data: string):string;
 var
-  ctx: THMAC_Context;
-  mac: TMD5Digest;
+  dgst:THMACMD5Digest;
+  dgststr: string;
   i: Integer;
 begin
-  Result:='';
-  hmac_MD5_init(ctx,@key[1],Length(key));
-  hmac_MD5_update(ctx,@data[1],Length(data));
-  hmac_MD5_final(ctx,mac);
-  for i:=Low(mac) to High(mac) do
-    Result:=Result+char(mac[i]);
-  Result:=EncodeBase64(Result);
+  SetLength(dgststr,16);
+  dgst:=HMACMD5Digest(key,data);
+  for i:=0 to 15 do
+    byte(dgststr[i+1]):=dgst[i];
+  Result:=EncodeStringBase64(dgststr);
 end;
 
 procedure SetupVersion;
@@ -262,6 +256,38 @@ begin
   end;
 end;
 
+function DateTimeToNumber(ADateTime: TDateTime): Double;
+begin
+  if ADateTime >= 0  then
+    Result := ADateTime
+  else
+    Result := int(ADateTime) - frac(ADateTime);
+end;
+
+function NumberToDateTime(AValue: Double): TDateTime;
+begin
+  if AValue >= 0 then
+    Result := AValue
+  else
+    Result := int(AValue) + frac(AValue);
+end;
+
+Function DateTimeDiff(const ANow, AThen: TDateTime): TDateTime;
+begin
+  Result := NumberToDateTime(DateTimeToNumber(ANow) - DateTimeToNumber(AThen));
+end;
+
+Function DateTimeToUnix(const AValue: TDateTime; AInputIsUTC: Boolean = True): Int64;
+Var
+  T : TDateTime;
+begin
+  T:=aValue;
+  if Not aInputisUTC then
+    T:=IncMinute(T,GetLocalTimeOffset(AValue, AInputisUTC));
+  Result:=Round(DateTimeDiff(RecodeMillisecond(T,0),UnixEpoch)*SecsPerDay*1000);
+end;
+
+
 function PapagoTranAPI_Translate(const fromlang, tolang, text: string): string;
 var
   hget: THTTPSend;
@@ -280,7 +306,7 @@ begin
     d:=NowUTC;
     timestamp:=IntToStr(DateTimeToUnix(d));
     key:=_version;
-    data:=sysid+#13#10+Papago_url+#13#10+timestamp;
+    data:=sysid+#$a+Papago_url+#$a+timestamp;
     token:=GetHMACMD5(key,data);
 
     hget.Headers.Add('Authorization: PPG '+sysid+':'+token);
