@@ -145,6 +145,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="upoReplaceDialog"/>
       </Unit>
+      <Unit>
+        <Filename Value="udatetimecsharp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uDateTimeCSharp"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

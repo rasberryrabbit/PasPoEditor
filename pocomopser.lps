@@ -8,9 +8,10 @@
       <Unit>
         <Filename Value="pocomopser.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="62" Y="12"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="61" Y="12"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pocomposer_main.pas"/>
@@ -18,7 +19,6 @@
         <ComponentName Value="FormPoEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="1975"/>
         <CursorPos X="9" Y="2001"/>
         <UsageCount Value="201"/>
@@ -29,7 +29,7 @@
         <Filename Value="uporeader.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uPoReader"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="85"/>
         <CursorPos X="3" Y="36"/>
         <UsageCount Value="201"/>
@@ -59,16 +59,16 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="13"/>
         <CursorPos X="11" Y="37"/>
-        <UsageCount Value="162"/>
+        <UsageCount Value="164"/>
       </Unit>
       <Unit>
         <Filename Value="ugoogletranapi.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uGoogleTranApi"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="270"/>
         <CursorPos X="15" Y="177"/>
-        <UsageCount Value="98"/>
+        <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -78,9 +78,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFormTask"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="21" Y="51"/>
-        <UsageCount Value="83"/>
+        <UsageCount Value="85"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -88,10 +88,10 @@
         <Filename Value="ustringlistpro.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uStringListPro"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="24"/>
         <CursorPos X="15" Y="51"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="72"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -100,7 +100,17 @@
         <UnitName Value="upoReplaceDialog"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="58" Y="11"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="28"/>
+      </Unit>
+      <Unit>
+        <Filename Value="udatetimecsharp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uDateTimeCSharp"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="160"/>
+        <CursorPos X="79" Y="180"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="uMSTRanAPI.pas"/>
@@ -839,10 +849,11 @@
       </Unit>
       <Unit>
         <Filename Value="upapagotranslate.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="300"/>
-        <CursorPos Y="336"/>
-        <UsageCount Value="22"/>
+        <TopLine Value="310"/>
+        <CursorPos X="5" Y="329"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -905,16 +916,16 @@
       <Unit>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysutils\datih.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="139"/>
-        <CursorPos X="20" Y="115"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="114"/>
+        <CursorPos X="10" Y="127"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysutils\dati.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="97"/>
-        <CursorPos X="59" Y="100"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="60"/>
+        <CursorPos X="3" Y="49"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\fpcupdeluxe\lazarus\lcl\dialogs.pp"/>
@@ -927,8 +938,8 @@
       <Unit>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\rtl-objpas\src\inc\dateutil.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2105"/>
-        <CursorPos X="3" Y="2107"/>
+        <TopLine Value="2295"/>
+        <CursorPos X="40" Y="2312"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -960,123 +971,141 @@
         <CursorPos X="71" Y="76"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\rtl-objpas\src\inc\dateutils.pp"/>
+        <UnitName Value="DateUtils"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysconst.pp"/>
+        <UnitName Value="SysConst"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="41"/>
+        <CursorPos X="60" Y="52"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
+    <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="343" Column="29" TopLine="327"/>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="169" TopLine="160"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="170" TopLine="160"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="163" TopLine="158"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="164" TopLine="158"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="119" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="120" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="121" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="122" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="123" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="124" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="125" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="126" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="127" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="128" TopLine="107"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="129" TopLine="109"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="100" TopLine="87"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="101" TopLine="87"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="102" TopLine="87"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="87" TopLine="74"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="88" TopLine="74"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="91" TopLine="74"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="92" TopLine="74"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="93" TopLine="74"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="103" TopLine="90"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="104" TopLine="90"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="105" TopLine="90"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="130" TopLine="115"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="166" TopLine="159"/>
+      </Position>
+      <Position>
+        <Filename Value="udatetimecsharp.pas"/>
+        <Caret Line="171" TopLine="159"/>
       </Position>
       <Position>
         <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="317" Column="17" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="198" Column="14" TopLine="188"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="205" Column="12" TopLine="191"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="54" Column="18" TopLine="41"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="53" Column="31" TopLine="41"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="200" Column="8" TopLine="191"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="53" Column="44" TopLine="46"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="200" Column="30" TopLine="187"/>
-      </Position>
-      <Position>
-        <Filename Value="ustringlistpro.pas"/>
-        <Caret Line="51" Column="15"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="193" Column="45" TopLine="188"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="200" Column="40" TopLine="188"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="53" Column="38" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="200" Column="35" TopLine="187"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="53" Column="32" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="200" Column="36" TopLine="187"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="208" TopLine="196"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="207" Column="23" TopLine="194"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="208" TopLine="194"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="352" Column="7" TopLine="336"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="356" TopLine="338"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="217" TopLine="204"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="205" Column="25" TopLine="195"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="357" TopLine="340"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="356" Column="33" TopLine="340"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="355" TopLine="335"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="303" Column="61" TopLine="291"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="317" Column="13" TopLine="303"/>
-      </Position>
-      <Position>
-        <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="300" Column="23" TopLine="291"/>
+        <Caret Line="329" TopLine="310"/>
       </Position>
     </JumpHistory>
     <RunParams>
