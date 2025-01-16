@@ -51,7 +51,7 @@ implementation
 
 uses
   fpjson, jsonparser, httpsend, synsock, synacode, ssl_openssl,
-  RegExpr, ZStream, DateUtils, HMAC, base64;
+  RegExpr, ZStream,HMAC, base64, uDateTimeCSharp;
 
 const
  user_agent_browser = 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36';
@@ -277,17 +277,6 @@ begin
   Result := NumberToDateTime(DateTimeToNumber(ANow) - DateTimeToNumber(AThen));
 end;
 
-Function DateTimeToUnix(const AValue: TDateTime; AInputIsUTC: Boolean = True): Int64;
-Var
-  T : TDateTime;
-begin
-  T:=aValue;
-  if Not aInputisUTC then
-    T:=IncMinute(T,GetLocalTimeOffset(AValue, AInputisUTC));
-  Result:=Round(DateTimeDiff(RecodeMillisecond(T,0),UnixEpoch)*SecsPerDay*1000);
-end;
-
-
 function PapagoTranAPI_Translate(const fromlang, tolang, text: string): string;
 var
   hget: THTTPSend;
@@ -304,7 +293,7 @@ begin
     Add_Header(hget.Headers);
 
     d:=NowUTC;
-    timestamp:=IntToStr(DateTimeToUnix(d));
+    timestamp:=IntToStr(DateTimeToUnix_us(d));
     key:=_version;
     data:=sysid+#$a+Papago_url+#$a+timestamp;
     token:=GetHMACMD5(key,data);
@@ -335,6 +324,9 @@ initialization
   sysid:=copy(sysid,2,36);
   LangList:= TStringList.Create;
   SetupVersion;
+
+  // 1736396471279
+  //debugtxt:=IntToStr(DateTimeToUnix_us(Now));
 
 finalization
   LangList.Free;
