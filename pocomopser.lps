@@ -19,8 +19,9 @@
         <ComponentName Value="FormPoEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="1975"/>
-        <CursorPos X="9" Y="2001"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="819"/>
+        <CursorPos Y="785"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -849,9 +850,8 @@
       </Unit>
       <Unit>
         <Filename Value="upapagotranslate.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="310"/>
+        <TopLine Value="295"/>
         <CursorPos X="5" Y="329"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
@@ -985,20 +985,31 @@
         <CursorPos X="60" Y="52"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\fcl-base\src\gettext.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="69"/>
+        <CursorPos X="20" Y="78"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\fpcupdeluxe\lazarus\components\lazutils\lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3867"/>
+        <CursorPos X="61" Y="6"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\fpcupdeluxe\lazarus\components\lazutils\translations.pas"/>
+        <UnitName Value="Translations"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="284"/>
+        <CursorPos X="22" Y="192"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="udatetimecsharp.pas"/>
-        <Caret Line="169" TopLine="160"/>
-      </Position>
-      <Position>
-        <Filename Value="udatetimecsharp.pas"/>
-        <Caret Line="170" TopLine="160"/>
-      </Position>
-      <Position>
-        <Filename Value="udatetimecsharp.pas"/>
-        <Caret Line="163" TopLine="158"/>
-      </Position>
       <Position>
         <Filename Value="udatetimecsharp.pas"/>
         <Caret Line="164" TopLine="158"/>
@@ -1105,7 +1116,19 @@
       </Position>
       <Position>
         <Filename Value="upapagotranslate.pas"/>
-        <Caret Line="329" TopLine="310"/>
+        <Caret Line="329" Column="5" TopLine="307"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="785" Column="28" TopLine="770"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="784" Column="40" TopLine="765"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="787" TopLine="775"/>
       </Position>
     </JumpHistory>
     <RunParams>

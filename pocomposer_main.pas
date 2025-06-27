@@ -762,7 +762,7 @@ end;
 procedure TFormPoEditor.SetupTranslatorApi;
 var
   i: Integer;
-  lang: string;
+  lang: TLanguageID;
   Langs: TStringList;
 begin
   try
@@ -781,10 +781,10 @@ begin
       ComboBoxSrcLang.Items.Assign(Langs);
       ComboBoxSrcLang.Items.Insert(0, rsAuto);
       ComboBoxSrcLang.ItemIndex:=0;
-      LazGetShortLanguageID(lang);
+      lang:=Translations.GetLanguageID;
       if ComboBoxLang.Items.Count>0 then
         for i:=0 to ComboBoxLang.Items.Count-1 do
-          if ComboBoxLang.Items[i]=lang then begin
+          if ComboBoxLang.Items[i]=lang.LanguageID then begin
             ComboBoxLang.ItemIndex:=i;
             break;
         end;
