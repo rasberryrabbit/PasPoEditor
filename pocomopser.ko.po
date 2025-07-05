@@ -13,6 +13,10 @@ msgstr "자동"
 msgid "Cannot be undo, are you sure?"
 msgstr "되돌릴 수 없어집니다. 정말 하시겠습니까?"
 
+#: pocomposer_main.rsclearuntrans
+msgid "Clear Untranslated"
+msgstr ""
+
 #: pocomposer_main.rsdmessagesimp
 #, object-pascal-format
 msgid "%d messages imported."
@@ -23,10 +27,26 @@ msgstr "%d 번역을 가져왔습니다."
 msgid "%d patched, %d added"
 msgstr "%d 패치되고 %d 추가 되었습니다"
 
+#: pocomposer_main.rsexport
+msgid "Export"
+msgstr ""
+
+#: pocomposer_main.rsexportselect
+msgid "Export Selection"
+msgstr ""
+
 #: pocomposer_main.rsformcaption
 msgctxt "pocomposer_main.rsformcaption"
 msgid "PO Editor"
 msgstr "PO 편집기"
+
+#: pocomposer_main.rsimport
+msgid "Import"
+msgstr ""
+
+#: pocomposer_main.rsimportadd
+msgid "Import(Add)"
+msgstr ""
 
 #: pocomposer_main.rsinputlectoapikey
 msgctxt "pocomposer_main.rsinputlectoapikey"
@@ -45,6 +65,10 @@ msgstr ""
 msgid "It will lost changes. continue anyway?"
 msgstr "변경한 내용을 잃습니다. 계속하시겠습니까?"
 
+#: pocomposer_main.rsloading
+msgid "Loading"
+msgstr ""
+
 #: pocomposer_main.rsnomatchesfound
 msgid "No Matches found."
 msgstr "일치하는 것이 없습니다."
@@ -52,6 +76,19 @@ msgstr "일치하는 것이 없습니다."
 #: pocomposer_main.rsreplace
 msgid "Replace?"
 msgstr "바꾸시겠습니까?"
+
+#: pocomposer_main.rssave
+msgctxt "pocomposer_main.rssave"
+msgid "Save"
+msgstr ""
+
+#: pocomposer_main.rssort
+msgid "Sort"
+msgstr ""
+
+#: pocomposer_main.rstranslate
+msgid "Translate"
+msgstr ""
 
 #: pocomposer_main.translateerror
 msgid "Translator Error"
@@ -228,6 +265,7 @@ msgid "Open"
 msgstr ""
 
 #: tformpoeditor.filesave.caption
+msgctxt "tformpoeditor.filesave.caption"
 msgid "Save"
 msgstr ""
 

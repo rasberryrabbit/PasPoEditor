@@ -13,6 +13,10 @@ msgstr ""
 msgid "Cannot be undo, are you sure?"
 msgstr ""
 
+#: pocomposer_main.rsclearuntrans
+msgid "Clear Untranslated"
+msgstr ""
+
 #: pocomposer_main.rsdmessagesimp
 #, object-pascal-format
 msgid "%d messages imported."
@@ -23,9 +27,25 @@ msgstr ""
 msgid "%d patched, %d added"
 msgstr ""
 
+#: pocomposer_main.rsexport
+msgid "Export"
+msgstr ""
+
+#: pocomposer_main.rsexportselect
+msgid "Export Selection"
+msgstr ""
+
 #: pocomposer_main.rsformcaption
 msgctxt "pocomposer_main.rsformcaption"
 msgid "PO Editor"
+msgstr ""
+
+#: pocomposer_main.rsimport
+msgid "Import"
+msgstr ""
+
+#: pocomposer_main.rsimportadd
+msgid "Import(Add)"
 msgstr ""
 
 #: pocomposer_main.rsinputlectoapikey
@@ -45,12 +65,29 @@ msgstr ""
 msgid "It will lost changes. continue anyway?"
 msgstr ""
 
+#: pocomposer_main.rsloading
+msgid "Loading"
+msgstr ""
+
 #: pocomposer_main.rsnomatchesfound
 msgid "No Matches found."
 msgstr ""
 
 #: pocomposer_main.rsreplace
 msgid "Replace?"
+msgstr ""
+
+#: pocomposer_main.rssave
+msgctxt "pocomposer_main.rssave"
+msgid "Save"
+msgstr ""
+
+#: pocomposer_main.rssort
+msgid "Sort"
+msgstr ""
+
+#: pocomposer_main.rstranslate
+msgid "Translate"
 msgstr ""
 
 #: pocomposer_main.translateerror
@@ -227,6 +264,7 @@ msgid "Open"
 msgstr ""
 
 #: tformpoeditor.filesave.caption
+msgctxt "tformpoeditor.filesave.caption"
 msgid "Save"
 msgstr ""
 
