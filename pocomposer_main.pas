@@ -4,7 +4,7 @@ unit pocomposer_main;
 
 { Simple PO Editor
 
-  Copyright (c) 2013-2018 rasberryrabbit
+  Copyright (c) 2013-2025 rasberryrabbit
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -295,6 +295,15 @@ resourcestring
   rsInputLectoAPIKey = 'Input API Key';
   rsInputPapagoID = 'Input Papago Client ID';
   rsInputPapagoSecret = 'Input Papago Client Secret';
+  rsLoading = 'Loading';
+  rsExportSelect = 'Export Selection';
+  rsImport = 'Import';
+  rsSave = 'Save';
+  rsExport = 'Export';
+  rsClearUntrans = 'Clear Untranslated';
+  rsImportAdd = 'Import(Add)';
+  rsSort = 'Sort';
+  rsTranslate = 'Translate';
 
 const
   strfuzzy = 'fuzzy';
@@ -477,7 +486,7 @@ begin
           else
             ret:='';
         FormTaskProg.Show;
-        FormTaskProg.Caption:='Translate';
+        FormTaskProg.Caption:=rsTranslate;
         Application.ProcessMessages;
         case idTranslator of
         0: ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),pchar(msg));
@@ -552,7 +561,7 @@ begin
           else
             ret:='';
         FormTaskProg.Show;
-        FormTaskProg.Caption:='Translate';
+        FormTaskProg.Caption:=rsTranslate;
         Application.ProcessMessages;
         case idTranslator of
         0: ret:=GoogleTranAPI_Translate(ret,pchar(ComboBoxLang.Text),msg);
@@ -670,7 +679,7 @@ begin
   lastFindIndex:=Point(-1, 0);
 
   FormTaskProg.Show;
-  FormTaskProg.Caption:='Sort';
+  FormTaskProg.Caption:=rsSort;
   try
     for i:=0 to mPo.Count-1 do begin
         stemp:=TPoItem(mPo.Items[i]).GetNameStr('msgid');
@@ -834,7 +843,7 @@ begin
   lastFindIndex:=Point(-1,0);
   if Assigned(mPo) then
      FreeAndNil(mPo);
-  FormTaskProg.Caption:='Loading';
+  FormTaskProg.Caption:=rsLoading;
   FormTaskProg.Show;
   mPo:=TPoList.Create;
   try
@@ -906,7 +915,7 @@ begin
       try
         mPOimport.Callback:=@PoListCallback;
         FormTaskProg.Show;
-        FormTaskProg.Caption:='Import(Add)';
+        FormTaskProg.Caption:=rsImportAdd;
         try
           mPOimport.Load(OpenDialogImport.FileName);
           mPOimport.FileLineBreak:=mPo.FileLineBreak;
@@ -1074,7 +1083,7 @@ begin
           try
             newPo.Callback:=@PoListCallback;
             FormTaskProg.Show;
-            FormTaskProg.Caption:='Export Selection';
+            FormTaskProg.Caption:=rsExportSelect;
             newPo.Save(SaveDialogExport.FileName);
             MRUManager1.Add(SaveDialogExport.FileName,0);
           except
@@ -1231,7 +1240,7 @@ begin
         ListBoxPO.Clear;
         PoList.Clear;
         FormTaskProg.Show;
-        FormTaskProg.Caption:='Clear Untranslated';
+        FormTaskProg.Caption:=rsClearUntrans;
         try
           i:=0;
           while i<mPo.Count do begin
@@ -1339,7 +1348,7 @@ begin
           try
             newPo.Callback:=@PoListCallback;
             FormTaskProg.Show;
-            FormTaskProg.Caption:='Export';
+            FormTaskProg.Caption:=rsExport;
             newPo.Save(SaveDialogExport.FileName);
             MRUManager1.Add(SaveDialogExport.FileName,0);
           except
@@ -1372,7 +1381,7 @@ begin
           mPo.LineBreak:=#13#10;
       mPo.Callback:=@PoListCallback;
       FormTaskProg.Show;
-      FormTaskProg.Caption:='Save';
+      FormTaskProg.Caption:=rsSave;
       mPo.Save(TFileSaveAs(Sender).Dialog.FileName);
       MRUManager1.Add(TFileSaveAs(Sender).Dialog.FileName,0);
       modified:=False;
@@ -1493,7 +1502,7 @@ begin
       try
         mPOimport.Callback:=@PoListCallback;
         FormTaskProg.Show;
-        FormTaskProg.Caption:='Import';
+        FormTaskProg.Caption:=rsImport;
         try
           mPOimport.Load(OpenDialogImport.FileName);
           mPOimport.FileLineBreak:=mPo.FileLineBreak;
