@@ -20,8 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1486"/>
-        <CursorPos X="28" Y="1511"/>
+        <TopLine Value="1707"/>
+        <CursorPos Y="1716"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -1012,10 +1012,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="udatetimecsharp.pas"/>
-        <Caret Line="164" TopLine="158"/>
-      </Position>
-      <Position>
-        <Filename Value="udatetimecsharp.pas"/>
         <Caret Line="119" TopLine="106"/>
       </Position>
       <Position>
@@ -1129,6 +1125,10 @@
       <Position>
         <Filename Value="pocomposer_main.pas"/>
         <Caret Line="787" TopLine="775"/>
+      </Position>
+      <Position>
+        <Filename Value="pocomposer_main.pas"/>
+        <Caret Line="209" Column="24" TopLine="203"/>
       </Position>
     </JumpHistory>
     <RunParams>
