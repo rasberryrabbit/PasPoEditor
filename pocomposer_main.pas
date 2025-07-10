@@ -266,7 +266,8 @@ implementation
 
 uses uPoReader, LCLType, {RegExpr,} BRRE, LazUTF8, udlgprop,
   gettext, Translations, DefaultTranslator, udlgshowraw, uFormTask,
-  uGoogleTranApi, LazFileUtils, ulectotranslate, upapagotranslate;
+  uGoogleTranApi, LazFileUtils, ulectotranslate, upapagotranslate,
+  LCLIntf;
 
 var
   mPo:TPoList=nil;
@@ -1712,6 +1713,8 @@ begin
   iCanvas.TextRect(ARect,ARect.Left+10,ARect.Top+7+(nHeight+2),sid);
   iCanvas.Font.Color:=clGreen;
   iCanvas.TextRect(ARect,ARect.Left+3,ARect.Top+7,scmt);
+  if TListBox(Control).ItemIndex=Index then
+    DrawFocusRect(iCanvas.Handle,ARect);
 end;
 
 
