@@ -132,6 +132,41 @@ const
   _PO_Flag = '#,';
   dummyLineBrk:array[0..2] of char=(#13,#10,#0);
 
+function GetLineEnd(const s:string):Integer;
+var
+  i, len, ib: Integer;
+  brkch: char;
+begin
+  Result:=0;
+  i:=1;
+  brkch:=#0;
+  len:=Length(s);
+  while i<=len do begin
+    if s[i] in [#10,#13] then begin
+      brkch:=s[i];
+      inc(i);
+      while i<=len do begin
+        if s[i] in [#10,#13] then begin
+          if s[i]=brkch then
+            Result:=i-1
+            else
+              Result:=i;
+        end
+        else
+          Result:=i-1;
+        if Result>0 then
+          break;
+        inc(i);
+      end;
+      if Result>0 then
+        break;
+    end;
+    inc(i);
+  end;
+  if Result>Len then
+    Result:=0;
+end;
+
 { TPoItem }
 
 function TPoItem.GetHeader(const str: string): string;
@@ -204,7 +239,6 @@ begin
     end else
       break;
   end;
-  // remove space
   while i<=l do begin
     if str[i]>#32 then
       break;
@@ -216,24 +250,49 @@ begin
        Value:='';
 end;
 
+function RemoveLineBrk(const s:string):string;
+var
+  len: Integer;
+begin
+  len:=Length(s);
+  while len>0 do begin
+    if s[len] in [#10,#13] then
+      dec(len)
+      else
+        break;
+  end;
+  if len=0 then
+    len:=Length(s);
+  Result:=Copy(s,1,len);
+end;
+
 // check multiline
 function TPoItem.ValidateValue(const str: string): string;
 var
-  s1, s2:string;
-  ip:Integer;
+  s1, s2, s3, s4:string;
+  ip, len, i:Integer;
+  isMsgid: boolean;
 begin
   Result:='';
   s1:=GetHeaderValue(str,s2);
-  ip:=Pos(#13#10,s2);
-  if ip=0 then
-     ip:=Pos(#10,s2);
-  if ip=0 then
-     ip:=Pos(StrPas(StrLineBreak),s2);
-  if ip>0 then begin
-    if Copy(s2,1,ip-1)<>'""' then
-       s2:='""'+StrLineBreak+s2;
-  end;
-  Result:=s1+' '+s2;
+  s3:='';
+  i:=0;
+  isMsgid:=CompareText(s1,'msgid')=0;
+  repeat
+    ip:=GetLineEnd(s2);
+    if s3<>'' then
+      s3:=s3+StrLineBreak;
+    if ip>0 then begin
+      // msgid multiline has no first "" text
+      s4:=RemoveLineBrk(Copy(s2,1,ip));
+      if (i>0) or (not isMsgid) or (s4<>'""') then
+        s3:=s3+s4;
+      system.Delete(s2,1,ip);
+      inc(i);
+    end else
+      s3:=s3+s2;
+  until ip=0;
+  Result:=s1+' '+s3;
 end;
 
 function TPoItem.GetStrItem(Index: Integer): string;
