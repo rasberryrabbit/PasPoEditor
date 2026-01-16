@@ -50,7 +50,7 @@ uses
   RegExpr;
 
 const
- user_agent_browser = 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64)';
+  user_agent_browser = 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64)';
 
 (*
   return json array
@@ -207,7 +207,9 @@ begin
           end;
           }
         end;
-      end;
+      end
+    else
+      ret:='Invalid';
   end;
 end;
 
