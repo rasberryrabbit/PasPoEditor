@@ -38,7 +38,7 @@ unit uPoReader;
 interface
 
 uses
-  Classes, SysUtils{$ifdef USE_UTF8_FILESTREAM}, LazUTF8Classes{$endif};
+  Classes, SysUtils{$ifdef USE_UTF8_FILESTREAM}, LazUTF8Classes {$endif};
 
 type
 
@@ -283,7 +283,7 @@ begin
     if s3<>'' then
       s3:=s3+StrLineBreak;
     if ip>0 then begin
-      // msgid multiline has no first "" text
+      // msgid multiline has no first "" text, it prevent making error some app.
       s4:=RemoveLineBrk(Copy(s2,1,ip));
       if (i>0) or (not isMsgid) or (s4<>'""') then
         s3:=s3+s4;
