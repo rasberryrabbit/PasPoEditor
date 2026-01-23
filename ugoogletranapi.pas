@@ -47,27 +47,7 @@ implementation
 
 uses
   fpjson, jsonparser, httpsend, synsock, synacode, ssl_openssl,
-  RegExpr;
-
-const
-  user_agent_browser = 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64)';
-
-(*
-  return json array
-*)
-
-  GoogleTranAPI_Base_url = 'https://translate.googleapis.com/translate_a/single?client=gtx';
-  GoogleTranAPI_tranpost_url = 'sl=%s&tl=%s&dt=t&q=%s';
-
-  // languages for nmt model support
-  Google_Lang_array : array[0..30] of string =
-                    ('af','ar','bg','zh-CN','zh-TW','hr','cs','da','nl','fr','de','el','iw','hi','is','id','it','ja',
-                     'ko','no','pl','pt','ro','ru','sk','es','sv','th','tr','vi','en');
-
-
-var
-  uInternetConn : Boolean = False;
-  badHit : Integer = 0;
+  RegExpr, GoogleTranslate;
 
 type
 
@@ -80,6 +60,9 @@ type
 var
   ConThread: TConnThread;
   ConnEnd: Boolean;
+  uInternetConn : Boolean = False;
+  badHit : Integer = 0;
+  TranGoogle : TGoogleTranslator;
 
 
 procedure GetProxyServer;
@@ -175,98 +158,21 @@ var
 begin
   Result:=False;
   langs.Clear;
-  for i:=low(Google_Lang_array) to High(Google_Lang_array) do
-    langs.Add(Google_Lang_array[i]);
-end;
-
-
-procedure GoogleTranAPI_ParseJsonText(Data:TJSONData; var ret:string; const stext:string);
-var
-  j:Integer;
-  ditem, citem:TJSONData;
-  s:string;
-begin
-  if Data.JSONType=jtArray then begin
-    citem:=Data.Items[0];
-    if citem.JSONType=jtArray then
-      for j:=0 to citem.Count-1 do begin
-        ditem:=citem.Items[j];
-        if ditem.JSONType=jtArray then begin
-          if ditem.Items[0].JSONType=jtString then begin
-            ret:=pchar(UTF8Encode(ditem.Items[0].AsUnicodeString));
-            break;
-          end;
-          {
-          if ditem.Items[1].JSONType in [jtString,jtNull] then begin
-            if ditem.Items[1].JSONType=jtString then begin
-              s:=pchar(UTF8Encode(ditem.Items[1].AsUnicodeString));
-              if (s<>ret) and (s<>stext) then
-                ret:=ret+s;
-            end;
-            break;
-          end;
-          }
-        end;
-      end
-    else
-      ret:='Invalid';
-  end;
+  for i:=low(LANGUAGES) to High(LANGUAGES) do
+    langs.Add(LANGUAGES[i][0]);
 end;
 
 // fromlang can be ''
 function GoogleTranAPI_Translate(const fromlang,tolang,text:string):string;
 var
-  retData, DataRoot: TJSONData;
-  jparser : TJSONParser;
-  hget : THTTPSend;
-  slang, s, surl: string;
-  stemp: TStringStream;
+  res: TTranslated;
 begin
   Result:='';
   if not uInternetConn then
     exit;
-  hget:=THTTPSend.Create;
-  try
-    hget.ProxyHost:=TranProxyHost;
-    hget.ProxyPort:=TranProxyPort;
-    hget.Headers.Add(user_agent_browser);
-    hget.Headers.Add('Content-Type: charset=UTF-8');
-    hget.Headers.Add('Accept: application/json; charset=UTF-8');
-    slang:=fromlang;
-    if slang='' then
-      slang:='auto';
-    surl:=Format(GoogleTranAPI_tranpost_url,[slang,tolang,EncodeURLElement(text)]);
-    hget.Document.Write(surl[1],Length(surl));
-    hget.MimeType := 'application/x-www-form-urlencoded';
-    if hget.HTTPMethod('POST',GoogleTranAPI_Base_url) then begin
-      stemp:=TStringStream.Create('');
-      stemp.CopyFrom(hget.Document,0);
-      s:=stemp.DataString;
-      stemp.Free;
-      if hget.ResultCode=200 then begin
-        hget.Document.Position:=0;
-        jparser:=TJSONParser.Create(hget.Document, True);
-        try
-          retData:=jparser.Parse;
-        finally
-          jparser.Free;
-        end;
-        DataRoot:=retData;
-        try
-          GoogleTranAPI_ParseJsonText(retData,Result,text);
-          badHit:=0;
-        except
-          Result:=text;
-        end;
-        DataRoot.Free;
-      end else begin
-        Result:=IntToStr(hget.ResultCode)+' '+hget.ResultString;
-        GetProxyServer;
-      end;
-    end;
-  finally
-    hget.Free;
-  end;
+  res:=TranGoogle.Translate(text,tolang);
+  Result:=res.Text;
+  res.Free;
 end;
 
 procedure GoogleTranAPI_SetBaseURL(const Url: string);
@@ -288,8 +194,10 @@ end;
 
 initialization
   ConThread:=TConnThread.Create(False);
+  TranGoogle:= TGoogleTranslator.Create();
 
 finalization
+  TranGoogle.Free;
   while not ConnEnd do
     Application.ProcessMessages;
 
