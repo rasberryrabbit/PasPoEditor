@@ -170,9 +170,14 @@ begin
   Result:='';
   if not uInternetConn then
     exit;
-  res:=TranGoogle.Translate(text,tolang);
-  Result:=res.Text;
-  res.Free;
+  try
+    res:=TranGoogle.Translate(text,tolang);
+    Result:=res.Text;
+    res.Free;
+  except
+    on e: exception do
+       Result:=e.Message;
+  end;
 end;
 
 procedure GoogleTranAPI_SetBaseURL(const Url: string);
