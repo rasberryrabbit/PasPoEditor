@@ -427,7 +427,7 @@ begin
   
   for i := Low(Texts) to High(Texts) do
   begin
-    Translated := Translate(Texts[i], Dest, Src);
+    Translated := Translate(UTF8Decode(Texts[i]), Dest, Src);
     Result.Add(Translated);
   end;
 end;
