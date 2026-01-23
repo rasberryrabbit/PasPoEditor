@@ -794,7 +794,7 @@ begin
       lang:=Translations.GetLanguageID;
       if ComboBoxLang.Items.Count>0 then
         for i:=0 to ComboBoxLang.Items.Count-1 do
-          if ComboBoxLang.Items[i]=lang.LanguageID then begin
+          if ComboBoxLang.Items[i]=lang.LanguageCode then begin
             ComboBoxLang.ItemIndex:=i;
             break;
         end;
