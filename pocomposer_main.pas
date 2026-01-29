@@ -280,6 +280,7 @@ var
   DisableTranslator:Boolean=False;
   uLineBreak:string=#13#10;
   idTranslator:Integer=0;
+  CPosText:string='';
 
 
 resourcestring
@@ -394,6 +395,49 @@ begin
   end else
       cstr2:='';
   Result:=CompareStr(cstr1,cstr2);
+end;
+
+function CustomCommentStr(List: TStringList; Index1, Index2: Integer): Integer;
+var
+  itemp1, itemp2:TPoItem;
+  cstr1,cstr2:string;
+  p1, p2: Integer;
+begin
+  itemp1:=TPoItem(List.Objects[Index1]);
+  itemp2:=TPoItem(List.Objects[Index2]);
+  if itemp1<>nil then begin
+    cstr1:=itemp1.GetNameStr('msgctxt');
+    if cstr1='' then
+      cstr1:=itemp1.GetNameStr('#.');
+    if cstr1='' then
+      cstr1:=itemp1.GetNameStr('#:');
+    if cstr1='' then
+      cstr1:=itemp1.StrItem[0];
+  end else
+      cstr1:='';
+  if itemp2<>nil then begin
+    cstr2:=itemp2.GetNameStr('msgctxt');
+    if cstr2='' then
+      cstr2:=itemp2.GetNameStr('#.');
+    if cstr2='' then
+      cstr2:=itemp2.GetNameStr('#:');
+    if cstr2='' then
+      cstr2:=itemp2.StrItem[0];
+  end else
+      cstr2:='';
+  p1:=Pos(CPosText,cstr1);
+  p2:=Pos(CPosText,cstr2);
+  if (p1>0) and (p2>0) then begin
+    Result:=p1-p2;
+    exit;
+  end else if p1>0 then
+      Result:=1
+      else if p2>0 then
+        Result:=-1
+        else
+          Result:=0;
+  if Result=0 then
+    Result:=CompareStr(cstr1,cstr2);
 end;
 
 { TFormPoEditor }
