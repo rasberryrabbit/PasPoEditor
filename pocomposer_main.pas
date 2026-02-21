@@ -484,6 +484,7 @@ begin
         memo.SelText:=pchar(msg)
         else
           memo.Text:=pchar(msg);
+      memo.Modified:=True;
     end;
   end;
 end;
@@ -553,6 +554,7 @@ begin
             end else
               memoout.Text:=pchar(ret);
           end;
+        memoout.Modified:=True;
       except
         ret:=TranslateError;
         MemoTran.Append(ret);
@@ -599,6 +601,7 @@ begin
       msg:=pchar(memo.SelText)
       else
         msg:=pchar(memo.Text);
+    memo.Modified:=True;
     if msg<>'' then begin
       try
         if ComboBoxSrcLang.ItemIndex>0 then
