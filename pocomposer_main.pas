@@ -729,6 +729,7 @@ begin
   FormTaskProg.Show;
   FormTaskProg.Caption:=rsSort;
   try
+    if Assigned(mPo) then
     for i:=0 to mPo.Count-1 do begin
         stemp:=TPoItem(mPo.Items[i]).GetNameStr('msgid');
         if stemp<>'' then begin
