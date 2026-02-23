@@ -1414,13 +1414,16 @@ end;
 procedure TFormPoEditor.FileSaveAs1Accept(Sender: TObject);
 var
   s: string;
+  i: Integer;
 begin
   if Assigned(mPo) then begin
     try
       // make backup
-      s:=pchar(TFileSaveAs(Sender).Dialog.FileName);
+      i:=1;
       repeat
-        s:=s+'.bak';
+        s:=pchar(TFileSaveAs(Sender).Dialog.FileName);
+        s:=s+'('+IntToStr(i)+').bak';
+        inc(i);
       until not FileExists(UTF8Decode(s));
       RenameFile(UTF8Decode(TFileSaveAs(Sender).Dialog.FileName),UTF8Decode(s));
 
