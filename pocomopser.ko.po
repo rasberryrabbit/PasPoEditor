@@ -96,15 +96,15 @@ msgstr "번역 오류"
 
 #: tformpoeditor.addpo.caption
 msgid "Add PO File"
-msgstr ""
+msgstr "PO File 더하기"
 
 #: tformpoeditor.addpo.hint
 msgid "Add translation and items from other PO file."
-msgstr ""
+msgstr "다른 PO 파일에서 번역 문자열과 아이템을 추가"
 
 #: tformpoeditor.buttonclr.caption
 msgid "clear"
-msgstr ""
+msgstr "지우기"
 
 #: tformpoeditor.caption
 #, fuzzy
@@ -118,39 +118,39 @@ msgstr ""
 
 #: tformpoeditor.editcopy1.caption
 msgid "&Copy"
-msgstr ""
+msgstr "복사(&C)"
 
 #: tformpoeditor.editcopy1.hint
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: tformpoeditor.editcut1.caption
 msgid "Cu&t"
-msgstr ""
+msgstr "잘라내기(&t)"
 
 #: tformpoeditor.editcut1.hint
 msgid "Cut"
-msgstr ""
+msgstr "잘라내기"
 
 #: tformpoeditor.editdelete1.caption
 msgid "&Delete"
-msgstr ""
+msgstr "삭제(&D)"
 
 #: tformpoeditor.editdelete1.hint
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 #: tformpoeditor.editdown.caption
 msgid "Item Down"
-msgstr ""
+msgstr "위 아이템"
 
 #: tformpoeditor.editexportsel.caption
 msgid "Export Selections"
-msgstr ""
+msgstr "선택한 것을 내보내기"
 
 #: tformpoeditor.editexportsel.hint
 msgid "Export selected items"
-msgstr ""
+msgstr "선택된 아이템을 내보내기"
 
 #: tformpoeditor.editgotonextfuzzy.caption
 msgid "Goto Next Fuzzy"
@@ -158,11 +158,11 @@ msgstr ""
 
 #: tformpoeditor.editgotonexttran.caption
 msgid "Goto Next Translated"
-msgstr ""
+msgstr "번역된 다음 아이템으로"
 
 #: tformpoeditor.editgotonextuntran.caption
 msgid "Goto Next Untranslated"
-msgstr ""
+msgstr "번역없는 다음 아이템으로"
 
 #: tformpoeditor.editgotoprevfuzzy.caption
 msgid "Goto Previous Fuzzy"
@@ -170,99 +170,99 @@ msgstr ""
 
 #: tformpoeditor.editgotoprevtran.caption
 msgid "Goto Previous Translated"
-msgstr ""
+msgstr "번역된 이전 아이템으로"
 
 #: tformpoeditor.editgotoprevuntran.caption
 msgid "Goto Previous Untranslated"
-msgstr ""
+msgstr "번역없는 이전 아이템으로"
 
 #: tformpoeditor.editmemoleft.caption
 msgid "Left Editor"
-msgstr ""
+msgstr "왼쪽 편집기"
 
 #: tformpoeditor.editmemoright.caption
 msgid "Right Editor"
-msgstr ""
+msgstr "오른쪽 편집기"
 
 #: tformpoeditor.editpaste1.caption
 msgid "&Paste"
-msgstr ""
+msgstr "붙여넣기(&P)"
 
 #: tformpoeditor.editpaste1.hint
 msgid "Paste"
-msgstr ""
+msgstr "붙여넣기"
 
 #: tformpoeditor.editpofileprop.caption
 msgid "Edit PO File comment"
-msgstr ""
+msgstr "PO File 주석문 편집"
 
 #: tformpoeditor.editpofileprop.hint
 msgid "Edit PO file property"
-msgstr ""
+msgstr "PO 파일 속성을 편집"
 
 #: tformpoeditor.editselalltran.caption
 msgid "Select All Translated"
-msgstr ""
+msgstr "번역된 것 모두 선택"
 
 #: tformpoeditor.editselalluntran.caption
 msgid "Select All Untranslated"
-msgstr ""
+msgstr "번역 안된 것 모두 선택"
 
 #: tformpoeditor.editselectall1.caption
 msgid "Select &All"
-msgstr ""
+msgstr "모두 선택(&A)"
 
 #: tformpoeditor.editselectall1.hint
 msgid "Select All"
-msgstr ""
+msgstr "모두 선택"
 
 #: tformpoeditor.editshowrawitem.caption
 msgid "Show raw string"
-msgstr ""
+msgstr "내용 문자열 보기"
 
 #: tformpoeditor.editstripuntran.caption
 msgid "Remove untranslated"
-msgstr ""
+msgstr "번역되지 않은 것을 제거"
 
 #: tformpoeditor.editstripuntran.hint
 msgid "Remove untranslated items"
-msgstr ""
+msgstr "번역되지 않은 아이템 제거"
 
 #: tformpoeditor.editundo1.caption
 msgid "&Undo"
-msgstr ""
+msgstr "되돌리기(&U)"
 
 #: tformpoeditor.editundo1.hint
 msgid "Undo"
-msgstr ""
+msgstr "되돌리기"
 
 #: tformpoeditor.editup.caption
 msgid "Item Up"
-msgstr ""
+msgstr "아래 아이템"
 
 #: tformpoeditor.exportpo.caption
 msgid "Export PO File"
-msgstr ""
+msgstr "PO File 내보내기"
 
 #: tformpoeditor.exportpo.hint
 msgid "Export Translated msgstr to PO file"
-msgstr ""
+msgstr "PO 파일로 번역된 문장들을 내보내기"
 
 #: tformpoeditor.fileexit1.caption
 msgid "E&xit"
-msgstr ""
+msgstr "종료(&x)"
 
 #: tformpoeditor.fileexit1.hint
 msgid "Exit"
-msgstr ""
+msgstr "종료"
 
 #: tformpoeditor.fileopen1.caption
 msgid "&Open ..."
-msgstr ""
+msgstr "열기(&O) ..."
 
 #: tformpoeditor.fileopen1.hint
 msgid "Open"
-msgstr ""
+msgstr "열기"
 
 #: tformpoeditor.filesave.caption
 msgctxt "tformpoeditor.filesave.caption"
@@ -271,47 +271,47 @@ msgstr ""
 
 #: tformpoeditor.filesaveas1.caption
 msgid "Save &As ..."
-msgstr ""
+msgstr "저장 (&A) ..."
 
 #: tformpoeditor.filesaveas1.hint
 msgid "Save As"
-msgstr ""
+msgstr "저장"
 
 #: tformpoeditor.importpo.caption
 msgid "Import PO File"
-msgstr ""
+msgstr "PO File 가져오기"
 
 #: tformpoeditor.importpo.hint
 msgid "Import Translation from other PO file"
-msgstr ""
+msgstr "다른 PO 파일에서 번역을 가져오기"
 
 #: tformpoeditor.menuitem1.caption
 msgid "&File"
-msgstr ""
+msgstr "파일(&F)"
 
 #: tformpoeditor.menuitem19.caption
 msgid "&Translate"
-msgstr ""
+msgstr "번역(&T)"
 
 #: tformpoeditor.menuitem3.caption
 msgid "&Search"
-msgstr ""
+msgstr "찾기(&S)"
 
 #: tformpoeditor.menuitem40.caption
 msgid "&View"
-msgstr ""
+msgstr "보기(&V)"
 
 #: tformpoeditor.menuitemedit.caption
 msgid "&Edit"
-msgstr ""
+msgstr "편집(&E)"
 
 #: tformpoeditor.menuitemrecent.caption
 msgid "Recent Files"
-msgstr ""
+msgstr "최근 파일"
 
 #: tformpoeditor.optionsortcomment.caption
 msgid "Sort by comment"
-msgstr ""
+msgstr "주석문으로 정렬"
 
 #: tformpoeditor.optionuselinuxlinebreak.caption
 msgid "Use Linux LineBreak"
@@ -319,19 +319,19 @@ msgstr ""
 
 #: tformpoeditor.searchfind.caption
 msgid "Find"
-msgstr ""
+msgstr "찾기"
 
 #: tformpoeditor.searchfind.hint
 msgid "Find & replace text. Regular Expression"
-msgstr ""
+msgstr "문자열 검색/치환. 정규식"
 
 #: tformpoeditor.searchnext.caption
 msgid "Next"
-msgstr ""
+msgstr "다음찾기"
 
 #: tformpoeditor.searchnext.hint
 msgid "Find next match text"
-msgstr ""
+msgstr "다음 검색"
 
 #: tformpoeditor.sheetmsg1.caption
 msgid "0"
@@ -359,11 +359,11 @@ msgstr ""
 
 #: tformpoeditor.translatecopy.caption
 msgid "Copy Translated Text"
-msgstr ""
+msgstr "번역한 문장 붙이기"
 
 #: tformpoeditor.translatecopy.hint
 msgid "Copy Translated text from bottom window"
-msgstr ""
+msgstr "아래 창에서 번역된 문자열을 복사"
 
 #: tformpoeditor.translatedogoogle.caption
 msgid "Use Google"
@@ -383,11 +383,11 @@ msgstr ""
 
 #: tformpoeditor.translatemsg.caption
 msgid "Translate Msg"
-msgstr ""
+msgstr "메시지 번역"
 
 #: tformpoeditor.translatemsg.hint
 msgid "Translate directly"
-msgstr ""
+msgstr "바로 번역"
 
 #: tformpoeditor.translatepapagokey.caption
 msgid "Set Papago ClientID/Secret"
@@ -395,9 +395,9 @@ msgstr ""
 
 #: tformpoeditor.translatetext1.caption
 msgid "Translate text"
-msgstr ""
+msgstr "문장 번역"
 
 #: tformpoeditor.translatetext1.hint
 msgid "Translate text to bottom window"
-msgstr ""
+msgstr "아래 창으로 내용을 번역"
 
