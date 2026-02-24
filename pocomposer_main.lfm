@@ -641,7 +641,8 @@ object FormPoEditor: TFormPoEditor
       OnExecute = OptionUseLinuxLineBreakExecute
     end
     object FileSave: TAction
-      Caption = 'Save'
+      Category = 'File'
+      Caption = '&Save'
       ShortCut = 16467
       OnExecute = FileSaveExecute
     end

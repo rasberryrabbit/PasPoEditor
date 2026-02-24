@@ -265,7 +265,7 @@ msgstr ""
 
 #: tformpoeditor.filesave.caption
 msgctxt "tformpoeditor.filesave.caption"
-msgid "Save"
+msgid "&Save"
 msgstr ""
 
 #: tformpoeditor.filesaveas1.caption
